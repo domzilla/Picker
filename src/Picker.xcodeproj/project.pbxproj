@@ -7,13 +7,106 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F242EC4F22D9B54400D741AD /* PIPickerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */; };
+		F242EC5022D9B54400D741AD /* PIPickerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F242EC4E22D9B54400D741AD /* PIPickerWindowController.xib */; };
+		F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5322D9B57200D741AD /* PIPickerViewController.m */; };
+		F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F242EC5422D9B57200D741AD /* PIPickerViewController.xib */; };
+		F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */; };
+		F242EC5D22D9BA7700D741AD /* PIColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5C22D9BA7700D741AD /* PIColorView.m */; };
+		F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */; };
+		F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC6222D9C1A200D741AD /* PIColorPicker.m */; };
 		F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9022D0800A00A6172F /* Assets.xcassets */; };
 		F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9222D0800A00A6172F /* MainMenu.xib */; };
 		F2CABA9722D0800A00A6172F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABA9622D0800A00A6172F /* main.m */; };
 		F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABAA222D0805F00A6172F /* PIAppDelegate.m */; };
+		F2F8C09E22D9D57A009A809F /* BGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09B22D9D570009A809F /* BGFoundation.framework */; };
+		F2F8C09F22D9D57A009A809F /* BGFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09B22D9D570009A809F /* BGFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A422D9D5A0009A809F /* Foundation.framework */; };
+		F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A622D9D5A6009A809F /* Cocoa.framework */; };
+		F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F2F8C09222D9D570009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F2575CED1C3BA8D00027FB39;
+			remoteInfo = "BGFoundation (iOS Framework)";
+		};
+		F2F8C09422D9D570009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F25C57E522954DD4002C9CE3;
+			remoteInfo = "BGFoundationLocationServices (iOS Framework)";
+		};
+		F2F8C09622D9D570009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F29033871C3D1EB900DCE7A4;
+			remoteInfo = "BGFoundation (iOS Static Library)";
+		};
+		F2F8C09822D9D570009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F25C584622954DF9002C9CE3;
+			remoteInfo = "BGFoundationLocationServices (iOS Static Library)";
+		};
+		F2F8C09A22D9D570009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F29033951C3D1FD300DCE7A4;
+			remoteInfo = "BGFoundation (OS X Framework)";
+		};
+		F2F8C09C22D9D570009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F29033B21C3D20C400DCE7A4;
+			remoteInfo = "BGFoundation (OS X Static Library)";
+		};
+		F2F8C0A022D9D57A009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F29033941C3D1FD300DCE7A4;
+			remoteInfo = "BGFoundation (OS X Framework)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F2F8C0A222D9D57A009A809F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F2F8C09F22D9D57A009A809F /* BGFoundation.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerWindowController.h; sourceTree = "<group>"; };
+		F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerWindowController.m; sourceTree = "<group>"; };
+		F242EC4E22D9B54400D741AD /* PIPickerWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIPickerWindowController.xib; sourceTree = "<group>"; };
+		F242EC5222D9B57200D741AD /* PIPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerViewController.h; sourceTree = "<group>"; };
+		F242EC5322D9B57200D741AD /* PIPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerViewController.m; sourceTree = "<group>"; };
+		F242EC5422D9B57200D741AD /* PIPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIPickerViewController.xib; sourceTree = "<group>"; };
+		F242EC5822D9BA6100D741AD /* PIPickerPreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerPreviewView.h; sourceTree = "<group>"; };
+		F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerPreviewView.m; sourceTree = "<group>"; };
+		F242EC5B22D9BA7700D741AD /* PIColorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorView.h; sourceTree = "<group>"; };
+		F242EC5C22D9BA7700D741AD /* PIColorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorView.m; sourceTree = "<group>"; };
+		F242EC5E22D9C18E00D741AD /* PIPreviewImageGrabber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreviewImageGrabber.h; sourceTree = "<group>"; };
+		F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreviewImageGrabber.m; sourceTree = "<group>"; };
+		F242EC6122D9C1A200D741AD /* PIColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorPicker.h; sourceTree = "<group>"; };
+		F242EC6222D9C1A200D741AD /* PIColorPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorPicker.m; sourceTree = "<group>"; };
 		F2CABA8A22D0800800A6172F /* Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2CABA9022D0800A00A6172F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2CABA9322D0800A00A6172F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -22,6 +115,11 @@
 		F2CABA9822D0800A00A6172F /* Picker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picker.entitlements; sourceTree = "<group>"; };
 		F2CABAA122D0805F00A6172F /* PIAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIAppDelegate.h; sourceTree = "<group>"; };
 		F2CABAA222D0805F00A6172F /* PIAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIAppDelegate.m; sourceTree = "<group>"; };
+		F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BGFoundation.xcodeproj; path = ../../../../Epics/Libraries/BGFoundation/src/BGFoundation.xcodeproj; sourceTree = "<group>"; };
+		F2F8C0A422D9D5A0009A809F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F2F8C0A622D9D5A6009A809F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		F2F8C0A922D9D6BC009A809F /* NSColor+Picker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Picker.h"; sourceTree = "<group>"; };
+		F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Picker.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,16 +127,63 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */,
+				F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */,
+				F2F8C09E22D9D57A009A809F /* BGFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F242EC3622D8CC6100D741AD /* WindowController */ = {
+			isa = PBXGroup;
+			children = (
+				F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */,
+				F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */,
+				F242EC4E22D9B54400D741AD /* PIPickerWindowController.xib */,
+			);
+			name = WindowController;
+			sourceTree = "<group>";
+		};
+		F242EC3822D8CC7900D741AD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F242EC6122D9C1A200D741AD /* PIColorPicker.h */,
+				F242EC6222D9C1A200D741AD /* PIColorPicker.m */,
+				F242EC5E22D9C18E00D741AD /* PIPreviewImageGrabber.h */,
+				F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		F242EC5122D9B54E00D741AD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F242EC5222D9B57200D741AD /* PIPickerViewController.h */,
+				F242EC5322D9B57200D741AD /* PIPickerViewController.m */,
+				F242EC5422D9B57200D741AD /* PIPickerViewController.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		F242EC5722D9BA4E00D741AD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F242EC5822D9BA6100D741AD /* PIPickerPreviewView.h */,
+				F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */,
+				F242EC5B22D9BA7700D741AD /* PIColorView.h */,
+				F242EC5C22D9BA7700D741AD /* PIColorView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		F2CABA8122D0800800A6172F = {
 			isa = PBXGroup;
 			children = (
+				F2F8C08822D9D520009A809F /* Extern */,
 				F2CABA8C22D0800800A6172F /* Picker */,
+				F2F8C0A322D9D589009A809F /* Frameworks */,
 				F2CABA8B22D0800800A6172F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,8 +214,52 @@
 			children = (
 				F2CABAA122D0805F00A6172F /* PIAppDelegate.h */,
 				F2CABAA222D0805F00A6172F /* PIAppDelegate.m */,
+				F242EC3622D8CC6100D741AD /* WindowController */,
+				F242EC5122D9B54E00D741AD /* ViewController */,
+				F242EC5722D9BA4E00D741AD /* Views */,
+				F242EC3822D8CC7900D741AD /* Data */,
+				F2F8C0A822D9D6A1009A809F /* Categories */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		F2F8C08822D9D520009A809F /* Extern */ = {
+			isa = PBXGroup;
+			children = (
+				F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */,
+			);
+			name = Extern;
+			sourceTree = "<group>";
+		};
+		F2F8C08A22D9D570009A809F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2F8C09322D9D570009A809F /* BGFoundation.framework */,
+				F2F8C09522D9D570009A809F /* BGFoundationLocationServices.framework */,
+				F2F8C09722D9D570009A809F /* libBGFoundation.a */,
+				F2F8C09922D9D570009A809F /* libBGFoundationLocationServices.a */,
+				F2F8C09B22D9D570009A809F /* BGFoundation.framework */,
+				F2F8C09D22D9D570009A809F /* libBGFoundation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2F8C0A322D9D589009A809F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F2F8C0A622D9D5A6009A809F /* Cocoa.framework */,
+				F2F8C0A422D9D5A0009A809F /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2F8C0A822D9D6A1009A809F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F2F8C0A922D9D6BC009A809F /* NSColor+Picker.h */,
+				F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,10 +272,12 @@
 				F2CABA8622D0800800A6172F /* Sources */,
 				F2CABA8722D0800800A6172F /* Frameworks */,
 				F2CABA8822D0800800A6172F /* Resources */,
+				F2F8C0A222D9D57A009A809F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F2F8C0A122D9D57A009A809F /* PBXTargetDependency */,
 			);
 			name = Picker;
 			productName = Picker;
@@ -99,6 +290,7 @@
 		F2CABA8222D0800800A6172F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PI;
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
 					F2CABA8922D0800800A6172F = {
@@ -117,6 +309,12 @@
 			mainGroup = F2CABA8122D0800800A6172F;
 			productRefGroup = F2CABA8B22D0800800A6172F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F2F8C08A22D9D570009A809F /* Products */;
+					ProjectRef = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				F2CABA8922D0800800A6172F /* Picker */,
@@ -124,12 +322,59 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		F2F8C09322D9D570009A809F /* BGFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BGFoundation.framework;
+			remoteRef = F2F8C09222D9D570009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C09522D9D570009A809F /* BGFoundationLocationServices.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BGFoundationLocationServices.framework;
+			remoteRef = F2F8C09422D9D570009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C09722D9D570009A809F /* libBGFoundation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBGFoundation.a;
+			remoteRef = F2F8C09622D9D570009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C09922D9D570009A809F /* libBGFoundationLocationServices.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBGFoundationLocationServices.a;
+			remoteRef = F2F8C09822D9D570009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C09B22D9D570009A809F /* BGFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BGFoundation.framework;
+			remoteRef = F2F8C09A22D9D570009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C09D22D9D570009A809F /* libBGFoundation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBGFoundation.a;
+			remoteRef = F2F8C09C22D9D570009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		F2CABA8822D0800800A6172F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */,
+				F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */,
+				F242EC5022D9B54400D741AD /* PIPickerWindowController.xib in Resources */,
 				F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,12 +386,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F242EC4F22D9B54400D741AD /* PIPickerWindowController.m in Sources */,
+				F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */,
+				F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */,
+				F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */,
+				F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */,
+				F242EC5D22D9BA7700D741AD /* PIColorView.m in Sources */,
 				F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */,
+				F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */,
 				F2CABA9722D0800A00A6172F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2F8C0A122D9D57A009A809F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "BGFoundation (OS X Framework)";
+			targetProxy = F2F8C0A022D9D57A009A809F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F2CABA9222D0800A00A6172F /* MainMenu.xib */ = {
@@ -284,6 +544,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = net.domzilla.picker.Picker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -302,6 +563,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = net.domzilla.picker.Picker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

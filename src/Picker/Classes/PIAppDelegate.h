@@ -7,7 +7,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PIAppDelegate : NSObject <NSApplicationDelegate>
+@class PIPickerViewController;
+
+@interface PIAppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
+{
+    PIPickerViewController *pickerViewController;
+    
+    NSStatusItem *statusItem;
+    NSMenu *pickerMenu;
+    
+    NSMenuItem *pickerMenuItem;
+    NSMenuItem *quitMenuItem;
+}
 
 
 @end
