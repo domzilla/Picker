@@ -46,7 +46,7 @@
 - (void)showWindow:(id)sender
 {
     // Activates icon on dock
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
     
     [super showWindow:sender];
 }

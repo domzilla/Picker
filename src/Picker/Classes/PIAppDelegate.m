@@ -97,6 +97,14 @@
         pickerWindowController = [[PIPickerWindowController alloc] init];
     }
     
+    NSRect menuFrame = [pickerMenuItem.view.window convertRectToScreen:pickerMenuItem.view.frame];
+    NSRect windowFrame = NSMakeRect(menuFrame.origin.x,
+                                    menuFrame.origin.y,
+                                    pickerWindowController.window.frame.size.width,
+                                    pickerWindowController.window.frame.size.height);
+    [pickerWindowController.window setFrame:windowFrame display:NO];
+    
+    [pickerMenu cancelTracking];
     [pickerWindowController showWindow:nil];
 }
 
