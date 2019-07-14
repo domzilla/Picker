@@ -13,6 +13,9 @@
 
 @interface PIAppDelegate ()
 
+- (void)registerGlobalCopyColorHotkey;
+- (void)unregisterGlobalCopyColorHotkey;
+
 @end
 
 @implementation PIAppDelegate
@@ -31,6 +34,8 @@
     // Hides icon on dock
     [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
     
+    pickerWindowController = [[PIPickerWindowController alloc] init];
+    
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.highlightMode = YES;
     statusItem.image = [NSImage imageNamed:@"menu_icon_dropper"];
@@ -44,6 +49,15 @@
     pickerMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
     pickerMenuItem.view = pickerViewController.view;
     [pickerMenu addItem:pickerMenuItem];
+    
+    //Hidden dummy item for local shortcut
+    NSMenuItem *copyColorMenuItem =[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy color", @"Button to copy the current color to clipboard")
+                                                              action:@selector(copyColorMenuItemAction:)
+                                                       keyEquivalent:@"p"];
+    copyColorMenuItem.keyEquivalentModifierMask = NSEventModifierFlagControl | NSEventModifierFlagCommand;
+    copyColorMenuItem.allowsKeyEquivalentWhenHidden = YES;
+    copyColorMenuItem.hidden = YES;
+    [pickerMenu addItem:copyColorMenuItem];
     
     [pickerMenu addItem:[NSMenuItem separatorItem]];
     availableFormatsMenuItem = [[NSMenuItem alloc] init];
@@ -68,15 +82,7 @@
     
     [[PIColorPicker defaultPicker] startTracking];
     
-    [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:PIColorPickerUserDefaultsCopyShortcutKey toAction:^{
-        
-        NSLog(@"Copy");
-        [[PIColorPicker defaultPicker] copyColorToPasteboard];
-        [self->statusItem.button setHighlighted:YES];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self->statusItem.button setHighlighted:NO];
-        });
-    }];
+    [self registerGlobalCopyColorHotkey];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -89,6 +95,12 @@
 #pragma mark ---
 #pragma mark Actions
 #pragma mark ---
+- (void)copyColorMenuItemAction:(id)sender
+{
+    NSLog(@"Copy local");
+    [[PIColorPicker defaultPicker] copyColorToPasteboard];
+}
+
 - (void)formatSubmenuItemAction:(id)sender
 {
     NSMenuItem *menuItem = (NSMenuItem *)sender;
@@ -109,15 +121,36 @@
 
 
 #pragma mark ---
+#pragma mark Private
+#pragma mark ---
+- (void)registerGlobalCopyColorHotkey
+{
+    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
+    [[MASShortcutMonitor sharedMonitor] registerShortcut:shortcut withAction:^{
+        
+        NSLog(@"Copy global");
+        [[PIColorPicker defaultPicker] copyColorToPasteboard];
+        
+        [self->statusItem.button setHighlighted:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self->statusItem.button setHighlighted:NO];
+        });
+    }];
+}
+
+- (void)unregisterGlobalCopyColorHotkey
+{
+    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:shortcut];
+}
+
+
+
+#pragma mark ---
 #pragma mark PIPickerViewControllerDelegate
 #pragma mark ---
 - (void)pickerViewControllerPinToWindow:(PIPickerViewController *)controller
 {
-    if (pickerWindowController ==  nil)
-    {
-        pickerWindowController = [[PIPickerWindowController alloc] init];
-    }
-    
     NSRect menuFrame = [pickerMenuItem.view.window convertRectToScreen:pickerMenuItem.view.frame];
     NSRect windowFrame = NSMakeRect(menuFrame.origin.x,
                                     menuFrame.origin.y,
@@ -137,12 +170,13 @@
 - (void)menuWillOpen:(NSMenu *)menu
 {
     pickerViewController.shouldUpdateView = YES;
+    [self unregisterGlobalCopyColorHotkey];
 }
 
 - (void)menuDidClose:(NSMenu *)menu
 {
     pickerViewController.shouldUpdateView = NO;
+    [self registerGlobalCopyColorHotkey];
 }
-
 
 @end
