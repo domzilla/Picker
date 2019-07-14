@@ -23,6 +23,8 @@
 		F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A422D9D5A0009A809F /* Foundation.framework */; };
 		F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A622D9D5A6009A809F /* Cocoa.framework */; };
 		F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */; };
+		F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; };
+		F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,34 @@
 			remoteGlobalIDString = F29033941C3D1FD300DCE7A4;
 			remoteInfo = "BGFoundation (OS X Framework)";
 		};
+		F2F8C0CF22DB4587009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0D827CD31990D4420010B8EF;
+			remoteInfo = MASShortcut;
+		};
+		F2F8C0D122DB4587009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0D827D8319910AFF0010B8EF;
+			remoteInfo = MASShortcutTests;
+		};
+		F2F8C0D322DB4587009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0D827D371990D5E70010B8EF;
+			remoteInfo = Demo;
+		};
+		F2F8C0D722DB4598009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D827CD21990D4420010B8EF;
+			remoteInfo = MASShortcut;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +114,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */,
 				F2F8C09F22D9D57A009A809F /* BGFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -118,6 +149,7 @@
 		F2F8C0A622D9D5A6009A809F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F2F8C0A922D9D6BC009A809F /* NSColor+Picker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Picker.h"; sourceTree = "<group>"; };
 		F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Picker.m"; sourceTree = "<group>"; };
+		F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASShortcut.xcodeproj; path = ../../../../Github/MASShortcut/MASShortcut.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +159,7 @@
 			files = (
 				F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */,
 				F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */,
+				F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */,
 				F2F8C09E22D9D57A009A809F /* BGFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */,
+				F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */,
 			);
 			name = Extern;
 			sourceTree = "<group>";
@@ -259,6 +293,16 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		F2F8C0CA22DB4587009A809F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2F8C0D022DB4587009A809F /* MASShortcut.framework */,
+				F2F8C0D222DB4587009A809F /* MASShortcutTests.xctest */,
+				F2F8C0D422DB4587009A809F /* Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,6 +319,7 @@
 			);
 			dependencies = (
 				F2F8C0A122D9D57A009A809F /* PBXTargetDependency */,
+				F2F8C0D822DB4598009A809F /* PBXTargetDependency */,
 			);
 			name = Picker;
 			productName = Picker;
@@ -310,6 +355,10 @@
 				{
 					ProductGroup = F2F8C08A22D9D570009A809F /* Products */;
 					ProjectRef = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+				},
+				{
+					ProductGroup = F2F8C0CA22DB4587009A809F /* Products */;
+					ProjectRef = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -362,6 +411,27 @@
 			remoteRef = F2F8C09C22D9D570009A809F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F2F8C0D022DB4587009A809F /* MASShortcut.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MASShortcut.framework;
+			remoteRef = F2F8C0CF22DB4587009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C0D222DB4587009A809F /* MASShortcutTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MASShortcutTests.xctest;
+			remoteRef = F2F8C0D122DB4587009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F2F8C0D422DB4587009A809F /* Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Demo.app;
+			remoteRef = F2F8C0D322DB4587009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -401,6 +471,11 @@
 			isa = PBXTargetDependency;
 			name = "BGFoundation (OS X Framework)";
 			targetProxy = F2F8C0A022D9D57A009A809F /* PBXContainerItemProxy */;
+		};
+		F2F8C0D822DB4598009A809F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MASShortcut;
+			targetProxy = F2F8C0D722DB4598009A809F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

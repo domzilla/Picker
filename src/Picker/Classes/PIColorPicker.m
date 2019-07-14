@@ -8,12 +8,12 @@
 #import "PIColorPicker.h"
 
 #import "PIPreviewImageGrabber.h"
-
+#import "NSColor+Picker.h"
 
 NSString *const PIColorPickerDidChangeColorNotification = @"PIColorPickerDidChangeColorNotification";
 
-
 NSString *const PIColorPickerUserDefaultsFormatKey = @"PIColorPickerUserDefaultsFormatKey";
+NSString *const PIColorPickerUserDefaultsCopyShortcutKey = @"PIColorPickerUserDefaultsCopyShortcutKey";
 
 NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 {
@@ -59,7 +59,7 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 - (id)init
 {
     if (self = [super init])
-    {
+    {        
         pickerFormat = (PIColorPickerFormat)[[NSUserDefaults standardUserDefaults] integerForKey:PIColorPickerUserDefaultsFormatKey];
         
         [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^ (NSEvent *event){
@@ -139,6 +139,51 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 - (NSImage *)previewImage
 {
     return [PIPreviewImageGrabber imageForLocation:mouseLocation];
+}
+
+- (void)copyColorToPasteboard
+{
+    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    
+    NSColor *color = [self color];
+    NSString *colorString = nil;
+    
+    switch (pickerFormat)
+    {
+        case PIColorPickerFormatHEX:
+            colorString = [color pi_hexRepresentation];
+            break;
+        case PIColorPickerFormatNoHashHEX:
+            colorString = [color pi_noHashHexRepresentation];
+            break;
+        case PIColorPickerFormatRGB:
+            colorString = [color pi_rgbRepresentation];
+            break;
+        case PIColorPickerFormatHSB:
+            colorString = [color pi_hsbRepresentation];;
+            break;
+        case PIColorPickerFormatCMYK:
+            colorString = [color pi_cmykRepresentation];;
+            break;
+        case PIColorPickerFormatUIColor:
+            colorString = [color pi_UIColorRepresentation];;
+            break;
+        case PIColorPickerFormatUIColorSwift:
+            colorString = [color pi_UIColorSwiftRepresentation];;
+            break;
+        case PIColorPickerFormatNSColor:
+            colorString = [color pi_NScolorRepresentation];;
+            break;
+        case PIColorPickerFormatNSColorSwift:
+            colorString = [color pi_NSColorSwiftbRepresentation];;
+            break;
+        case PIColorPickerFormatsCount:
+        default:
+            break;
+    }
+    
+    [pasteBoard setString:colorString forType:NSStringPboardType];
 }
 
 

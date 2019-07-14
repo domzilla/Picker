@@ -22,8 +22,10 @@ typedef NS_ENUM(NSUInteger, PIColorPickerFormat) {
     
     PIColorPickerFormatsCount
 };
-
 NSString *PIColorPickerFormatToString(PIColorPickerFormat format);
+
+extern NSString *const PIColorPickerUserDefaultsFormatKey;
+extern NSString *const PIColorPickerUserDefaultsCopyShortcutKey;
 
 @interface PIColorPicker : NSObject
 {
@@ -46,5 +48,7 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format);
 
 - (NSColor *)color;
 - (NSImage *)previewImage;
+
+- (void)copyColorToPasteboard;
 
 @end

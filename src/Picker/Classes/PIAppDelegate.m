@@ -7,6 +7,8 @@
 
 #import "PIAppDelegate.h"
 
+#import <MASShortcut/Shortcut.h>
+
 #import "PIColorPicker.h"
 
 @interface PIAppDelegate ()
@@ -14,6 +16,15 @@
 @end
 
 @implementation PIAppDelegate
+
++ (void)initialize
+{
+    MASShortcut *defaultCopyShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagControl];
+    NSData *defaultCopyShortcutData = [NSKeyedArchiver archivedDataWithRootObject:defaultCopyShortcut];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{PIColorPickerUserDefaultsCopyShortcutKey:defaultCopyShortcutData}];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -56,6 +67,16 @@
     [pickerMenu addItem:quitMenuItem];
     
     [[PIColorPicker defaultPicker] startTracking];
+    
+    [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:PIColorPickerUserDefaultsCopyShortcutKey toAction:^{
+        
+        NSLog(@"Copy");
+        [[PIColorPicker defaultPicker] copyColorToPasteboard];
+        [self->statusItem.button setHighlighted:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self->statusItem.button setHighlighted:NO];
+        });
+    }];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
