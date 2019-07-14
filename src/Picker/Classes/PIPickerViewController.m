@@ -35,6 +35,8 @@
 - (void)dealloc
 {
     [timer invalidate];
+    timer = nil;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -78,6 +80,7 @@
         else
         {
             [timer invalidate];
+            timer = nil;
             
             [[NSNotificationCenter defaultCenter] removeObserver:self
                                                             name:PIColorPickerDidChangeColorNotification
