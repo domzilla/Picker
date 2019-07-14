@@ -13,6 +13,37 @@
 NSString *const PIColorPickerDidChangeColorNotification = @"PIColorPickerDidChangeColorNotification";
 
 
+NSString *const PIColorPickerUserDefaultsFormatKey = @"PIColorPickerUserDefaultsFormatKey";
+
+NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
+{
+    switch (format)
+    {
+        case PIColorPickerFormatHEX:
+            return @"#ff00ff";
+        case PIColorPickerFormatNoHashHEX:
+            return @"ff00ff";
+        case PIColorPickerFormatRGB:
+            return @"rbg(255, 0, 255)";
+        case PIColorPickerFormatHSB:
+            return @"hsb(300, 100, 100)";
+        case PIColorPickerFormatCMYK:
+            return @"cmyk(184, 224, 0, 0)";
+        case PIColorPickerFormatUIColor:
+            return @"UIColor Objective-C";
+        case PIColorPickerFormatUIColorSwift:
+            return @"UIColor Swift";
+        case PIColorPickerFormatNSColor:
+            return @"NSColor Objective-C";
+        case PIColorPickerFormatNSColorSwift:
+            return @"NSColor Swift";
+        case PIColorPickerFormatsCount:
+        default:
+            return nil;
+    }
+}
+
+
 @interface PIColorPicker ()
 
 - (void)updateMouseLocation;
@@ -29,6 +60,8 @@ NSString *const PIColorPickerDidChangeColorNotification = @"PIColorPickerDidChan
 {
     if (self = [super init])
     {
+        pickerFormat = (PIColorPickerFormat)[[NSUserDefaults standardUserDefaults] integerForKey:PIColorPickerUserDefaultsFormatKey];
+        
         [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^ (NSEvent *event){
             [self updateMouseLocation];
         }];
@@ -46,6 +79,25 @@ NSString *const PIColorPickerDidChangeColorNotification = @"PIColorPickerDidChan
     });
     
     return defaultPicker;
+}
+
+
+
+#pragma mark ---
+#pragma mark Accessors
+#pragma mark ---
+- (PIColorPickerFormat)pickerFormat
+{
+    return pickerFormat;
+}
+
+- (void)setPickerFormat:(PIColorPickerFormat)aPickerFormat
+{
+    [self willChangeValueForKey:@"pickerFormat"];
+    pickerFormat = aPickerFormat;
+    [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)pickerFormat forKey:PIColorPickerUserDefaultsFormatKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self didChangeValueForKey:@"pickerFormat"];
 }
 
 

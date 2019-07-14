@@ -29,10 +29,25 @@
     pickerMenu.delegate = self;
     statusItem.menu = pickerMenu;
     
-    pickerViewController  = [[PIPickerViewController alloc] initWithNibName:@"PIPickerViewController" bundle:[NSBundle mainBundle]];
+    pickerViewController  = [[PIPickerViewController alloc] initWithMode:PIPickerViewControllerModeMenu];
     pickerMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
     pickerMenuItem.view = pickerViewController.view;
     [pickerMenu addItem:pickerMenuItem];
+    
+    [pickerMenu addItem:[NSMenuItem separatorItem]];
+    availableFormatsMenuItem = [[NSMenuItem alloc] init];
+    availableFormatsMenuItem.title = NSLocalizedString(@"Color format", @"The headline for the color format which gets copied to clipboard");
+    availableFormatsSubmenu = [[NSMenu alloc] init];
+    for (PIColorPickerFormat format = 0; format < PIColorPickerFormatsCount; format++)
+    {
+        [availableFormatsSubmenu addItemWithTitle:PIColorPickerFormatToString(format)
+                                           action:@selector(formatSubmenuItemAction:)
+                                    keyEquivalent:@""];
+    }
+    selectedFormatMenuItem = [availableFormatsSubmenu itemAtIndex:[[PIColorPicker defaultPicker] pickerFormat]];
+    selectedFormatMenuItem.state = NSOnState;
+    [availableFormatsMenuItem setSubmenu:availableFormatsSubmenu];
+    [pickerMenu addItem:availableFormatsMenuItem];
     
     [pickerMenu addItem:[NSMenuItem separatorItem]];
     quitMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit", @"Button to quit the application")
@@ -53,6 +68,18 @@
 #pragma mark ---
 #pragma mark Actions
 #pragma mark ---
+- (void)formatSubmenuItemAction:(id)sender
+{
+    NSMenuItem *menuItem = (NSMenuItem *)sender;
+    
+    selectedFormatMenuItem.state = NSOffState;
+    selectedFormatMenuItem = menuItem;
+    selectedFormatMenuItem.state = NSOnState;
+    
+    PIColorPickerFormat pickerFormat = (PIColorPickerFormat)[availableFormatsSubmenu indexOfItem:selectedFormatMenuItem];
+    [[PIColorPicker defaultPicker] setPickerFormat:pickerFormat];
+}
+
 - (void)quitMenuItemAction:(id)sender
 {
     [NSApp terminate:sender];

@@ -10,13 +10,22 @@
 @class PIPickerPreviewView;
 @class PIColorView;
 
+typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
+    PIPickerViewControllerModeDefault,
+    PIPickerViewControllerModeMenu
+};
+
 @interface PIPickerViewController : NSViewController
 {
+    PIPickerViewControllerMode mode;
+    
     NSTimer *timer;
     
     BOOL updateColorsHistory;
     BOOL shouldUpdateView;
 }
+
+@property (nonatomic, readonly) PIPickerViewControllerMode mode;
 
 @property (nonatomic) BOOL shouldUpdateView;
 
@@ -38,6 +47,10 @@
 @property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView6;
 
 @property (nonatomic, strong) IBOutlet NSTextField *shortcutLabel;
+@property (nonatomic, strong) IBOutlet NSPopUpButton *formatButton;
+
 @property (nonatomic, strong) IBOutlet NSButton *pinButton;
+
+- (id)initWithMode:(PIPickerViewControllerMode)aMode;
 
 @end

@@ -17,6 +17,11 @@
     NSMenu *pickerMenu;
     
     NSMenuItem *pickerMenuItem;
+    
+    NSMenuItem *availableFormatsMenuItem;
+    NSMenu *availableFormatsSubmenu;
+    NSMenuItem *selectedFormatMenuItem;
+    
     NSMenuItem *quitMenuItem;
 }
 

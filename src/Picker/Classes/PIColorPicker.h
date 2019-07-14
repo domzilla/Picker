@@ -9,8 +9,26 @@
 
 extern NSString *const PIColorPickerDidChangeColorNotification;
 
+typedef NS_ENUM(NSUInteger, PIColorPickerFormat) {
+    PIColorPickerFormatHEX,
+    PIColorPickerFormatNoHashHEX,
+    PIColorPickerFormatRGB,
+    PIColorPickerFormatHSB,
+    PIColorPickerFormatCMYK,
+    PIColorPickerFormatUIColor,
+    PIColorPickerFormatUIColorSwift,
+    PIColorPickerFormatNSColor,
+    PIColorPickerFormatNSColorSwift,
+    
+    PIColorPickerFormatsCount
+};
+
+NSString *PIColorPickerFormatToString(PIColorPickerFormat format);
+
 @interface PIColorPicker : NSObject
 {
+    PIColorPickerFormat pickerFormat;
+    
     NSPoint mouseLocation;
     
     BOOL tracking;
@@ -18,6 +36,8 @@ extern NSString *const PIColorPickerDidChangeColorNotification;
 
 @property (nonatomic, readonly) NSPoint mouseLocation;
 @property (nonatomic, readonly) BOOL tracking;
+
+@property (nonatomic) PIColorPickerFormat pickerFormat;
 
 + (instancetype)defaultPicker;
 

@@ -21,10 +21,14 @@
 
 @implementation PIPickerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize mode;
+
+- (id)initWithMode:(PIPickerViewControllerMode)aMode
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    if (self = [super initWithNibName:@"PIPickerViewController" bundle:[NSBundle mainBundle]])
     {
+        mode = aMode;
+        
         updateColorsHistory = YES;
         shouldUpdateView = NO;
     }
@@ -44,6 +48,19 @@
 {
     [super viewDidLoad];
     
+    if (mode == PIPickerViewControllerModeMenu)
+    {
+        self.formatButton.hidden = YES;
+    }
+    else
+    {
+        for (PIColorPickerFormat format = 0; format < PIColorPickerFormatsCount; format++)
+        {
+            [self.formatButton addItemWithTitle:PIColorPickerFormatToString(format)];
+        }
+        
+        [self.formatButton selectItemAtIndex:[[PIColorPicker defaultPicker] pickerFormat]];
+    }
 }
 
 
@@ -67,7 +84,7 @@
             [self updateView];
             
             [timer invalidate];
-            timer = [NSTimer timerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            timer = [NSTimer timerWithTimeInterval:0.1 repeats:YES block:^(NSTimer *aTimer) {
                 [self updateView];
             }];
             [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
@@ -97,6 +114,14 @@
 - (IBAction)pinButtonAction:(id)sender
 {
     NSLog(@"pinButtonAction:");
+}
+
+- (IBAction)formatButtonAction:(id)sender
+{
+    PIColorPickerFormat pickerFormat = (PIColorPickerFormat)[self.formatButton indexOfSelectedItem];
+    [[PIColorPicker defaultPicker] setPickerFormat:pickerFormat];
+    
+    NSLog(@"formatButtonAction:");
 }
 
 
