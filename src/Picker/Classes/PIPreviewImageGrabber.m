@@ -13,7 +13,7 @@
 @implementation PIPreviewImageGrabber
 
 + (NSImage *)imageForLocation:(NSPoint)mouseLocation;
-{
+{    
     CGRect imageRect = CGRectMake(mouseLocation.x - kPIScreenGrabberImageWidth / 2,
                                   mouseLocation.y - kPIScreenGrabberImageHeight / 2,
                                   kPIScreenGrabberImageWidth,

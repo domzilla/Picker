@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F242EC4F22D9B54400D741AD /* PIPickerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */; };
-		F242EC5022D9B54400D741AD /* PIPickerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F242EC4E22D9B54400D741AD /* PIPickerWindowController.xib */; };
 		F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5322D9B57200D741AD /* PIPickerViewController.m */; };
 		F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F242EC5422D9B57200D741AD /* PIPickerViewController.xib */; };
 		F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */; };
@@ -95,7 +94,6 @@
 /* Begin PBXFileReference section */
 		F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerWindowController.h; sourceTree = "<group>"; };
 		F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerWindowController.m; sourceTree = "<group>"; };
-		F242EC4E22D9B54400D741AD /* PIPickerWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIPickerWindowController.xib; sourceTree = "<group>"; };
 		F242EC5222D9B57200D741AD /* PIPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerViewController.h; sourceTree = "<group>"; };
 		F242EC5322D9B57200D741AD /* PIPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerViewController.m; sourceTree = "<group>"; };
 		F242EC5422D9B57200D741AD /* PIPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIPickerViewController.xib; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 			children = (
 				F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */,
 				F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */,
-				F242EC4E22D9B54400D741AD /* PIPickerWindowController.xib */,
 			);
 			name = WindowController;
 			sourceTree = "<group>";
@@ -374,7 +371,6 @@
 			files = (
 				F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */,
 				F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */,
-				F242EC5022D9B54400D741AD /* PIPickerWindowController.xib in Resources */,
 				F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

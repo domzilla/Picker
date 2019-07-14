@@ -7,10 +7,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-NS_ASSUME_NONNULL_BEGIN
+#import "PIPickerViewController.h"
 
-@interface PIPickerWindowController : NSWindowController
+@interface PIPickerWindowController : NSWindowController <NSWindowDelegate>
+{
+    PIPickerViewController *pickerViewController;
+}
+
+@property (nonatomic, strong) IBOutlet NSView *view;
+
+- (id)init;
 
 @end
-
-NS_ASSUME_NONNULL_END

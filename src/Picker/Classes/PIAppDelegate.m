@@ -7,7 +7,6 @@
 
 #import "PIAppDelegate.h"
 
-#import "PIPickerViewController.h"
 #import "PIColorPicker.h"
 
 @interface PIAppDelegate ()
@@ -19,7 +18,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Hides icon on dock
-    [NSApp setActivationPolicy: NSApplicationActivationPolicyProhibited];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
     
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.highlightMode = YES;
@@ -30,6 +29,7 @@
     statusItem.menu = pickerMenu;
     
     pickerViewController  = [[PIPickerViewController alloc] initWithMode:PIPickerViewControllerModeMenu];
+    pickerViewController.delegate = self;
     pickerMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
     pickerMenuItem.view = pickerViewController.view;
     [pickerMenu addItem:pickerMenuItem];
@@ -83,6 +83,21 @@
 - (void)quitMenuItemAction:(id)sender
 {
     [NSApp terminate:sender];
+}
+
+
+
+#pragma mark ---
+#pragma mark PIPickerViewControllerDelegate
+#pragma mark ---
+- (void)pickerViewControllerPinToWindow:(PIPickerViewController *)controller
+{
+    if (pickerWindowController ==  nil)
+    {
+        pickerWindowController = [[PIPickerWindowController alloc] init];
+    }
+    
+    [pickerWindowController showWindow:nil];
 }
 
 

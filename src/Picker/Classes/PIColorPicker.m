@@ -63,7 +63,15 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
         pickerFormat = (PIColorPickerFormat)[[NSUserDefaults standardUserDefaults] integerForKey:PIColorPickerUserDefaultsFormatKey];
         
         [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^ (NSEvent *event){
+            
             [self updateMouseLocation];
+        }];
+        
+        [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^NSEvent * (NSEvent *event) {
+            
+            [self updateMouseLocation];
+            
+            return event;
         }];
     }
     
