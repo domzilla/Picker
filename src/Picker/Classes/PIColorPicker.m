@@ -8,6 +8,7 @@
 #import "PIColorPicker.h"
 
 #import "PIPreviewImageGrabber.h"
+#import "PIColorHistory.h"
 #import "NSColor+Picker.h"
 
 NSString *const PIColorPickerDidChangeColorNotification = @"PIColorPickerDidChangeColorNotification";
@@ -143,10 +144,19 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 
 - (void)copyColorToPasteboard
 {
+    [self copyColorToPasteboardSaveToHistory:YES];
+}
+
+- (void)copyColorToPasteboardSaveToHistory:(BOOL)save
+{
+    [self copyColorToPasteboard:[self color] saveToHistory:YES];
+}
+
+- (void)copyColorToPasteboard:(NSColor *)color saveToHistory:(BOOL)save
+{
     NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
     [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
     
-    NSColor *color = [self color];
     NSString *colorString = nil;
     
     switch (pickerFormat)
@@ -184,6 +194,11 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
     }
     
     [pasteBoard setString:colorString forType:NSStringPboardType];
+    
+    if (save)
+    {
+        [[PIColorHistory defaultHistory] pushColor:color];
+    }
 }
 
 

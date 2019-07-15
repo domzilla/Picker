@@ -1,13 +1,13 @@
 //
-//  PIColorView.h
+//  PIColorButton.h
 //  Picker
 //
-//  Created by Dominic Rodemer on 15.07.19.
+//  Created by Dominic Rodemer on 13.07.19.
 //
 
 #import <Cocoa/Cocoa.h>
 
-@interface PIColorView : NSView
+@interface PIColorButton : NSButton
 {
     NSColor *color;
 }

@@ -50,5 +50,7 @@ extern NSString *const PIColorPickerUserDefaultsCopyShortcutKey;
 - (NSImage *)previewImage;
 
 - (void)copyColorToPasteboard;
+- (void)copyColorToPasteboardSaveToHistory:(BOOL)save;
+- (void)copyColorToPasteboard:(NSColor *)color saveToHistory:(BOOL)save;
 
 @end

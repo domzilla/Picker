@@ -9,6 +9,7 @@
 
 @class PIPickerPreviewView;
 @class PIColorView;
+@class PIColorButton;
 
 typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
     PIPickerViewControllerModeDefault,
@@ -39,12 +40,12 @@ typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
 @property (nonatomic, strong) IBOutlet NSTextField *x;
 @property (nonatomic, strong) IBOutlet NSTextField *y;
 
-@property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView1;
-@property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView2;
-@property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView3;
-@property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView4;
-@property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView5;
-@property (nonatomic, strong) IBOutlet PIColorView *colorHistoryView6;
+@property (nonatomic, strong) IBOutlet PIColorButton *colorHistoryButton1;
+@property (nonatomic, strong) IBOutlet PIColorButton *colorHistoryButton2;
+@property (nonatomic, strong) IBOutlet PIColorButton *colorHistoryButton3;
+@property (nonatomic, strong) IBOutlet PIColorButton *colorHistoryButton4;
+@property (nonatomic, strong) IBOutlet PIColorButton *colorHistoryButton5;
+@property (nonatomic, strong) IBOutlet PIColorButton *colorHistoryButton6;
 
 @property (nonatomic, strong) IBOutlet NSTextField *shortcutLabel;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *formatButton;

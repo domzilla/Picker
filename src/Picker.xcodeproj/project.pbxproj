@@ -11,7 +11,7 @@
 		F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5322D9B57200D741AD /* PIPickerViewController.m */; };
 		F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F242EC5422D9B57200D741AD /* PIPickerViewController.xib */; };
 		F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */; };
-		F242EC5D22D9BA7700D741AD /* PIColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5C22D9BA7700D741AD /* PIColorView.m */; };
+		F242EC5D22D9BA7700D741AD /* PIColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5C22D9BA7700D741AD /* PIColorButton.m */; };
 		F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */; };
 		F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC6222D9C1A200D741AD /* PIColorPicker.m */; };
 		F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9022D0800A00A6172F /* Assets.xcassets */; };
@@ -25,6 +25,8 @@
 		F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */; };
 		F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; };
 		F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F2F8C0DD22DC7CEA009A809F /* PIColorHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */; };
+		F2F8C0E722DC8402009A809F /* PIColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0E622DC8402009A809F /* PIColorView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,8 +132,8 @@
 		F242EC5422D9B57200D741AD /* PIPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIPickerViewController.xib; sourceTree = "<group>"; };
 		F242EC5822D9BA6100D741AD /* PIPickerPreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerPreviewView.h; sourceTree = "<group>"; };
 		F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerPreviewView.m; sourceTree = "<group>"; };
-		F242EC5B22D9BA7700D741AD /* PIColorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorView.h; sourceTree = "<group>"; };
-		F242EC5C22D9BA7700D741AD /* PIColorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorView.m; sourceTree = "<group>"; };
+		F242EC5B22D9BA7700D741AD /* PIColorButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorButton.h; sourceTree = "<group>"; };
+		F242EC5C22D9BA7700D741AD /* PIColorButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorButton.m; sourceTree = "<group>"; };
 		F242EC5E22D9C18E00D741AD /* PIPreviewImageGrabber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreviewImageGrabber.h; sourceTree = "<group>"; };
 		F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreviewImageGrabber.m; sourceTree = "<group>"; };
 		F242EC6122D9C1A200D741AD /* PIColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorPicker.h; sourceTree = "<group>"; };
@@ -150,6 +152,10 @@
 		F2F8C0A922D9D6BC009A809F /* NSColor+Picker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Picker.h"; sourceTree = "<group>"; };
 		F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Picker.m"; sourceTree = "<group>"; };
 		F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASShortcut.xcodeproj; path = ../../../../Github/MASShortcut/MASShortcut.xcodeproj; sourceTree = "<group>"; };
+		F2F8C0DB22DC7CEA009A809F /* PIColorHistory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorHistory.h; sourceTree = "<group>"; };
+		F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorHistory.m; sourceTree = "<group>"; };
+		F2F8C0E522DC8402009A809F /* PIColorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorView.h; sourceTree = "<group>"; };
+		F2F8C0E622DC8402009A809F /* PIColorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,8 @@
 			children = (
 				F242EC6122D9C1A200D741AD /* PIColorPicker.h */,
 				F242EC6222D9C1A200D741AD /* PIColorPicker.m */,
+				F2F8C0DB22DC7CEA009A809F /* PIColorHistory.h */,
+				F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */,
 				F242EC5E22D9C18E00D741AD /* PIPreviewImageGrabber.h */,
 				F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */,
 			);
@@ -202,8 +210,10 @@
 			children = (
 				F242EC5822D9BA6100D741AD /* PIPickerPreviewView.h */,
 				F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */,
-				F242EC5B22D9BA7700D741AD /* PIColorView.h */,
-				F242EC5C22D9BA7700D741AD /* PIColorView.m */,
+				F2F8C0E522DC8402009A809F /* PIColorView.h */,
+				F2F8C0E622DC8402009A809F /* PIColorView.m */,
+				F242EC5B22D9BA7700D741AD /* PIColorButton.h */,
+				F242EC5C22D9BA7700D741AD /* PIColorButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -457,9 +467,11 @@
 				F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */,
 				F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */,
 				F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */,
-				F242EC5D22D9BA7700D741AD /* PIColorView.m in Sources */,
+				F2F8C0DD22DC7CEA009A809F /* PIColorHistory.m in Sources */,
+				F242EC5D22D9BA7700D741AD /* PIColorButton.m in Sources */,
 				F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */,
 				F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */,
+				F2F8C0E722DC8402009A809F /* PIColorView.m in Sources */,
 				F2CABA9722D0800A00A6172F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

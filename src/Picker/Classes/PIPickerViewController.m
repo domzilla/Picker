@@ -9,13 +9,16 @@
 
 #import "PIPickerPreviewView.h"
 #import "PIColorView.h"
+#import "PIColorButton.h"
 
 #import "PIColorPicker.h"
+#import "PIColorHistory.h"
 #import "NSColor+Picker.h"
 
 @interface PIPickerViewController ()
 
 - (void)updateView;
+- (void)updateHistory;
 
 @end
 
@@ -31,6 +34,11 @@
         
         updateColorsHistory = YES;
         shouldUpdateView = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(colorHistoryDidUpdateHistoryNotification:)
+                                                     name:PIColorHistoryDidUpdateHistoryNotification
+                                                   object:nil];
     }
     
     return self;
@@ -63,6 +71,8 @@
         
         [self.formatButton selectItemAtIndex:[[PIColorPicker defaultPicker] pickerFormat]];
     }
+    
+    [self updateHistory];
 }
 
 
@@ -113,6 +123,13 @@
 #pragma mark ---
 #pragma mark Actions
 #pragma mark ---
+- (IBAction)colorHistoryButtonAction:(id)sender
+{
+    PIColorButton *colorHistoryButton = (PIColorButton *)sender;
+    
+    [[PIColorPicker defaultPicker] copyColorToPasteboard:colorHistoryButton.color saveToHistory:NO];
+}
+
 - (IBAction)formatButtonAction:(id)sender
 {
     PIColorPickerFormat pickerFormat = (PIColorPickerFormat)[self.formatButton indexOfSelectedItem];
@@ -146,6 +163,16 @@
     self.y.stringValue = [NSString stringWithFormat:@"%.f", [PIColorPicker defaultPicker].mouseLocation.y];
 }
 
+- (void)updateHistory
+{
+    self.colorHistoryButton1.color = [[PIColorHistory defaultHistory] colorAtIndex:0];
+    self.colorHistoryButton2.color = [[PIColorHistory defaultHistory] colorAtIndex:1];
+    self.colorHistoryButton3.color = [[PIColorHistory defaultHistory] colorAtIndex:2];
+    self.colorHistoryButton4.color = [[PIColorHistory defaultHistory] colorAtIndex:3];
+    self.colorHistoryButton5.color = [[PIColorHistory defaultHistory] colorAtIndex:4];
+    self.colorHistoryButton6.color = [[PIColorHistory defaultHistory] colorAtIndex:5];
+}
+
 
 
 #pragma mark ---
@@ -154,6 +181,16 @@
 - (void)colorPickerDidChangeColorNotification:(NSNotification *)notification
 {
     [self updateView];
+}
+
+
+
+#pragma mark ---
+#pragma mark PiColorHistory Notifictions
+#pragma mark ---
+- (void)colorHistoryDidUpdateHistoryNotification:(NSNotification *)notification
+{
+    [self updateHistory];
 }
 
 @end
