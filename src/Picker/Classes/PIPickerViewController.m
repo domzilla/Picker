@@ -21,7 +21,6 @@
 
 @implementation PIPickerViewController
 
-@synthesize delegate;
 @synthesize mode;
 
 - (id)initWithMode:(PIPickerViewControllerMode)aMode
@@ -52,12 +51,10 @@
     if (mode == PIPickerViewControllerModeMenu)
     {
         self.formatButton.hidden = YES;
-        self.pinButton.hidden = NO;
     }
     else
     {
         self.formatButton.hidden = NO;
-        self.pinButton.hidden = YES;
         
         for (PIColorPickerFormat format = 0; format < PIColorPickerFormatsCount; format++)
         {
@@ -116,14 +113,6 @@
 #pragma mark ---
 #pragma mark Actions
 #pragma mark ---
-- (IBAction)pinButtonAction:(id)sender
-{
-    if ([delegate respondsToSelector:@selector(pickerViewControllerPinToWindow:)])
-    {
-        [delegate pickerViewControllerPinToWindow:self];
-    }
-}
-
 - (IBAction)formatButtonAction:(id)sender
 {
     PIColorPickerFormat pickerFormat = (PIColorPickerFormat)[self.formatButton indexOfSelectedItem];

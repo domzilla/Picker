@@ -15,12 +15,8 @@ typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
     PIPickerViewControllerModeMenu
 };
 
-@protocol PIPickerViewControllerDelegate;
-
 @interface PIPickerViewController : NSViewController
 {
-    __weak id<PIPickerViewControllerDelegate> delegate;
-    
     PIPickerViewControllerMode mode;
     
     NSTimer *timer;
@@ -28,8 +24,6 @@ typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
     BOOL updateColorsHistory;
     BOOL shouldUpdateView;
 }
-
-@property (nonatomic, weak) id<PIPickerViewControllerDelegate> delegate;
 
 @property (nonatomic, readonly) PIPickerViewControllerMode mode;
 
@@ -55,16 +49,6 @@ typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
 @property (nonatomic, strong) IBOutlet NSTextField *shortcutLabel;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *formatButton;
 
-@property (nonatomic, strong) IBOutlet NSButton *pinButton;
-
 - (id)initWithMode:(PIPickerViewControllerMode)aMode;
-
-@end
-
-
-@protocol PIPickerViewControllerDelegate <NSObject>
-
-@optional
-- (void)pickerViewControllerPinToWindow:(PIPickerViewController *)controller;
 
 @end

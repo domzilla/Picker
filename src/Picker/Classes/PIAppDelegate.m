@@ -9,12 +9,16 @@
 
 #import <MASShortcut/Shortcut.h>
 
+#import "PIPickerViewController.h"
+#import "PIPickerWindowController.h"
 #import "PIColorPicker.h"
 
 @interface PIAppDelegate ()
 
-- (void)registerGlobalCopyColorHotkey;
-- (void)unregisterGlobalCopyColorHotkey;
+- (void)registerGlobalHotkeys;
+- (void)unregisterGlobalHotkeys;
+
+- (void)showPickerWindow;
 
 @end
 
@@ -34,8 +38,6 @@
     // Hides icon on dock
     [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
     
-    pickerWindowController = [[PIPickerWindowController alloc] init];
-    
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.highlightMode = YES;
     statusItem.image = [NSImage imageNamed:@"menu_icon_dropper"];
@@ -45,7 +47,6 @@
     statusItem.menu = pickerMenu;
     
     pickerViewController  = [[PIPickerViewController alloc] initWithMode:PIPickerViewControllerModeMenu];
-    pickerViewController.delegate = self;
     pickerMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
     pickerMenuItem.view = pickerViewController.view;
     [pickerMenu addItem:pickerMenuItem];
@@ -74,6 +75,12 @@
     [availableFormatsMenuItem setSubmenu:availableFormatsSubmenu];
     [pickerMenu addItem:availableFormatsMenuItem];
     
+    pickerWindowItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Pin on screen", @"Button to pin the window on screen")
+                                                  action:@selector(pickerWindowItemAction:)
+                                           keyEquivalent:@"p"];
+    pickerWindowItem.keyEquivalentModifierMask = NSEventModifierFlagControl | NSEventModifierFlagCommand | NSEventModifierFlagOption;
+    [pickerMenu addItem:pickerWindowItem];
+    
     [pickerMenu addItem:[NSMenuItem separatorItem]];
     quitMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit", @"Button to quit the application")
                                               action:@selector(quitMenuItemAction:)
@@ -82,7 +89,7 @@
     
     [[PIColorPicker defaultPicker] startTracking];
     
-    [self registerGlobalCopyColorHotkey];
+    [self registerGlobalHotkeys];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -99,6 +106,11 @@
 {
     NSLog(@"Copy local");
     [[PIColorPicker defaultPicker] copyColorToPasteboard];
+}
+
+- (void)pickerWindowItemAction:(id)sender
+{
+    [self showPickerWindow];
 }
 
 - (void)formatSubmenuItemAction:(id)sender
@@ -123,10 +135,10 @@
 #pragma mark ---
 #pragma mark Private
 #pragma mark ---
-- (void)registerGlobalCopyColorHotkey
+- (void)registerGlobalHotkeys
 {
-    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
-    [[MASShortcutMonitor sharedMonitor] registerShortcut:shortcut withAction:^{
+    MASShortcut *copyColorShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
+    [[MASShortcutMonitor sharedMonitor] registerShortcut:copyColorShortcut withAction:^{
         
         NSLog(@"Copy global");
         [[PIColorPicker defaultPicker] copyColorToPasteboard];
@@ -136,27 +148,44 @@
             [self->statusItem.button setHighlighted:NO];
         });
     }];
+    
+    MASShortcut *showWindowShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand | NSEventModifierFlagOption];
+    [[MASShortcutMonitor sharedMonitor] registerShortcut:showWindowShortcut withAction:^{
+        
+        [self showPickerWindow];
+    }];
 }
 
-- (void)unregisterGlobalCopyColorHotkey
+- (void)unregisterGlobalHotkeys
 {
-    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
-    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:shortcut];
+    MASShortcut *copyColorShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:copyColorShortcut];
+    
+    MASShortcut *showWindowShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand | NSEventModifierFlagOption];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:showWindowShortcut];
 }
 
-
-
-#pragma mark ---
-#pragma mark PIPickerViewControllerDelegate
-#pragma mark ---
-- (void)pickerViewControllerPinToWindow:(PIPickerViewController *)controller
+- (void)showPickerWindow
 {
-    NSRect menuFrame = [pickerMenuItem.view.window convertRectToScreen:pickerMenuItem.view.frame];
-    NSRect windowFrame = NSMakeRect(menuFrame.origin.x,
-                                    menuFrame.origin.y,
-                                    pickerWindowController.window.frame.size.width,
-                                    pickerWindowController.window.frame.size.height);
-    [pickerWindowController.window setFrame:windowFrame display:NO];
+    if (pickerWindowController == nil)
+    {
+        pickerWindowController = [[PIPickerWindowController alloc] init];
+        
+        NSRect statusItemWindowRect = [statusItem.button convertRect:statusItem.button.bounds toView:nil];
+        NSRect statusItemScreenRect = [statusItem.button.window convertRectToScreen:statusItemWindowRect];
+        
+        CGFloat originX = statusItemScreenRect.origin.x;
+        NSRect screenRect = [[NSScreen mainScreen] frame];
+        if (originX + pickerWindowController.window.frame.size.width + 20.0 > screenRect.size.width)
+            originX = statusItemScreenRect.origin.x - pickerWindowController.window.frame.size.width + statusItemScreenRect.size.width;
+        
+        NSRect windowFrame = NSMakeRect(originX,
+                                        statusItemScreenRect.origin.y - pickerWindowController.window.frame.size.height,
+                                        pickerWindowController.window.frame.size.width,
+                                        pickerWindowController.window.frame.size.height);
+        [pickerWindowController.window setFrame:windowFrame display:NO];
+        
+    }
     
     [pickerMenu cancelTracking];
     [pickerWindowController showWindow:nil];
@@ -170,13 +199,13 @@
 - (void)menuWillOpen:(NSMenu *)menu
 {
     pickerViewController.shouldUpdateView = YES;
-    [self unregisterGlobalCopyColorHotkey];
+    [self unregisterGlobalHotkeys];
 }
 
 - (void)menuDidClose:(NSMenu *)menu
 {
     pickerViewController.shouldUpdateView = NO;
-    [self registerGlobalCopyColorHotkey];
+    [self registerGlobalHotkeys];
 }
 
 @end

@@ -7,10 +7,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "PIPickerViewController.h"
-#import "PIPickerWindowController.h"
+@class PIPickerViewController;
+@class PIPickerWindowController;
 
-@interface PIAppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate, PIPickerViewControllerDelegate>
+@interface PIAppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 {
     PIPickerViewController *pickerViewController;
     PIPickerWindowController *pickerWindowController;
@@ -24,6 +24,7 @@
     NSMenu *availableFormatsSubmenu;
     NSMenuItem *selectedFormatMenuItem;
     
+    NSMenuItem *pickerWindowItem;
     NSMenuItem *quitMenuItem;
 }
 
