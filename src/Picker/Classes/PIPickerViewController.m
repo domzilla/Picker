@@ -7,6 +7,8 @@
 
 #import "PIPickerViewController.h"
 
+#import <MASShortcut/MASShortcut.h>
+
 #import "PIPickerPreviewView.h"
 #import "PIColorView.h"
 #import "PIColorButton.h"
@@ -19,6 +21,7 @@
 
 - (void)updateView;
 - (void)updateHistory;
+- (void)updateCopyShortcut;
 
 @end
 
@@ -73,6 +76,7 @@
     }
     
     [self updateHistory];
+    [self updateCopyShortcut];
 }
 
 
@@ -171,6 +175,15 @@
     self.colorHistoryButton4.color = [[PIColorHistory defaultHistory] colorAtIndex:3];
     self.colorHistoryButton5.color = [[PIColorHistory defaultHistory] colorAtIndex:4];
     self.colorHistoryButton6.color = [[PIColorHistory defaultHistory] colorAtIndex:5];
+}
+
+- (void)updateCopyShortcut
+{
+#warning TODO
+    MASShortcut *defaultCopyShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagControl];
+    
+    NSString *shortcutString = [NSString stringWithFormat:@"%@%@", defaultCopyShortcut.modifierFlagsString, defaultCopyShortcut.keyCodeString];
+    self.shortcutLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Press %@ to copy color", @"Place holder is a key-combination which copies the current color to clipboard"), shortcutString];
 }
 
 

@@ -27,6 +27,13 @@
 		F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F2F8C0DD22DC7CEA009A809F /* PIColorHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */; };
 		F2F8C0E722DC8402009A809F /* PIColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0E622DC8402009A809F /* PIColorView.m */; };
+		F2F8C0F922DDABB6009A809F /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0F622DDABA3009A809F /* MASPreferences.framework */; };
+		F2F8C0FA22DDABB6009A809F /* MASPreferences.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0F622DDABA3009A809F /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F2F8C0FF22DDACC2009A809F /* PIPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0FE22DDACC2009A809F /* PIPreferencesWindowController.m */; };
+		F2F8C10422DDAD2D009A809F /* PIGeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10222DDAD2D009A809F /* PIGeneralPreferencesViewController.m */; };
+		F2F8C10522DDAD2D009A809F /* PIGeneralPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F8C10322DDAD2D009A809F /* PIGeneralPreferencesViewController.xib */; };
+		F2F8C10922DDAD44009A809F /* PIShortcutsPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */; };
+		F2F8C10A22DDAD44009A809F /* PIShortcutsPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +114,20 @@
 			remoteGlobalIDString = 0D827CD21990D4420010B8EF;
 			remoteInfo = MASShortcut;
 		};
+		F2F8C0F522DDABA3009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F16AF7F41BA279F10022155C;
+			remoteInfo = MASPreferences;
+		};
+		F2F8C0FB22DDABB6009A809F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F16AF7F31BA279F10022155C;
+			remoteInfo = MASPreferences;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,6 +137,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F2F8C0FA22DDABB6009A809F /* MASPreferences.framework in Embed Frameworks */,
 				F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */,
 				F2F8C09F22D9D57A009A809F /* BGFoundation.framework in Embed Frameworks */,
 			);
@@ -156,6 +178,15 @@
 		F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorHistory.m; sourceTree = "<group>"; };
 		F2F8C0E522DC8402009A809F /* PIColorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorView.h; sourceTree = "<group>"; };
 		F2F8C0E622DC8402009A809F /* PIColorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorView.m; sourceTree = "<group>"; };
+		F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASPreferences.xcodeproj; path = ../../../../Github/MASPreferences/MASPreferences.xcodeproj; sourceTree = "<group>"; };
+		F2F8C0FD22DDACC2009A809F /* PIPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreferencesWindowController.h; sourceTree = "<group>"; };
+		F2F8C0FE22DDACC2009A809F /* PIPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreferencesWindowController.m; sourceTree = "<group>"; };
+		F2F8C10122DDAD2D009A809F /* PIGeneralPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIGeneralPreferencesViewController.h; sourceTree = "<group>"; };
+		F2F8C10222DDAD2D009A809F /* PIGeneralPreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIGeneralPreferencesViewController.m; sourceTree = "<group>"; };
+		F2F8C10322DDAD2D009A809F /* PIGeneralPreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIGeneralPreferencesViewController.xib; sourceTree = "<group>"; };
+		F2F8C10622DDAD44009A809F /* PIShortcutsPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIShortcutsPreferencesViewController.h; sourceTree = "<group>"; };
+		F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIShortcutsPreferencesViewController.m; sourceTree = "<group>"; };
+		F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIShortcutsPreferencesViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +196,7 @@
 			files = (
 				F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */,
 				F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */,
+				F2F8C0F922DDABB6009A809F /* MASPreferences.framework in Frameworks */,
 				F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */,
 				F2F8C09E22D9D57A009A809F /* BGFoundation.framework in Frameworks */,
 			);
@@ -178,6 +210,8 @@
 			children = (
 				F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */,
 				F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */,
+				F2F8C0FD22DDACC2009A809F /* PIPreferencesWindowController.h */,
+				F2F8C0FE22DDACC2009A809F /* PIPreferencesWindowController.m */,
 			);
 			name = WindowController;
 			sourceTree = "<group>";
@@ -201,6 +235,12 @@
 				F242EC5222D9B57200D741AD /* PIPickerViewController.h */,
 				F242EC5322D9B57200D741AD /* PIPickerViewController.m */,
 				F242EC5422D9B57200D741AD /* PIPickerViewController.xib */,
+				F2F8C10122DDAD2D009A809F /* PIGeneralPreferencesViewController.h */,
+				F2F8C10222DDAD2D009A809F /* PIGeneralPreferencesViewController.m */,
+				F2F8C10322DDAD2D009A809F /* PIGeneralPreferencesViewController.xib */,
+				F2F8C10622DDAD44009A809F /* PIShortcutsPreferencesViewController.h */,
+				F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */,
+				F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -267,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */,
+				F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */,
 				F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */,
 			);
 			name = Extern;
@@ -313,6 +354,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F2F8C0ED22DDABA3009A809F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2F8C0F622DDABA3009A809F /* MASPreferences.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -330,6 +379,7 @@
 			dependencies = (
 				F2F8C0A122D9D57A009A809F /* PBXTargetDependency */,
 				F2F8C0D822DB4598009A809F /* PBXTargetDependency */,
+				F2F8C0FC22DDABB6009A809F /* PBXTargetDependency */,
 			);
 			name = Picker;
 			productName = Picker;
@@ -365,6 +415,10 @@
 				{
 					ProductGroup = F2F8C08A22D9D570009A809F /* Products */;
 					ProjectRef = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+				},
+				{
+					ProductGroup = F2F8C0ED22DDABA3009A809F /* Products */;
+					ProjectRef = F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */;
 				},
 				{
 					ProductGroup = F2F8C0CA22DB4587009A809F /* Products */;
@@ -442,6 +496,13 @@
 			remoteRef = F2F8C0D322DB4587009A809F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F2F8C0F622DDABA3009A809F /* MASPreferences.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MASPreferences.framework;
+			remoteRef = F2F8C0F522DDABA3009A809F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -452,6 +513,8 @@
 				F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */,
 				F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */,
 				F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */,
+				F2F8C10A22DDAD44009A809F /* PIShortcutsPreferencesViewController.xib in Resources */,
+				F2F8C10522DDAD2D009A809F /* PIGeneralPreferencesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +527,7 @@
 			files = (
 				F242EC4F22D9B54400D741AD /* PIPickerWindowController.m in Sources */,
 				F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */,
+				F2F8C10422DDAD2D009A809F /* PIGeneralPreferencesViewController.m in Sources */,
 				F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */,
 				F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */,
 				F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */,
@@ -471,6 +535,8 @@
 				F242EC5D22D9BA7700D741AD /* PIColorButton.m in Sources */,
 				F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */,
 				F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */,
+				F2F8C10922DDAD44009A809F /* PIShortcutsPreferencesViewController.m in Sources */,
+				F2F8C0FF22DDACC2009A809F /* PIPreferencesWindowController.m in Sources */,
 				F2F8C0E722DC8402009A809F /* PIColorView.m in Sources */,
 				F2CABA9722D0800A00A6172F /* main.m in Sources */,
 			);
@@ -488,6 +554,11 @@
 			isa = PBXTargetDependency;
 			name = MASShortcut;
 			targetProxy = F2F8C0D722DB4598009A809F /* PBXContainerItemProxy */;
+		};
+		F2F8C0FC22DDABB6009A809F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MASPreferences;
+			targetProxy = F2F8C0FB22DDABB6009A809F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

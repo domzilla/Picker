@@ -9,22 +9,23 @@
 
 @class PIPickerViewController;
 @class PIPickerWindowController;
+@class PIPreferencesWindowController;
 
 @interface PIAppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
 {
     PIPickerViewController *pickerViewController;
     PIPickerWindowController *pickerWindowController;
+    PIPreferencesWindowController *preferencesWindowController;
     
     NSStatusItem *statusItem;
     NSMenu *pickerMenu;
     
     NSMenuItem *pickerMenuItem;
-    
     NSMenuItem *availableFormatsMenuItem;
     NSMenu *availableFormatsSubmenu;
     NSMenuItem *selectedFormatMenuItem;
-    
     NSMenuItem *pickerWindowItem;
+    NSMenuItem *pickerPreferencesItem;
     NSMenuItem *quitMenuItem;
 }
 

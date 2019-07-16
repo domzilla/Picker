@@ -11,6 +11,7 @@
 
 #import "PIPickerViewController.h"
 #import "PIPickerWindowController.h"
+#import "PIPreferencesWindowController.h"
 #import "PIColorPicker.h"
 
 @interface PIAppDelegate ()
@@ -19,6 +20,7 @@
 - (void)unregisterGlobalHotkeys;
 
 - (void)showPickerWindow;
+- (void)showPreferencesWindow;
 
 @end
 
@@ -82,6 +84,13 @@
     [pickerMenu addItem:pickerWindowItem];
     
     [pickerMenu addItem:[NSMenuItem separatorItem]];
+    pickerPreferencesItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Preferences", @"Button to show app preferences")
+                                                       action:@selector(preferencesMenuItemAction:)
+                                                keyEquivalent:@","];
+    pickerPreferencesItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
+    [pickerMenu addItem:pickerPreferencesItem];
+    
+    [pickerMenu addItem:[NSMenuItem separatorItem]];
     quitMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit", @"Button to quit the application")
                                               action:@selector(quitMenuItemAction:)
                                        keyEquivalent:@"q"];
@@ -123,6 +132,11 @@
     
     PIColorPickerFormat pickerFormat = (PIColorPickerFormat)[availableFormatsSubmenu indexOfItem:selectedFormatMenuItem];
     [[PIColorPicker defaultPicker] setPickerFormat:pickerFormat];
+}
+
+- (void)preferencesMenuItemAction:(id)sender
+{
+    [self showPreferencesWindow];
 }
 
 - (void)quitMenuItemAction:(id)sender
@@ -189,6 +203,16 @@
     
     [pickerMenu cancelTracking];
     [pickerWindowController showWindow:nil];
+}
+
+- (void)showPreferencesWindow
+{
+    if (preferencesWindowController == nil)
+    {
+        preferencesWindowController = [PIPreferencesWindowController preferencesWindowController];
+    }
+    
+    [preferencesWindowController showWindow:nil];
 }
 
 
