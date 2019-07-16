@@ -36,7 +36,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Hides icon on dock
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
     
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     statusItem.highlightMode = YES;

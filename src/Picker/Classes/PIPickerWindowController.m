@@ -30,7 +30,6 @@
         self.window.canHide = NO;
         self.window.excludedFromWindowsMenu = YES;
         self.window.level = NSFloatingWindowLevel;
-        self.window.delegate = self;
     }
     
     return self;
@@ -41,25 +40,6 @@
     [super windowDidLoad];
     
     
-}
-
-- (void)showWindow:(id)sender
-{
-    // Activates icon on dock
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
-    
-    [super showWindow:sender];
-}
-
-
-
-#pragma mark ---
-#pragma mark NSWindowDelegate
-#pragma mark ---
-- (void)windowWillClose:(NSNotification *)notification
-{
-    // Hides icon on dock
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyProhibited];
 }
 
 @end

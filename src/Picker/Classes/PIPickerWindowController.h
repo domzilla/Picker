@@ -9,7 +9,7 @@
 
 #import "PIPickerViewController.h"
 
-@interface PIPickerWindowController : NSWindowController <NSWindowDelegate>
+@interface PIPickerWindowController : NSWindowController
 {
     PIPickerViewController *pickerViewController;
 }
