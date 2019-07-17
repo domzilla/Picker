@@ -7,6 +7,10 @@
 
 #import "PIShortcutsPreferencesViewController.h"
 
+#import <MASShortcut/Shortcut.h>
+
+#import "PIPreferences.h"
+
 @interface PIShortcutsPreferencesViewController ()
 
 @end
@@ -21,6 +25,21 @@
     }
     
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.colorCopyShortcutView.shortcutValue = [[PIPreferences shadredPreferences] colorCopyShortcut];
+    self.colorCopyShortcutView.shortcutValueChange = ^void(MASShortcutView *shortcutView) {
+        [[PIPreferences shadredPreferences] setColorCopyShortcut:shortcutView.shortcutValue];
+    };
+    
+    self.pinToScreenShortcutView.shortcutValue = [[PIPreferences shadredPreferences] pinToScreenShortcut];
+    self.pinToScreenShortcutView.shortcutValueChange = ^void(MASShortcutView *shortcutView) {
+        [[PIPreferences shadredPreferences] setPinToScreenShortcut:shortcutView.shortcutValue];
+    };
 }
 
 

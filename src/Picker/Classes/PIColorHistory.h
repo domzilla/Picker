@@ -16,6 +16,8 @@ extern NSString *const PIColorHistoryDidUpdateHistoryNotification;
 
 + (instancetype)defaultHistory;
 
++ (NSDictionary *)defaults;
+
 - (void)pushColor:(NSColor *)color;
 - (NSColor *)colorAtIndex:(NSUInteger)index;
 

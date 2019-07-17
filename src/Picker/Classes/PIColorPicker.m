@@ -14,7 +14,6 @@
 NSString *const PIColorPickerDidChangeColorNotification = @"PIColorPickerDidChangeColorNotification";
 
 NSString *const PIColorPickerUserDefaultsFormatKey = @"PIColorPickerUserDefaultsFormatKey";
-NSString *const PIColorPickerUserDefaultsCopyShortcutKey = @"PIColorPickerUserDefaultsCopyShortcutKey";
 
 NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 {
@@ -114,6 +113,11 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 #pragma mark ---
 #pragma mark Public
 #pragma mark ---
++ (NSDictionary *)defaults
+{
+    return @{PIColorPickerUserDefaultsFormatKey:@(PIColorPickerFormatHEX)};
+}
+
 - (void)startTracking
 {
     if (tracking)

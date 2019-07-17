@@ -21,14 +21,14 @@
     NSMenu *pickerMenu;
     
     NSMenuItem *pickerMenuItem;
+    NSMenuItem *colorCopyMenuItem;
     NSMenuItem *availableFormatsMenuItem;
     NSMenu *availableFormatsSubmenu;
     NSMenuItem *selectedFormatMenuItem;
-    NSMenuItem *pickerWindowItem;
+    NSMenuItem *pinToScreenItem;
     NSMenuItem *pickerPreferencesItem;
     NSMenuItem *quitMenuItem;
 }
 
 
 @end
-

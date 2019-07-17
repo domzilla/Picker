@@ -7,6 +7,14 @@
 
 #import <MASPreferences/MASPreferences.h>
 
+@class MASShortcutView;
+
 @interface PIShortcutsPreferencesViewController : NSViewController <MASPreferencesViewController>
+{
+    
+}
+
+@property (nonatomic, strong) IBOutlet MASShortcutView *colorCopyShortcutView;
+@property (nonatomic, strong) IBOutlet MASShortcutView *pinToScreenShortcutView;
 
 @end

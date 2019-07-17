@@ -7,12 +7,14 @@
 
 #import "PIPickerViewController.h"
 
+#import <BGDataBinding/BGDataBinding.h>
 #import <MASShortcut/MASShortcut.h>
 
 #import "PIPickerPreviewView.h"
 #import "PIColorView.h"
 #import "PIColorButton.h"
 
+#import "PIPreferences.h"
 #import "PIColorPicker.h"
 #import "PIColorHistory.h"
 #import "NSColor+Picker.h"
@@ -21,7 +23,6 @@
 
 - (void)updateView;
 - (void)updateHistory;
-- (void)updateCopyShortcut;
 
 @end
 
@@ -75,8 +76,12 @@
         [self.formatButton selectItemAtIndex:[[PIColorPicker defaultPicker] pickerFormat]];
     }
     
+    [[PIPreferences shadredPreferences] bg_addTarget:self
+                                              action:@selector(bindPreferencesColorCopySortcutChanged:)
+                                    forKeyPathChange:BGKeyPath(PIPreferences, colorCopyShortcut)
+                                     callImmediately:YES];
+    
     [self updateHistory];
-    [self updateCopyShortcut];
 }
 
 
@@ -120,6 +125,19 @@
                                                           object:nil];
         }
     }
+}
+
+
+
+#pragma mark ---
+#pragma mark Bindings
+#pragma mark ---
+- (void)bindPreferencesColorCopySortcutChanged:(NSDictionary *)change
+{
+    MASShortcut *colorCopyShortcut = [[PIPreferences shadredPreferences] colorCopyShortcut];
+    
+    NSString *shortcutString = [NSString stringWithFormat:@"%@%@", colorCopyShortcut.modifierFlagsString, colorCopyShortcut.keyCodeString];
+    self.shortcutLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Press %@ to copy color", @"Place holder is a key-combination which copies the current color to clipboard"), shortcutString];
 }
 
 
@@ -175,15 +193,6 @@
     self.colorHistoryButton4.color = [[PIColorHistory defaultHistory] colorAtIndex:3];
     self.colorHistoryButton5.color = [[PIColorHistory defaultHistory] colorAtIndex:4];
     self.colorHistoryButton6.color = [[PIColorHistory defaultHistory] colorAtIndex:5];
-}
-
-- (void)updateCopyShortcut
-{
-#warning TODO
-    MASShortcut *defaultCopyShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagControl];
-    
-    NSString *shortcutString = [NSString stringWithFormat:@"%@%@", defaultCopyShortcut.modifierFlagsString, defaultCopyShortcut.keyCodeString];
-    self.shortcutLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Press %@ to copy color", @"Place holder is a key-combination which copies the current color to clipboard"), shortcutString];
 }
 
 

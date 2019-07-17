@@ -7,17 +7,23 @@
 
 #import "PIAppDelegate.h"
 
+#import <BGDataBinding/BGDataBinding.h>
 #import <MASShortcut/Shortcut.h>
 
 #import "PIPickerViewController.h"
 #import "PIPickerWindowController.h"
 #import "PIPreferencesWindowController.h"
 #import "PIColorPicker.h"
+#import "PIColorHistory.h"
+#import "PIPreferences.h"
 
 @interface PIAppDelegate ()
 
 - (void)registerGlobalHotkeys;
 - (void)unregisterGlobalHotkeys;
+
+- (void)registerColorCopyShortcut;
+- (void)registerPinToScreenShortcut;
 
 - (void)showPickerWindow;
 - (void)showPreferencesWindow;
@@ -28,11 +34,12 @@
 
 + (void)initialize
 {
-    MASShortcut *defaultCopyShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagControl];
-    NSData *defaultCopyShortcutData = [NSKeyedArchiver archivedDataWithRootObject:defaultCopyShortcut];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{PIColorPickerUserDefaultsCopyShortcutKey:defaultCopyShortcutData}];
+    NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
+    [defaults addEntriesFromDictionary:[PIPreferences defaults]];
+    [defaults addEntriesFromDictionary:[PIColorPicker defaults]];
+    [defaults addEntriesFromDictionary:[PIColorHistory defaults]];
     
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -53,14 +60,13 @@
     pickerMenuItem.view = pickerViewController.view;
     [pickerMenu addItem:pickerMenuItem];
     
-    //Hidden dummy item for local shortcut
-    NSMenuItem *copyColorMenuItem =[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy color", @"Button to copy the current color to clipboard")
-                                                              action:@selector(copyColorMenuItemAction:)
-                                                       keyEquivalent:@"p"];
-    copyColorMenuItem.keyEquivalentModifierMask = NSEventModifierFlagControl | NSEventModifierFlagCommand;
-    copyColorMenuItem.allowsKeyEquivalentWhenHidden = YES;
-    copyColorMenuItem.hidden = YES;
-    [pickerMenu addItem:copyColorMenuItem];
+    //Hidden dummy item for local copy shortcut
+    colorCopyMenuItem =[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy color", @"Button to copy the current color to clipboard")
+                                                  action:@selector(copyColorMenuItemAction:)
+                                           keyEquivalent:@""];
+    colorCopyMenuItem.allowsKeyEquivalentWhenHidden = YES;
+    colorCopyMenuItem.hidden = YES;
+    [pickerMenu addItem:colorCopyMenuItem];
     
     [pickerMenu addItem:[NSMenuItem separatorItem]];
     availableFormatsMenuItem = [[NSMenuItem alloc] init];
@@ -77,14 +83,13 @@
     [availableFormatsMenuItem setSubmenu:availableFormatsSubmenu];
     [pickerMenu addItem:availableFormatsMenuItem];
     
-    pickerWindowItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Pin on screen", @"Button to pin the window on screen")
-                                                  action:@selector(pickerWindowItemAction:)
-                                           keyEquivalent:@"p"];
-    pickerWindowItem.keyEquivalentModifierMask = NSEventModifierFlagControl | NSEventModifierFlagCommand | NSEventModifierFlagOption;
-    [pickerMenu addItem:pickerWindowItem];
+    pinToScreenItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Pin on screen...", @"Button to pin the window on screen")
+                                                 action:@selector(pickerWindowItemAction:)
+                                          keyEquivalent:@""];
+    [pickerMenu addItem:pinToScreenItem];
     
     [pickerMenu addItem:[NSMenuItem separatorItem]];
-    pickerPreferencesItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Preferences", @"Button to show app preferences")
+    pickerPreferencesItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Preferences...", @"Button to show app preferences")
                                                        action:@selector(preferencesMenuItemAction:)
                                                 keyEquivalent:@","];
     pickerPreferencesItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
@@ -98,7 +103,14 @@
     
     [[PIColorPicker defaultPicker] startTracking];
     
-    [self registerGlobalHotkeys];
+    [[PIPreferences shadredPreferences] bg_addTarget:self
+                                              action:@selector(bindPreferencesColorCopySortcutChanged:)
+                                    forKeyPathChange:BGKeyPath(PIPreferences, colorCopyShortcut)
+                                     callImmediately:YES];
+    [[PIPreferences shadredPreferences] bg_addTarget:self
+                                              action:@selector(bindPreferencesPinToScreenSortcutChanged:)
+                                    forKeyPathChange:BGKeyPath(PIPreferences, pinToScreenShortcut)
+                                     callImmediately:YES];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -106,6 +118,24 @@
     
 }
 
+
+
+#pragma mark ---
+#pragma mark Bindings
+#pragma mark ---
+- (void)bindPreferencesColorCopySortcutChanged:(NSDictionary *)change
+{
+    MASShortcut *oldColorCopyShortcut = [change objectForKey:kBGDataBindingChangeOldKey];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:oldColorCopyShortcut];
+    [self registerColorCopyShortcut];
+}
+
+- (void)bindPreferencesPinToScreenSortcutChanged:(NSDictionary *)change
+{
+    MASShortcut *oldPinToScreenShortcut = [change objectForKey:kBGDataBindingChangeOldKey];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:oldPinToScreenShortcut];
+    [self registerPinToScreenShortcut];
+}
 
 
 #pragma mark ---
@@ -151,7 +181,26 @@
 #pragma mark ---
 - (void)registerGlobalHotkeys
 {
-    MASShortcut *copyColorShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
+    [self registerColorCopyShortcut];
+    [self registerPinToScreenShortcut];
+}
+
+- (void)unregisterGlobalHotkeys
+{
+    MASShortcut *copyColorShortcut = [[PIPreferences shadredPreferences] colorCopyShortcut];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:copyColorShortcut];
+    
+    MASShortcut *pinToScreenShortcut = [[PIPreferences shadredPreferences] pinToScreenShortcut];
+    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:pinToScreenShortcut];
+}
+
+- (void)registerColorCopyShortcut
+{
+    MASShortcut *copyColorShortcut = [[PIPreferences shadredPreferences] colorCopyShortcut];
+    
+    colorCopyMenuItem.keyEquivalent = copyColorShortcut.keyCodeString;
+    colorCopyMenuItem.keyEquivalentModifierMask = copyColorShortcut.modifierFlags;
+    
     [[MASShortcutMonitor sharedMonitor] registerShortcut:copyColorShortcut withAction:^{
         
         NSLog(@"Copy global");
@@ -162,21 +211,19 @@
             [self->statusItem.button setHighlighted:NO];
         });
     }];
+}
+
+- (void)registerPinToScreenShortcut
+{
+    MASShortcut *pinToScreenShortcut = [[PIPreferences shadredPreferences] pinToScreenShortcut];
+
+    pinToScreenItem.keyEquivalent = pinToScreenShortcut.keyCodeString;
+    pinToScreenItem.keyEquivalentModifierMask = pinToScreenShortcut.modifierFlags;
     
-    MASShortcut *showWindowShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand | NSEventModifierFlagOption];
-    [[MASShortcutMonitor sharedMonitor] registerShortcut:showWindowShortcut withAction:^{
+    [[MASShortcutMonitor sharedMonitor] registerShortcut:pinToScreenShortcut withAction:^{
         
         [self showPickerWindow];
     }];
-}
-
-- (void)unregisterGlobalHotkeys
-{
-    MASShortcut *copyColorShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand];
-    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:copyColorShortcut];
-    
-    MASShortcut *showWindowShortcut = [MASShortcut shortcutWithKeyCode:kVK_ANSI_P modifierFlags:NSEventModifierFlagControl | NSEventModifierFlagCommand | NSEventModifierFlagOption];
-    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:showWindowShortcut];
 }
 
 - (void)showPickerWindow

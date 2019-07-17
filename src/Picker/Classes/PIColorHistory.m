@@ -19,15 +19,6 @@ NSString *const PIColorHistoryUserDefaultsHistoryKey = @"PIColorHistoryUserDefau
 
 @implementation PIColorHistory
 
-+ (void)initialize
-{
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:PIColorHistoryUserDefaultsHistoryKey])
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:[[self class] defaultColors] forKey:PIColorHistoryUserDefaultsHistoryKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }    
-}
-
 - (id)init
 {
     if (self = [super init])
@@ -54,6 +45,11 @@ NSString *const PIColorHistoryUserDefaultsHistoryKey = @"PIColorHistoryUserDefau
 #pragma mark ---
 #pragma mark Public
 #pragma mark ---
++ (NSDictionary *)defaults
+{
+    return @{PIColorHistoryUserDefaultsHistoryKey:[[self class] defaultColors]};
+}
+
 - (void)pushColor:(NSColor *)color
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
