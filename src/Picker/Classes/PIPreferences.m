@@ -57,7 +57,7 @@ NSString *const PIPreferencesDefaultsPinToScreenShortcutKey = @"PIPreferencesDef
     for (int i = 0; i < 5; i++)
     {
         NSInteger keycode = keycodes[i];
-        defaultColorCopyShortcut = [MASShortcut shortcutWithKeyCode:keycode modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagControl];
+        defaultColorCopyShortcut = [MASShortcut shortcutWithKeyCode:keycode modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagShift];
         defaultPinToScreenShortcut = [MASShortcut shortcutWithKeyCode:keycode modifierFlags:NSEventModifierFlagCommand | NSEventModifierFlagShift | NSEventModifierFlagOption];
         
         if (![shortcutValidator isShortcutAlreadyTakenBySystem:defaultColorCopyShortcut explanation:nil]
