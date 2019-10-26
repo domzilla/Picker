@@ -18,8 +18,11 @@
 
 + (instancetype)preferencesWindowController
 {
+    /*
     NSArray *preferenceViewController = @[[[PIGeneralPreferencesViewController alloc] init],
                                           [[PIShortcutsPreferencesViewController alloc] init]];
+    */
+    NSArray *preferenceViewController = @[[[PIShortcutsPreferencesViewController alloc] init]];
     
     PIPreferencesWindowController *controller = [[PIPreferencesWindowController alloc] initWithViewControllers:preferenceViewController];
     
