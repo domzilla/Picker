@@ -7,7 +7,7 @@
 
 #import "PIAppDelegate.h"
 
-#import <BGDataBinding/BGDataBinding.h>
+#import <BGFoundation/BGFoundation.h>
 #import <MASShortcut/Shortcut.h>
 
 #import "PIPickerViewController.h"
@@ -31,6 +31,8 @@
 @end
 
 @implementation PIAppDelegate
+
+static void *PIAppDelegateKVOContext = &PIAppDelegateKVOContext;
 
 + (void)initialize
 {
@@ -102,15 +104,16 @@
     [pickerMenu addItem:quitMenuItem];
     
     [[PIColorPicker defaultPicker] startTracking];
+    [self registerGlobalHotkeys];
     
-    [[PIPreferences shadredPreferences] bg_addTarget:self
-                                              action:@selector(bindPreferencesColorCopySortcutChanged:)
-                                    forKeyPathChange:BGKeyPath(PIPreferences, colorCopyShortcut)
-                                     callImmediately:YES];
-    [[PIPreferences shadredPreferences] bg_addTarget:self
-                                              action:@selector(bindPreferencesPinToScreenSortcutChanged:)
-                                    forKeyPathChange:BGKeyPath(PIPreferences, pinToScreenShortcut)
-                                     callImmediately:YES];
+    [[PIPreferences shadredPreferences] addObserver:self
+                                         forKeyPath:BGKeyPath(PIPreferences, colorCopyShortcut)
+                                            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                            context:PIAppDelegateKVOContext];
+    [[PIPreferences shadredPreferences] addObserver:self
+                                         forKeyPath:BGKeyPath(PIPreferences, pinToScreenShortcut)
+                                            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                            context:PIAppDelegateKVOContext];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -118,24 +121,6 @@
     
 }
 
-
-
-#pragma mark ---
-#pragma mark Bindings
-#pragma mark ---
-- (void)bindPreferencesColorCopySortcutChanged:(NSDictionary *)change
-{
-    MASShortcut *oldColorCopyShortcut = [change objectForKey:kBGDataBindingChangeOldKey];
-    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:oldColorCopyShortcut];
-    [self registerColorCopyShortcut];
-}
-
-- (void)bindPreferencesPinToScreenSortcutChanged:(NSDictionary *)change
-{
-    MASShortcut *oldPinToScreenShortcut = [change objectForKey:kBGDataBindingChangeOldKey];
-    [[MASShortcutMonitor sharedMonitor] unregisterShortcut:oldPinToScreenShortcut];
-    [self registerPinToScreenShortcut];
-}
 
 
 #pragma mark ---
@@ -277,6 +262,43 @@
 {
     pickerViewController.shouldUpdateView = NO;
     [self registerGlobalHotkeys];
+}
+
+
+
+#pragma mark ---
+#pragma mark KVO
+#pragma mark ---
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if (context != PIAppDelegateKVOContext)
+    {
+        @try {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        } @catch (NSException *exception) {
+            BGExceptionLog(exception);
+        }
+        
+        return;
+    }
+    
+    if (object == [PIPreferences shadredPreferences])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([keyPath isEqualToString:BGKeyPath(PIPreferences, colorCopyShortcut)])
+            {
+                MASShortcut *oldColorCopyShortcut = change[NSKeyValueChangeOldKey];
+                [[MASShortcutMonitor sharedMonitor] unregisterShortcut:oldColorCopyShortcut];
+                [self registerColorCopyShortcut];
+            }
+            else if ([keyPath isEqualToString:BGKeyPath(PIPreferences, pinToScreenShortcut)])
+            {
+                MASShortcut *oldPinToScreenShortcut = change[NSKeyValueChangeOldKey];
+                [[MASShortcutMonitor sharedMonitor] unregisterShortcut:oldPinToScreenShortcut];
+                [self registerPinToScreenShortcut];
+            }
+        });
+    }
 }
 
 @end

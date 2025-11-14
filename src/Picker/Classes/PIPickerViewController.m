@@ -7,7 +7,7 @@
 
 #import "PIPickerViewController.h"
 
-#import <BGDataBinding/BGDataBinding.h>
+#import <BGFoundation/BGFoundation.h>
 #import <MASShortcut/MASShortcut.h>
 
 #import "PIPickerPreviewView.h"
@@ -28,6 +28,8 @@
 
 @implementation PIPickerViewController
 
+static void *PIPickerViewControllerKVOContext = &PIPickerViewControllerKVOContext;
+
 @synthesize mode;
 
 - (id)initWithMode:(PIPickerViewControllerMode)aMode
@@ -43,6 +45,11 @@
                                                  selector:@selector(colorHistoryDidUpdateHistoryNotification:)
                                                      name:PIColorHistoryDidUpdateHistoryNotification
                                                    object:nil];
+        
+        [[PIPreferences shadredPreferences] addObserver:self
+                                             forKeyPath:BGKeyPath(PIPreferences, colorCopyShortcut)
+                                                options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                                                context:PIPickerViewControllerKVOContext];
     }
     
     return self;
@@ -54,6 +61,10 @@
     timer = nil;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [[PIPreferences shadredPreferences] removeObserver:self
+                                            forKeyPath:BGKeyPath(PIPreferences, colorCopyShortcut)
+                                               context:PIPickerViewControllerKVOContext];
 }
 
 - (void)viewDidLoad
@@ -75,12 +86,8 @@
         
         [self.formatButton selectItemAtIndex:[[PIColorPicker defaultPicker] pickerFormat]];
     }
-    
-    [[PIPreferences shadredPreferences] bg_addTarget:self
-                                              action:@selector(bindPreferencesColorCopySortcutChanged:)
-                                    forKeyPathChange:BGKeyPath(PIPreferences, colorCopyShortcut)
-                                     callImmediately:YES];
-    
+        
+    [self updateColorCopyShortcut];
     [self updateHistory];
 }
 
@@ -130,19 +137,6 @@
 
 
 #pragma mark ---
-#pragma mark Bindings
-#pragma mark ---
-- (void)bindPreferencesColorCopySortcutChanged:(NSDictionary *)change
-{
-    MASShortcut *colorCopyShortcut = [[PIPreferences shadredPreferences] colorCopyShortcut];
-    
-    NSString *shortcutString = [NSString stringWithFormat:@"%@%@", colorCopyShortcut.modifierFlagsString, colorCopyShortcut.keyCodeString];
-    self.shortcutLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Press %@ to copy color", @"Place holder is a key-combination which copies the current color to clipboard"), shortcutString];
-}
-
-
-
-#pragma mark ---
 #pragma mark Actions
 #pragma mark ---
 - (IBAction)colorHistoryButtonAction:(id)sender
@@ -163,6 +157,12 @@
 #pragma mark ---
 #pragma mark Private
 #pragma mark ---
+- (void)updateColorCopyShortcut
+{
+    MASShortcut *colorCopyShortcut = [[PIPreferences shadredPreferences] colorCopyShortcut];
+    NSString *shortcutString = [NSString stringWithFormat:@"%@%@", colorCopyShortcut.modifierFlagsString, colorCopyShortcut.keyCodeString];
+    self.shortcutLabel.stringValue = [NSString stringWithFormat:NSLocalizedString(@"Press %@ to copy color", @"Place holder is a key-combination which copies the current color to clipboard"), shortcutString];
+}
 - (void)updateView
 {
     if (!shouldUpdateView)
@@ -213,6 +213,32 @@
 - (void)colorHistoryDidUpdateHistoryNotification:(NSNotification *)notification
 {
     [self updateHistory];
+}
+
+
+#pragma mark ---
+#pragma mark KVO
+#pragma mark ---
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if (context != PIPickerViewControllerKVOContext)
+    {
+        @try {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        } @catch (NSException *exception) {
+            BGExceptionLog(exception);
+        }
+        
+        return;
+    }
+    
+    if (object == [PIPreferences shadredPreferences])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([keyPath isEqualToString:BGKeyPath(PIPreferences, colorCopyShortcut)])
+                [self updateColorCopyShortcut];
+        });
+    }
 }
 
 @end

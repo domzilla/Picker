@@ -14,12 +14,12 @@
 		F242EC5D22D9BA7700D741AD /* PIColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5C22D9BA7700D741AD /* PIColorButton.m */; };
 		F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */; };
 		F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC6222D9C1A200D741AD /* PIColorPicker.m */; };
+		F25F31A52EC7816F009E8F13 /* BGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09322D9D570009A809F /* BGFoundation.framework */; };
+		F25F31A62EC7816F009E8F13 /* BGFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09322D9D570009A809F /* BGFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9022D0800A00A6172F /* Assets.xcassets */; };
 		F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9222D0800A00A6172F /* MainMenu.xib */; };
 		F2CABA9722D0800A00A6172F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABA9622D0800A00A6172F /* main.m */; };
 		F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABAA222D0805F00A6172F /* PIAppDelegate.m */; };
-		F2F8C09E22D9D57A009A809F /* BGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09B22D9D570009A809F /* BGFoundation.framework */; };
-		F2F8C09F22D9D57A009A809F /* BGFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09B22D9D570009A809F /* BGFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A422D9D5A0009A809F /* Foundation.framework */; };
 		F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A622D9D5A6009A809F /* Cocoa.framework */; };
 		F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */; };
@@ -35,11 +35,16 @@
 		F2F8C10922DDAD44009A809F /* PIShortcutsPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */; };
 		F2F8C10A22DDAD44009A809F /* PIShortcutsPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */; };
 		F2F8C11022DF3676009A809F /* PIPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10F22DF3676009A809F /* PIPreferences.m */; };
-		F2F8C12122DF3C8D009A809F /* BGDataBinding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C11E22DF3C86009A809F /* BGDataBinding.framework */; };
-		F2F8C12222DF3C8D009A809F /* BGDataBinding.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C11E22DF3C86009A809F /* BGDataBinding.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F25F31A22EC78159009E8F13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F2575CEC1C3BA8D00027FB39;
+			remoteInfo = BGFoundation;
+		};
 		F2F8C09222D9D570009A809F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
@@ -53,41 +58,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = F25C57E522954DD4002C9CE3;
 			remoteInfo = "BGFoundationLocationServices (iOS Framework)";
-		};
-		F2F8C09622D9D570009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F29033871C3D1EB900DCE7A4;
-			remoteInfo = "BGFoundation (iOS Static Library)";
-		};
-		F2F8C09822D9D570009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F25C584622954DF9002C9CE3;
-			remoteInfo = "BGFoundationLocationServices (iOS Static Library)";
-		};
-		F2F8C09A22D9D570009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F29033951C3D1FD300DCE7A4;
-			remoteInfo = "BGFoundation (OS X Framework)";
-		};
-		F2F8C09C22D9D570009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F29033B21C3D20C400DCE7A4;
-			remoteInfo = "BGFoundation (OS X Static Library)";
-		};
-		F2F8C0A022D9D57A009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F29033941C3D1FD300DCE7A4;
-			remoteInfo = "BGFoundation (OS X Framework)";
 		};
 		F2F8C0CF22DB4587009A809F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -131,41 +101,6 @@
 			remoteGlobalIDString = F16AF7F31BA279F10022155C;
 			remoteInfo = MASPreferences;
 		};
-		F2F8C11922DF3C86009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F2575CBD1C3BA6480027FB39;
-			remoteInfo = "BGDataBinding (iOS Framework)";
-		};
-		F2F8C11B22DF3C86009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F29034161C3D240600DCE7A4;
-			remoteInfo = "BGDataBinding (iOS Static Library)";
-		};
-		F2F8C11D22DF3C86009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F290343A1C3D409000DCE7A4;
-			remoteInfo = "BGDataBinding (OS X Framework)";
-		};
-		F2F8C11F22DF3C86009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F29034531C3D414700DCE7A4;
-			remoteInfo = "BGDataBinding (OS X Static Library)";
-		};
-		F2F8C12322DF3C8D009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F29034391C3D409000DCE7A4;
-			remoteInfo = "BGDataBinding (OS X Framework)";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -176,9 +111,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F2F8C0FA22DDABB6009A809F /* MASPreferences.framework in Embed Frameworks */,
-				F2F8C12222DF3C8D009A809F /* BGDataBinding.framework in Embed Frameworks */,
+				F25F31A62EC7816F009E8F13 /* BGFoundation.framework in Embed Frameworks */,
 				F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */,
-				F2F8C09F22D9D57A009A809F /* BGFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,7 +162,6 @@
 		F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIShortcutsPreferencesViewController.xib; sourceTree = "<group>"; };
 		F2F8C10E22DF3676009A809F /* PIPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreferences.h; sourceTree = "<group>"; };
 		F2F8C10F22DF3676009A809F /* PIPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreferences.m; sourceTree = "<group>"; };
-		F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BGDataBinding.xcodeproj; path = ../../../../Epics/Libraries/BGDataBinding/src/BGDataBinding.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,10 +171,9 @@
 			files = (
 				F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */,
 				F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */,
+				F25F31A52EC7816F009E8F13 /* BGFoundation.framework in Frameworks */,
 				F2F8C0F922DDABB6009A809F /* MASPreferences.framework in Frameworks */,
-				F2F8C12122DF3C8D009A809F /* BGDataBinding.framework in Frameworks */,
 				F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */,
-				F2F8C09E22D9D57A009A809F /* BGFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +284,6 @@
 			isa = PBXGroup;
 			children = (
 				F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */,
-				F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */,
 				F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */,
 				F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */,
 			);
@@ -364,10 +295,6 @@
 			children = (
 				F2F8C09322D9D570009A809F /* BGFoundation.framework */,
 				F2F8C09522D9D570009A809F /* BGFoundationLocationServices.framework */,
-				F2F8C09722D9D570009A809F /* libBGFoundation.a */,
-				F2F8C09922D9D570009A809F /* libBGFoundationLocationServices.a */,
-				F2F8C09B22D9D570009A809F /* BGFoundation.framework */,
-				F2F8C09D22D9D570009A809F /* libBGFoundation.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -408,17 +335,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F2F8C11222DF3C85009A809F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C11A22DF3C86009A809F /* BGDataBinding.framework */,
-				F2F8C11C22DF3C86009A809F /* libBGDataBinding.a */,
-				F2F8C11E22DF3C86009A809F /* BGDataBinding.framework */,
-				F2F8C12022DF3C86009A809F /* libBGDataBinding.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -434,10 +350,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				F2F8C0A122D9D57A009A809F /* PBXTargetDependency */,
+				F25F31A32EC78159009E8F13 /* PBXTargetDependency */,
 				F2F8C0D822DB4598009A809F /* PBXTargetDependency */,
 				F2F8C0FC22DDABB6009A809F /* PBXTargetDependency */,
-				F2F8C12422DF3C8D009A809F /* PBXTargetDependency */,
 			);
 			name = Picker;
 			productName = Picker;
@@ -470,10 +385,6 @@
 			productRefGroup = F2CABA8B22D0800800A6172F /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = F2F8C11222DF3C85009A809F /* Products */;
-					ProjectRef = F2F8C11122DF3C85009A809F /* BGDataBinding.xcodeproj */;
-				},
 				{
 					ProductGroup = F2F8C08A22D9D570009A809F /* Products */;
 					ProjectRef = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
@@ -509,34 +420,6 @@
 			remoteRef = F2F8C09422D9D570009A809F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F2F8C09722D9D570009A809F /* libBGFoundation.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBGFoundation.a;
-			remoteRef = F2F8C09622D9D570009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C09922D9D570009A809F /* libBGFoundationLocationServices.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBGFoundationLocationServices.a;
-			remoteRef = F2F8C09822D9D570009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C09B22D9D570009A809F /* BGFoundation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BGFoundation.framework;
-			remoteRef = F2F8C09A22D9D570009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C09D22D9D570009A809F /* libBGFoundation.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBGFoundation.a;
-			remoteRef = F2F8C09C22D9D570009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		F2F8C0D022DB4587009A809F /* MASShortcut.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -563,34 +446,6 @@
 			fileType = wrapper.framework;
 			path = MASPreferences.framework;
 			remoteRef = F2F8C0F522DDABA3009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C11A22DF3C86009A809F /* BGDataBinding.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BGDataBinding.framework;
-			remoteRef = F2F8C11922DF3C86009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C11C22DF3C86009A809F /* libBGDataBinding.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBGDataBinding.a;
-			remoteRef = F2F8C11B22DF3C86009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C11E22DF3C86009A809F /* BGDataBinding.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BGDataBinding.framework;
-			remoteRef = F2F8C11D22DF3C86009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C12022DF3C86009A809F /* libBGDataBinding.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBGDataBinding.a;
-			remoteRef = F2F8C11F22DF3C86009A809F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -636,10 +491,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F2F8C0A122D9D57A009A809F /* PBXTargetDependency */ = {
+		F25F31A32EC78159009E8F13 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "BGFoundation (OS X Framework)";
-			targetProxy = F2F8C0A022D9D57A009A809F /* PBXContainerItemProxy */;
+			name = BGFoundation;
+			targetProxy = F25F31A22EC78159009E8F13 /* PBXContainerItemProxy */;
 		};
 		F2F8C0D822DB4598009A809F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -650,11 +505,6 @@
 			isa = PBXTargetDependency;
 			name = MASPreferences;
 			targetProxy = F2F8C0FB22DDABB6009A809F /* PBXContainerItemProxy */;
-		};
-		F2F8C12422DF3C8D009A809F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BGDataBinding (OS X Framework)";
-			targetProxy = F2F8C12322DF3C8D009A809F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
