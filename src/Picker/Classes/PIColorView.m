@@ -17,13 +17,13 @@
         color = [NSColor whiteColor];
     
     [color set];
-    NSRectFill(dirtyRect);
+    NSRectFill(self.bounds);
     
     NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:dirtyRect.origin];
-    [path lineToPoint:NSMakePoint(dirtyRect.origin.x, NSMaxY(dirtyRect))];
-    [path lineToPoint:NSMakePoint(NSMaxX(dirtyRect), NSMaxY(dirtyRect))];
-    [path lineToPoint:NSMakePoint(NSMaxX(dirtyRect), dirtyRect.origin.y)];
+    [path moveToPoint:self.bounds.origin];
+    [path lineToPoint:NSMakePoint(self.bounds.origin.x, NSMaxY(self.bounds))];
+    [path lineToPoint:NSMakePoint(NSMaxX(self.bounds), NSMaxY(self.bounds))];
+    [path lineToPoint:NSMakePoint(NSMaxX(self.bounds), self.bounds.origin.y)];
     [path closePath];
     [[NSColor lightGrayColor] set];
     [path stroke];
