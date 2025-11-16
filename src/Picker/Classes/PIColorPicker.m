@@ -63,14 +63,13 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
         pickerFormat = (PIColorPickerFormat)[[NSUserDefaults standardUserDefaults] integerForKey:PIColorPickerUserDefaultsFormatKey];
         
         [NSEvent addGlobalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^ (NSEvent *event){
-            
+            //NSLog(@"addGlobalMonitorForEventsMatchingMask: %@", NSStringFromPoint(event.locationInWindow));
             [self updateMouseLocation];
         }];
         
         [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^NSEvent * (NSEvent *event) {
-            
+            //NSLog(@"addLocalMonitorForEventsMatchingMask: %@", NSStringFromPoint(event.locationInWindow));
             [self updateMouseLocation];
-            
             return event;
         }];
     }
@@ -124,6 +123,7 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
         return;
     
     tracking = YES;
+    [self updateMouseLocation];
 }
 
 - (void)stopTracking
@@ -215,13 +215,15 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
     if (!tracking)
         return;
         
-    NSPoint rawMouseLocation = [NSEvent mouseLocation];
-    NSScreen *principalScreen = [[NSScreen screens] objectAtIndex:0];
-    mouseLocation = NSMakePoint(rawMouseLocation.x, principalScreen.frame.size.height - rawMouseLocation.y);
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:PIColorPickerDidChangeColorNotification
-                                                        object:self
-                                                      userInfo:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSPoint rawMouseLocation = [NSEvent mouseLocation];
+        NSScreen *principalScreen = [[NSScreen screens] objectAtIndex:0];
+        self->mouseLocation = NSMakePoint(rawMouseLocation.x, principalScreen.frame.size.height - rawMouseLocation.y);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:PIColorPickerDidChangeColorNotification
+                                                            object:self
+                                                          userInfo:nil];
+        });
 }
 
 @end
