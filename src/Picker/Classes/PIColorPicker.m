@@ -212,12 +212,12 @@ NSString *PIColorPickerFormatToString(PIColorPickerFormat format)
 #pragma mark ---
 - (void)updateMouseLocation
 {
-    if (!self->tracking)
+    if (!tracking)
         return;
-    
+        
     NSPoint rawMouseLocation = [NSEvent mouseLocation];
     NSScreen *principalScreen = [[NSScreen screens] objectAtIndex:0];
-    self->mouseLocation = NSMakePoint(rawMouseLocation.x, principalScreen.frame.size.height - rawMouseLocation.y);
+    mouseLocation = NSMakePoint(rawMouseLocation.x, principalScreen.frame.size.height - rawMouseLocation.y);
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PIColorPickerDidChangeColorNotification
                                                         object:self
