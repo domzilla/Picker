@@ -16,31 +16,28 @@
     if (!previewImage)
         return;
     
-    [previewImage drawInRect:dirtyRect fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
+    [previewImage drawInRect:self.bounds fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
     
     NSBezierPath *path = [NSBezierPath bezierPath];
     
     [[NSColor blackColor] set];
     
     float centerAdjust = 3.5f;
-    float pickerRectX = dirtyRect.origin.x + centerAdjust;
-    float pickerRectY = dirtyRect.origin.y - centerAdjust;
+    float pickerRectX = self.bounds.origin.x + centerAdjust;
+    float pickerRectY = self.bounds.origin.y - centerAdjust;
     
-    [path moveToPoint:NSMakePoint(pickerRectX - centerAdjust, pickerRectY + dirtyRect.size.width / 2)];
-    [path lineToPoint:NSMakePoint(pickerRectX + dirtyRect.size.width - centerAdjust, pickerRectY + dirtyRect.size.height / 2)];
+    [path moveToPoint:NSMakePoint(pickerRectX - centerAdjust, pickerRectY + self.bounds.size.width / 2)];
+    [path lineToPoint:NSMakePoint(pickerRectX + self.bounds.size.width - centerAdjust, pickerRectY + self.bounds.size.height / 2)];
     
-    [path moveToPoint:NSMakePoint(pickerRectX + dirtyRect.size.width / 2, pickerRectY + dirtyRect.size.height + centerAdjust)];
-    [path lineToPoint:NSMakePoint(pickerRectX + dirtyRect.size.width / 2, pickerRectY + centerAdjust)];
+    [path moveToPoint:NSMakePoint(pickerRectX + self.bounds.size.width / 2, pickerRectY + self.bounds.size.height + centerAdjust)];
+    [path lineToPoint:NSMakePoint(pickerRectX + self.bounds.size.width / 2, pickerRectY + centerAdjust)];
     
     [path stroke];
-    
-    // Draw border
-    //NSBezierPath *path = [NSBezierPath bezierPath];
-    
-    [path moveToPoint:dirtyRect.origin];
-    [path lineToPoint:NSMakePoint(dirtyRect.origin.x, NSMaxY(dirtyRect))];
-    [path lineToPoint:NSMakePoint(NSMaxX(dirtyRect), NSMaxY(dirtyRect))];
-    [path lineToPoint:NSMakePoint(NSMaxX(dirtyRect), dirtyRect.origin.y)];
+        
+    [path moveToPoint:self.bounds.origin];
+    [path lineToPoint:NSMakePoint(self.bounds.origin.x, NSMaxY(self.bounds))];
+    [path lineToPoint:NSMakePoint(NSMaxX(self.bounds), NSMaxY(self.bounds))];
+    [path lineToPoint:NSMakePoint(NSMaxX(self.bounds), self.bounds.origin.y)];
     [path closePath];
     
     [[NSColor lightGrayColor] set];
