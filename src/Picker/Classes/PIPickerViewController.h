@@ -19,9 +19,7 @@ typedef NS_ENUM(NSUInteger, PIPickerViewControllerMode) {
 @interface PIPickerViewController : NSViewController
 {
     PIPickerViewControllerMode mode;
-    
-    NSTimer *timer;
-    
+        
     BOOL updateColorsHistory;
     BOOL shouldUpdateView;
 }

@@ -46,6 +46,11 @@ static void *PIPickerViewControllerKVOContext = &PIPickerViewControllerKVOContex
                                                      name:PIColorHistoryDidUpdateHistoryNotification
                                                    object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(colorPickerDidChangeColorNotification:)
+                                                     name:PIColorPickerDidChangeColorNotification
+                                                   object:nil];
+        
         [[PIPreferences shadredPreferences] addObserver:self
                                              forKeyPath:BGKeyPath(PIPreferences, colorCopyShortcut)
                                                 options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
@@ -57,9 +62,6 @@ static void *PIPickerViewControllerKVOContext = &PIPickerViewControllerKVOContex
 
 - (void)dealloc
 {
-    [timer invalidate];
-    timer = nil;
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [[PIPreferences shadredPreferences] removeObserver:self
@@ -106,31 +108,8 @@ static void *PIPickerViewControllerKVOContext = &PIPickerViewControllerKVOContex
     if (shouldUpdateView != update)
     {
         shouldUpdateView = update;
-        
         if (shouldUpdateView)
-        {
             [self updateView];
-            
-            [timer invalidate];
-            timer = [NSTimer timerWithTimeInterval:0.1 repeats:YES block:^(NSTimer *aTimer) {
-                [self updateView];
-            }];
-            [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-            
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(colorPickerDidChangeColorNotification:)
-                                                         name:PIColorPickerDidChangeColorNotification
-                                                       object:nil];
-        }
-        else
-        {
-            [timer invalidate];
-            timer = nil;
-            
-            [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                            name:PIColorPickerDidChangeColorNotification
-                                                          object:nil];
-        }
     }
 }
 
