@@ -16,6 +16,7 @@
 		F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC6222D9C1A200D741AD /* PIColorPicker.m */; };
 		F25F31A52EC7816F009E8F13 /* BGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09322D9D570009A809F /* BGFoundation.framework */; };
 		F25F31A62EC7816F009E8F13 /* BGFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09322D9D570009A809F /* BGFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F25F31D32EC9E262009E8F13 /* Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F25F31D22EC9E262009E8F13 /* Icon.icon */; };
 		F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9022D0800A00A6172F /* Assets.xcassets */; };
 		F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9222D0800A00A6172F /* MainMenu.xib */; };
 		F2CABA9722D0800A00A6172F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABA9622D0800A00A6172F /* main.m */; };
@@ -133,6 +134,7 @@
 		F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreviewImageGrabber.m; sourceTree = "<group>"; };
 		F242EC6122D9C1A200D741AD /* PIColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorPicker.h; sourceTree = "<group>"; };
 		F242EC6222D9C1A200D741AD /* PIColorPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorPicker.m; sourceTree = "<group>"; };
+		F25F31D22EC9E262009E8F13 /* Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Icon.icon; sourceTree = "<group>"; };
 		F2CABA8A22D0800800A6172F /* Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2CABA9022D0800A00A6172F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2CABA9322D0800A00A6172F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				F2CABAA022D0805F00A6172F /* Classes */,
 				F2CABA9022D0800A00A6172F /* Assets.xcassets */,
+				F25F31D22EC9E262009E8F13 /* Icon.icon */,
 				F2CABA9222D0800A00A6172F /* MainMenu.xib */,
 				F2CABA9522D0800A00A6172F /* Info.plist */,
 				F2CABA9622D0800A00A6172F /* main.m */,
@@ -458,6 +461,7 @@
 				F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */,
 				F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */,
 				F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */,
+				F25F31D32EC9E262009E8F13 /* Icon.icon in Resources */,
 				F2F8C10A22DDAD44009A809F /* PIShortcutsPreferencesViewController.xib in Resources */,
 				F2F8C10522DDAD2D009A809F /* PIGeneralPreferencesViewController.xib in Resources */,
 			);
@@ -634,7 +638,7 @@
 		F2CABA9C22D0800A00A6172F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				CODE_SIGN_ENTITLEMENTS = Picker/Picker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -653,7 +657,7 @@
 		F2CABA9D22D0800A00A6172F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				CODE_SIGN_ENTITLEMENTS = Picker/Picker.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
