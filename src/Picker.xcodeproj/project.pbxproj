@@ -3,110 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		F242EC4F22D9B54400D741AD /* PIPickerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */; };
-		F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5322D9B57200D741AD /* PIPickerViewController.m */; };
-		F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F242EC5422D9B57200D741AD /* PIPickerViewController.xib */; };
-		F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */; };
-		F242EC5D22D9BA7700D741AD /* PIColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5C22D9BA7700D741AD /* PIColorButton.m */; };
-		F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */; };
-		F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F242EC6222D9C1A200D741AD /* PIColorPicker.m */; };
-		F25F31A52EC7816F009E8F13 /* BGFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09322D9D570009A809F /* BGFoundation.framework */; };
-		F25F31A62EC7816F009E8F13 /* BGFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C09322D9D570009A809F /* BGFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F25F31D32EC9E262009E8F13 /* Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F25F31D22EC9E262009E8F13 /* Icon.icon */; };
-		F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9022D0800A00A6172F /* Assets.xcassets */; };
-		F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CABA9222D0800A00A6172F /* MainMenu.xib */; };
-		F2CABA9722D0800A00A6172F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABA9622D0800A00A6172F /* main.m */; };
-		F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CABAA222D0805F00A6172F /* PIAppDelegate.m */; };
-		F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A422D9D5A0009A809F /* Foundation.framework */; };
-		F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0A622D9D5A6009A809F /* Cocoa.framework */; };
-		F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */; };
-		F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; };
-		F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0D022DB4587009A809F /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F2F8C0DD22DC7CEA009A809F /* PIColorHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */; };
-		F2F8C0E722DC8402009A809F /* PIColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0E622DC8402009A809F /* PIColorView.m */; };
-		F2F8C0F922DDABB6009A809F /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0F622DDABA3009A809F /* MASPreferences.framework */; };
-		F2F8C0FA22DDABB6009A809F /* MASPreferences.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2F8C0F622DDABA3009A809F /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F2F8C0FF22DDACC2009A809F /* PIPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C0FE22DDACC2009A809F /* PIPreferencesWindowController.m */; };
-		F2F8C10422DDAD2D009A809F /* PIGeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10222DDAD2D009A809F /* PIGeneralPreferencesViewController.m */; };
-		F2F8C10522DDAD2D009A809F /* PIGeneralPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F8C10322DDAD2D009A809F /* PIGeneralPreferencesViewController.xib */; };
-		F2F8C10922DDAD44009A809F /* PIShortcutsPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */; };
-		F2F8C10A22DDAD44009A809F /* PIShortcutsPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */; };
-		F2F8C11022DF3676009A809F /* PIPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F8C10F22DF3676009A809F /* PIPreferences.m */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F25F31A22EC78159009E8F13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F2575CEC1C3BA8D00027FB39;
-			remoteInfo = BGFoundation;
-		};
-		F2F8C09222D9D570009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F2575CED1C3BA8D00027FB39;
-			remoteInfo = "BGFoundation (iOS Framework)";
-		};
-		F2F8C0CF22DB4587009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D827CD31990D4420010B8EF;
-			remoteInfo = MASShortcut;
-		};
-		F2F8C0D122DB4587009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D827D8319910AFF0010B8EF;
-			remoteInfo = MASShortcutTests;
-		};
-		F2F8C0D322DB4587009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0D827D371990D5E70010B8EF;
-			remoteInfo = Demo;
-		};
-		F2F8C0D722DB4598009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0D827CD21990D4420010B8EF;
-			remoteInfo = MASShortcut;
-		};
-		F2F8C0F522DDABA3009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F16AF7F41BA279F10022155C;
-			remoteInfo = MASPreferences;
-		};
-		F2F8C0FB22DDABB6009A809F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F16AF7F31BA279F10022155C;
-			remoteInfo = MASPreferences;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		F2F8C0A222D9D57A009A809F /* Embed Frameworks */ = {
+		F2C8ED2B2F178D58005B39D1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F2F8C0FA22DDABB6009A809F /* MASPreferences.framework in Embed Frameworks */,
-				F25F31A62EC7816F009E8F13 /* BGFoundation.framework in Embed Frameworks */,
-				F2F8C0D622DB4598009A809F /* MASShortcut.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,409 +20,140 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerWindowController.h; sourceTree = "<group>"; };
-		F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerWindowController.m; sourceTree = "<group>"; };
-		F242EC5222D9B57200D741AD /* PIPickerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerViewController.h; sourceTree = "<group>"; };
-		F242EC5322D9B57200D741AD /* PIPickerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerViewController.m; sourceTree = "<group>"; };
-		F242EC5422D9B57200D741AD /* PIPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIPickerViewController.xib; sourceTree = "<group>"; };
-		F242EC5822D9BA6100D741AD /* PIPickerPreviewView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPickerPreviewView.h; sourceTree = "<group>"; };
-		F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPickerPreviewView.m; sourceTree = "<group>"; };
-		F242EC5B22D9BA7700D741AD /* PIColorButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorButton.h; sourceTree = "<group>"; };
-		F242EC5C22D9BA7700D741AD /* PIColorButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorButton.m; sourceTree = "<group>"; };
-		F242EC5E22D9C18E00D741AD /* PIPreviewImageGrabber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreviewImageGrabber.h; sourceTree = "<group>"; };
-		F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreviewImageGrabber.m; sourceTree = "<group>"; };
-		F242EC6122D9C1A200D741AD /* PIColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorPicker.h; sourceTree = "<group>"; };
-		F242EC6222D9C1A200D741AD /* PIColorPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorPicker.m; sourceTree = "<group>"; };
-		F25F31D22EC9E262009E8F13 /* Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Icon.icon; sourceTree = "<group>"; };
-		F2CABA8A22D0800800A6172F /* Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2CABA9022D0800A00A6172F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F2CABA9322D0800A00A6172F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		F2CABA9522D0800A00A6172F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2CABA9622D0800A00A6172F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F2CABA9822D0800A00A6172F /* Picker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picker.entitlements; sourceTree = "<group>"; };
-		F2CABAA122D0805F00A6172F /* PIAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIAppDelegate.h; sourceTree = "<group>"; };
-		F2CABAA222D0805F00A6172F /* PIAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIAppDelegate.m; sourceTree = "<group>"; };
-		F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BGFoundation.xcodeproj; path = ../../../../Epics/Libraries/BGFoundation/src/BGFoundation.xcodeproj; sourceTree = "<group>"; };
-		F2F8C0A422D9D5A0009A809F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		F2F8C0A622D9D5A6009A809F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		F2F8C0A922D9D6BC009A809F /* NSColor+Picker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSColor+Picker.h"; sourceTree = "<group>"; };
-		F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Picker.m"; sourceTree = "<group>"; };
-		F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASShortcut.xcodeproj; path = ../../../../Github/MASShortcut/MASShortcut.xcodeproj; sourceTree = "<group>"; };
-		F2F8C0DB22DC7CEA009A809F /* PIColorHistory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorHistory.h; sourceTree = "<group>"; };
-		F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorHistory.m; sourceTree = "<group>"; };
-		F2F8C0E522DC8402009A809F /* PIColorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIColorView.h; sourceTree = "<group>"; };
-		F2F8C0E622DC8402009A809F /* PIColorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIColorView.m; sourceTree = "<group>"; };
-		F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MASPreferences.xcodeproj; path = ../../../../Github/MASPreferences/MASPreferences.xcodeproj; sourceTree = "<group>"; };
-		F2F8C0FD22DDACC2009A809F /* PIPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreferencesWindowController.h; sourceTree = "<group>"; };
-		F2F8C0FE22DDACC2009A809F /* PIPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreferencesWindowController.m; sourceTree = "<group>"; };
-		F2F8C10122DDAD2D009A809F /* PIGeneralPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIGeneralPreferencesViewController.h; sourceTree = "<group>"; };
-		F2F8C10222DDAD2D009A809F /* PIGeneralPreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIGeneralPreferencesViewController.m; sourceTree = "<group>"; };
-		F2F8C10322DDAD2D009A809F /* PIGeneralPreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIGeneralPreferencesViewController.xib; sourceTree = "<group>"; };
-		F2F8C10622DDAD44009A809F /* PIShortcutsPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIShortcutsPreferencesViewController.h; sourceTree = "<group>"; };
-		F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIShortcutsPreferencesViewController.m; sourceTree = "<group>"; };
-		F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PIShortcutsPreferencesViewController.xib; sourceTree = "<group>"; };
-		F2F8C10E22DF3676009A809F /* PIPreferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPreferences.h; sourceTree = "<group>"; };
-		F2F8C10F22DF3676009A809F /* PIPreferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIPreferences.m; sourceTree = "<group>"; };
+		F2C8ECB72F178CBC005B39D1 /* Picker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F2C8ECB92F178CBC005B39D1 /* Picker */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Picker;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		F2CABA8722D0800800A6172F /* Frameworks */ = {
+		F2C8ECB42F178CBC005B39D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2F8C0A722D9D5A6009A809F /* Cocoa.framework in Frameworks */,
-				F2F8C0A522D9D5A0009A809F /* Foundation.framework in Frameworks */,
-				F25F31A52EC7816F009E8F13 /* BGFoundation.framework in Frameworks */,
-				F2F8C0F922DDABB6009A809F /* MASPreferences.framework in Frameworks */,
-				F2F8C0D522DB4598009A809F /* MASShortcut.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F242EC3622D8CC6100D741AD /* WindowController */ = {
+		F2C8ECAE2F178CBC005B39D1 = {
 			isa = PBXGroup;
 			children = (
-				F242EC4C22D9B54400D741AD /* PIPickerWindowController.h */,
-				F242EC4D22D9B54400D741AD /* PIPickerWindowController.m */,
-				F2F8C0FD22DDACC2009A809F /* PIPreferencesWindowController.h */,
-				F2F8C0FE22DDACC2009A809F /* PIPreferencesWindowController.m */,
-			);
-			name = WindowController;
-			sourceTree = "<group>";
-		};
-		F242EC3822D8CC7900D741AD /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C0DB22DC7CEA009A809F /* PIColorHistory.h */,
-				F2F8C0DC22DC7CEA009A809F /* PIColorHistory.m */,
-				F242EC6122D9C1A200D741AD /* PIColorPicker.h */,
-				F242EC6222D9C1A200D741AD /* PIColorPicker.m */,
-				F242EC5E22D9C18E00D741AD /* PIPreviewImageGrabber.h */,
-				F242EC5F22D9C18E00D741AD /* PIPreviewImageGrabber.m */,
-				F2F8C10E22DF3676009A809F /* PIPreferences.h */,
-				F2F8C10F22DF3676009A809F /* PIPreferences.m */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
-		F242EC5122D9B54E00D741AD /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				F242EC5222D9B57200D741AD /* PIPickerViewController.h */,
-				F242EC5322D9B57200D741AD /* PIPickerViewController.m */,
-				F242EC5422D9B57200D741AD /* PIPickerViewController.xib */,
-				F2F8C10122DDAD2D009A809F /* PIGeneralPreferencesViewController.h */,
-				F2F8C10222DDAD2D009A809F /* PIGeneralPreferencesViewController.m */,
-				F2F8C10322DDAD2D009A809F /* PIGeneralPreferencesViewController.xib */,
-				F2F8C10622DDAD44009A809F /* PIShortcutsPreferencesViewController.h */,
-				F2F8C10722DDAD44009A809F /* PIShortcutsPreferencesViewController.m */,
-				F2F8C10822DDAD44009A809F /* PIShortcutsPreferencesViewController.xib */,
-			);
-			name = ViewController;
-			sourceTree = "<group>";
-		};
-		F242EC5722D9BA4E00D741AD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F242EC5822D9BA6100D741AD /* PIPickerPreviewView.h */,
-				F242EC5922D9BA6100D741AD /* PIPickerPreviewView.m */,
-				F2F8C0E522DC8402009A809F /* PIColorView.h */,
-				F2F8C0E622DC8402009A809F /* PIColorView.m */,
-				F242EC5B22D9BA7700D741AD /* PIColorButton.h */,
-				F242EC5C22D9BA7700D741AD /* PIColorButton.m */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		F2CABA8122D0800800A6172F = {
-			isa = PBXGroup;
-			children = (
-				F2F8C08822D9D520009A809F /* Extern */,
-				F2CABA8C22D0800800A6172F /* Picker */,
-				F2F8C0A322D9D589009A809F /* Frameworks */,
-				F2CABA8B22D0800800A6172F /* Products */,
+				F2C8ECB92F178CBC005B39D1 /* Picker */,
+				F2C8ED262F178D4F005B39D1 /* Frameworks */,
+				F2C8ECB82F178CBC005B39D1 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F2CABA8B22D0800800A6172F /* Products */ = {
+		F2C8ECB82F178CBC005B39D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F2CABA8A22D0800800A6172F /* Picker.app */,
+				F2C8ECB72F178CBC005B39D1 /* Picker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F2CABA8C22D0800800A6172F /* Picker */ = {
+		F2C8ED262F178D4F005B39D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F2CABAA022D0805F00A6172F /* Classes */,
-				F2CABA9022D0800A00A6172F /* Assets.xcassets */,
-				F25F31D22EC9E262009E8F13 /* Icon.icon */,
-				F2CABA9222D0800A00A6172F /* MainMenu.xib */,
-				F2CABA9522D0800A00A6172F /* Info.plist */,
-				F2CABA9622D0800A00A6172F /* main.m */,
-				F2CABA9822D0800A00A6172F /* Picker.entitlements */,
-			);
-			path = Picker;
-			sourceTree = "<group>";
-		};
-		F2CABAA022D0805F00A6172F /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				F2CABAA122D0805F00A6172F /* PIAppDelegate.h */,
-				F2CABAA222D0805F00A6172F /* PIAppDelegate.m */,
-				F242EC3622D8CC6100D741AD /* WindowController */,
-				F242EC5122D9B54E00D741AD /* ViewController */,
-				F242EC5722D9BA4E00D741AD /* Views */,
-				F242EC3822D8CC7900D741AD /* Data */,
-				F2F8C0A822D9D6A1009A809F /* Categories */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		F2F8C08822D9D520009A809F /* Extern */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */,
-				F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */,
-				F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */,
-			);
-			name = Extern;
-			sourceTree = "<group>";
-		};
-		F2F8C08A22D9D570009A809F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C09322D9D570009A809F /* BGFoundation.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F2F8C0A322D9D589009A809F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C0A622D9D5A6009A809F /* Cocoa.framework */,
-				F2F8C0A422D9D5A0009A809F /* Foundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F2F8C0A822D9D6A1009A809F /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C0A922D9D6BC009A809F /* NSColor+Picker.h */,
-				F2F8C0AA22D9D6BC009A809F /* NSColor+Picker.m */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
-		F2F8C0CA22DB4587009A809F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C0D022DB4587009A809F /* MASShortcut.framework */,
-				F2F8C0D222DB4587009A809F /* MASShortcutTests.xctest */,
-				F2F8C0D422DB4587009A809F /* Demo.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F2F8C0ED22DDABA3009A809F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F2F8C0F622DDABA3009A809F /* MASPreferences.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F2CABA8922D0800800A6172F /* Picker */ = {
+		F2C8ECB62F178CBC005B39D1 /* Picker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F2CABA9B22D0800A00A6172F /* Build configuration list for PBXNativeTarget "Picker" */;
+			buildConfigurationList = F2C8ECC62F178CBE005B39D1 /* Build configuration list for PBXNativeTarget "Picker" */;
 			buildPhases = (
-				F2CABA8622D0800800A6172F /* Sources */,
-				F2CABA8722D0800800A6172F /* Frameworks */,
-				F2CABA8822D0800800A6172F /* Resources */,
-				F2F8C0A222D9D57A009A809F /* Embed Frameworks */,
+				F2C8ECB32F178CBC005B39D1 /* Sources */,
+				F2C8ECB42F178CBC005B39D1 /* Frameworks */,
+				F2C8ECB52F178CBC005B39D1 /* Resources */,
+				F2C8ED2B2F178D58005B39D1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F25F31A32EC78159009E8F13 /* PBXTargetDependency */,
-				F2F8C0D822DB4598009A809F /* PBXTargetDependency */,
-				F2F8C0FC22DDABB6009A809F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F2C8ECB92F178CBC005B39D1 /* Picker */,
 			);
 			name = Picker;
+			packageProductDependencies = (
+			);
 			productName = Picker;
-			productReference = F2CABA8A22D0800800A6172F /* Picker.app */;
+			productReference = F2C8ECB72F178CBC005B39D1 /* Picker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F2CABA8222D0800800A6172F /* Project object */ = {
+		F2C8ECAF2F178CBC005B39D1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = PI;
+				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
-					F2CABA8922D0800800A6172F = {
-						CreatedOnToolsVersion = 10.2.1;
+					F2C8ECB62F178CBC005B39D1 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
-			buildConfigurationList = F2CABA8522D0800800A6172F /* Build configuration list for PBXProject "Picker" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = F2C8ECB22F178CBC005B39D1 /* Build configuration list for PBXProject "Picker" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F2CABA8122D0800800A6172F;
-			productRefGroup = F2CABA8B22D0800800A6172F /* Products */;
+			mainGroup = F2C8ECAE2F178CBC005B39D1;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F2C8ECB82F178CBC005B39D1 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = F2F8C08A22D9D570009A809F /* Products */;
-					ProjectRef = F2F8C08922D9D570009A809F /* BGFoundation.xcodeproj */;
-				},
-				{
-					ProductGroup = F2F8C0ED22DDABA3009A809F /* Products */;
-					ProjectRef = F2F8C0EC22DDABA3009A809F /* MASPreferences.xcodeproj */;
-				},
-				{
-					ProductGroup = F2F8C0CA22DB4587009A809F /* Products */;
-					ProjectRef = F2F8C0C922DB4587009A809F /* MASShortcut.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
-				F2CABA8922D0800800A6172F /* Picker */,
+				F2C8ECB62F178CBC005B39D1 /* Picker */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		F2F8C09322D9D570009A809F /* BGFoundation.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BGFoundation.framework;
-			remoteRef = F2F8C09222D9D570009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C0D022DB4587009A809F /* MASShortcut.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MASShortcut.framework;
-			remoteRef = F2F8C0CF22DB4587009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C0D222DB4587009A809F /* MASShortcutTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MASShortcutTests.xctest;
-			remoteRef = F2F8C0D122DB4587009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C0D422DB4587009A809F /* Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = Demo.app;
-			remoteRef = F2F8C0D322DB4587009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		F2F8C0F622DDABA3009A809F /* MASPreferences.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MASPreferences.framework;
-			remoteRef = F2F8C0F522DDABA3009A809F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
-		F2CABA8822D0800800A6172F /* Resources */ = {
+		F2C8ECB52F178CBC005B39D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2CABA9122D0800A00A6172F /* Assets.xcassets in Resources */,
-				F242EC5622D9B57200D741AD /* PIPickerViewController.xib in Resources */,
-				F2CABA9422D0800A00A6172F /* MainMenu.xib in Resources */,
-				F25F31D32EC9E262009E8F13 /* Icon.icon in Resources */,
-				F2F8C10A22DDAD44009A809F /* PIShortcutsPreferencesViewController.xib in Resources */,
-				F2F8C10522DDAD2D009A809F /* PIGeneralPreferencesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F2CABA8622D0800800A6172F /* Sources */ = {
+		F2C8ECB32F178CBC005B39D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F242EC4F22D9B54400D741AD /* PIPickerWindowController.m in Sources */,
-				F2F8C11022DF3676009A809F /* PIPreferences.m in Sources */,
-				F2F8C0AB22D9D6BC009A809F /* NSColor+Picker.m in Sources */,
-				F2F8C10422DDAD2D009A809F /* PIGeneralPreferencesViewController.m in Sources */,
-				F242EC5A22D9BA6100D741AD /* PIPickerPreviewView.m in Sources */,
-				F242EC5522D9B57200D741AD /* PIPickerViewController.m in Sources */,
-				F242EC6022D9C18E00D741AD /* PIPreviewImageGrabber.m in Sources */,
-				F2F8C0DD22DC7CEA009A809F /* PIColorHistory.m in Sources */,
-				F242EC5D22D9BA7700D741AD /* PIColorButton.m in Sources */,
-				F2CABAA322D0805F00A6172F /* PIAppDelegate.m in Sources */,
-				F242EC6322D9C1A200D741AD /* PIColorPicker.m in Sources */,
-				F2F8C10922DDAD44009A809F /* PIShortcutsPreferencesViewController.m in Sources */,
-				F2F8C0FF22DDACC2009A809F /* PIPreferencesWindowController.m in Sources */,
-				F2F8C0E722DC8402009A809F /* PIColorView.m in Sources */,
-				F2CABA9722D0800A00A6172F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		F25F31A32EC78159009E8F13 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BGFoundation;
-			targetProxy = F25F31A22EC78159009E8F13 /* PBXContainerItemProxy */;
-		};
-		F2F8C0D822DB4598009A809F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MASShortcut;
-			targetProxy = F2F8C0D722DB4598009A809F /* PBXContainerItemProxy */;
-		};
-		F2F8C0FC22DDABB6009A809F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MASPreferences;
-			targetProxy = F2F8C0FB22DDABB6009A809F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F2CABA9222D0800A00A6172F /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F2CABA9322D0800A00A6172F /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		F2CABA9922D0800A00A6172F /* Debug */ = {
+		F2C8ECC42F178CBE005B39D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -535,18 +172,20 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 568T6RKXH7;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -560,22 +199,24 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		F2CABA9A22D0800A00A6172F /* Release */ = {
+		F2C8ECC52F178CBE005B39D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -594,18 +235,20 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 568T6RKXH7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -613,79 +256,97 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
-		F2CABA9C22D0800A00A6172F /* Debug */ = {
+		F2C8ECC72F178CBE005B39D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
-				CODE_SIGN_ENTITLEMENTS = Picker/Picker.entitlements;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 568T6RKXH7;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				INFOPLIST_FILE = Picker/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = net.domzilla.Picker;
+				PRODUCT_BUNDLE_IDENTIFIER = net.domzilla.picker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Debug;
 		};
-		F2CABA9D22D0800A00A6172F /* Release */ = {
+		F2C8ECC82F178CBE005B39D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
-				CODE_SIGN_ENTITLEMENTS = Picker/Picker.entitlements;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 568T6RKXH7;
 				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				INFOPLIST_FILE = Picker/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = net.domzilla.Picker;
+				PRODUCT_BUNDLE_IDENTIFIER = net.domzilla.picker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F2CABA8522D0800800A6172F /* Build configuration list for PBXProject "Picker" */ = {
+		F2C8ECB22F178CBC005B39D1 /* Build configuration list for PBXProject "Picker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F2CABA9922D0800A00A6172F /* Debug */,
-				F2CABA9A22D0800A00A6172F /* Release */,
+				F2C8ECC42F178CBE005B39D1 /* Debug */,
+				F2C8ECC52F178CBE005B39D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F2CABA9B22D0800A00A6172F /* Build configuration list for PBXNativeTarget "Picker" */ = {
+		F2C8ECC62F178CBE005B39D1 /* Build configuration list for PBXNativeTarget "Picker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F2CABA9C22D0800A00A6172F /* Debug */,
-				F2CABA9D22D0800A00A6172F /* Release */,
+				F2C8ECC72F178CBE005B39D1 /* Debug */,
+				F2C8ECC82F178CBE005B39D1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F2CABA8222D0800800A6172F /* Project object */;
+	rootObject = F2C8ECAF2F178CBC005B39D1 /* Project object */;
 }
