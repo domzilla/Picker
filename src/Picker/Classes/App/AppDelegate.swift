@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import CoreGraphics
 
 @main
 @MainActor
@@ -32,6 +33,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Register defaults
         self.registerDefaults()
 
+        // Request screen capture permission (adds app to System Settings list)
+        self.requestScreenCapturePermission()
+
         // Set up status bar
         self.setupStatusItem()
 
@@ -51,6 +55,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: - Setup
+
+    /// Request screen capture permission on launch.
+    /// This adds the app to System Settings > Privacy & Security > Screen Recording.
+    private func requestScreenCapturePermission() {
+        // CGRequestScreenCaptureAccess() triggers the permission prompt on first launch
+        // and adds the app to the Screen Recording list in System Settings.
+        // On subsequent launches, it simply returns the current permission state.
+        _ = CGRequestScreenCaptureAccess()
+    }
 
     private func registerDefaults() {
         var defaults: [String: Any] = [:]
