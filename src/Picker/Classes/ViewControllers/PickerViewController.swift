@@ -60,7 +60,7 @@ class PickerViewController: NSViewController {
     }
 
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -91,18 +91,20 @@ class PickerViewController: NSViewController {
 
     // MARK: - Actions
 
-    @IBAction func colorHistoryButtonAction(_ sender: Any) {
-        guard let button = sender as? ColorButton,
-              let color = button.color
-        else { return }
+    @IBAction
+    func colorHistoryButtonAction(_ sender: Any) {
+        guard
+            let button = sender as? ColorButton,
+            let color = button.color else { return }
 
         ColorPicker.shared.copyColor(color, toPasteboard: .general, saveToHistory: false)
     }
 
-    @IBAction func formatButtonAction(_ sender: Any) {
-        guard let index = self.formatButton?.indexOfSelectedItem,
-              let format = ColorFormat(rawValue: index)
-        else { return }
+    @IBAction
+    func formatButtonAction(_: Any) {
+        guard
+            let index = self.formatButton?.indexOfSelectedItem,
+            let format = ColorFormat(rawValue: index) else { return }
 
         ColorPicker.shared.colorFormat = format
     }

@@ -65,8 +65,9 @@ final class Preferences: ObservableObject {
 
             // Use the first available combination
             // (In a full implementation, we'd check for system conflicts)
-            if let copyData = try? JSONEncoder().encode(copyShortcut),
-               let pinData = try? JSONEncoder().encode(pinShortcut)
+            if
+                let copyData = try? JSONEncoder().encode(copyShortcut),
+                let pinData = try? JSONEncoder().encode(pinShortcut)
             {
                 defaults[Keys.colorCopyShortcut] = copyData
                 defaults[Keys.pinToScreenShortcut] = pinData
@@ -87,8 +88,9 @@ final class Preferences: ObservableObject {
     }
 
     private func saveShortcut(_ shortcut: Shortcut?, forKey key: String) {
-        if let shortcut,
-           let data = try? JSONEncoder().encode(shortcut)
+        if
+            let shortcut,
+            let data = try? JSONEncoder().encode(shortcut)
         {
             UserDefaults.standard.set(data, forKey: key)
         } else {

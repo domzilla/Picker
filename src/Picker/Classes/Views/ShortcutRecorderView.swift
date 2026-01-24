@@ -199,12 +199,12 @@ class ShortcutRecorderView: NSControl {
         }
     }
 
-    override func mouseEntered(with event: NSEvent) {
+    override func mouseEntered(with _: NSEvent) {
         self.isHinting = true
         self.needsDisplay = true
     }
 
-    override func mouseExited(with event: NSEvent) {
+    override func mouseExited(with _: NSEvent) {
         self.isHinting = false
         self.needsDisplay = true
     }

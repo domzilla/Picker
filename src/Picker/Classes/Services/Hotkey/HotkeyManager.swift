@@ -78,9 +78,10 @@ final class HotkeyManager {
         let status = InstallEventHandler(
             GetEventDispatcherTarget(),
             { _, event, userData -> OSStatus in
-                guard let userData,
-                      let event
-                else {
+                guard
+                    let userData,
+                    let event else
+                {
                     return noErr
                 }
 

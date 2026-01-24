@@ -164,9 +164,10 @@ struct Shortcut: Codable, Equatable, Hashable, Sendable {
     // MARK: - Private Helpers
 
     private func keyCodeStringFromKeyboardLayout() -> String? {
-        guard let inputSource = TISCopyCurrentASCIICapableKeyboardLayoutInputSource()?.takeRetainedValue(),
-              let layoutDataRef = TISGetInputSourceProperty(inputSource, kTISPropertyUnicodeKeyLayoutData)
-        else {
+        guard
+            let inputSource = TISCopyCurrentASCIICapableKeyboardLayoutInputSource()?.takeRetainedValue(),
+            let layoutDataRef = TISGetInputSourceProperty(inputSource, kTISPropertyUnicodeKeyLayoutData) else
+        {
             return nil
         }
 

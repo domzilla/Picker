@@ -44,10 +44,12 @@ final class ColorHistory: ObservableObject {
             NSColor(srgbRed: 0.54, green: 0.96, blue: 0.89, alpha: 1.0),
         ]
 
-        guard let data = try? NSKeyedArchiver.archivedData(
-            withRootObject: defaultColors,
-            requiringSecureCoding: true
-        ) else {
+        guard
+            let data = try? NSKeyedArchiver.archivedData(
+                withRootObject: defaultColors,
+                requiringSecureCoding: true
+            ) else
+        {
             return [:]
         }
 
@@ -90,22 +92,25 @@ final class ColorHistory: ObservableObject {
     // MARK: - Private Helpers
 
     private func loadHistory() -> [NSColor] {
-        guard let data = UserDefaults.standard.data(forKey: Keys.history),
-              let colors = try? NSKeyedUnarchiver.unarchivedArrayOfObjects(
-                  ofClass: NSColor.self,
-                  from: data
-              )
-        else {
+        guard
+            let data = UserDefaults.standard.data(forKey: Keys.history),
+            let colors = try? NSKeyedUnarchiver.unarchivedArrayOfObjects(
+                ofClass: NSColor.self,
+                from: data
+            ) else
+        {
             return []
         }
         return colors
     }
 
     private func saveHistory(_ colors: [NSColor]) {
-        guard let data = try? NSKeyedArchiver.archivedData(
-            withRootObject: colors,
-            requiringSecureCoding: true
-        ) else {
+        guard
+            let data = try? NSKeyedArchiver.archivedData(
+                withRootObject: colors,
+                requiringSecureCoding: true
+            ) else
+        {
             return
         }
         UserDefaults.standard.set(data, forKey: Keys.history)

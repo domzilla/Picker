@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Application Lifecycle
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         // Hide dock icon (accessory app)
         NSApp.setActivationPolicy(.accessory)
 
@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.registerGlobalHotkeys()
     }
 
-    func applicationWillTerminate(_ notification: Notification) {
+    func applicationWillTerminate(_: Notification) {
         HotkeyManager.shared.unregisterAll()
     }
 
@@ -174,19 +174,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Actions
 
-    @objc private func copyColorMenuItemAction(_ sender: Any) {
+    @objc
+    private func copyColorMenuItemAction(_: Any) {
         ColorPicker.shared.copyColorToPasteboard()
     }
 
-    @objc private func pickerWindowItemAction(_ sender: Any) {
+    @objc
+    private func pickerWindowItemAction(_: Any) {
         self.showPickerWindow()
     }
 
-    @objc private func formatSubmenuItemAction(_ sender: Any) {
-        guard let menuItem = sender as? NSMenuItem,
-              let index = self.availableFormatsSubmenu.items.firstIndex(of: menuItem),
-              let format = ColorFormat(rawValue: index)
-        else { return }
+    @objc
+    private func formatSubmenuItemAction(_ sender: Any) {
+        guard
+            let menuItem = sender as? NSMenuItem,
+            let index = self.availableFormatsSubmenu.items.firstIndex(of: menuItem),
+            let format = ColorFormat(rawValue: index) else { return }
 
         self.selectedFormatMenuItem?.state = .off
         self.selectedFormatMenuItem = menuItem
@@ -195,11 +198,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ColorPicker.shared.colorFormat = format
     }
 
-    @objc private func preferencesMenuItemAction(_ sender: Any) {
+    @objc
+    private func preferencesMenuItemAction(_: Any) {
         self.showPreferencesWindow()
     }
 
-    @objc private func quitMenuItemAction(_ sender: Any) {
+    @objc
+    private func quitMenuItemAction(_ sender: Any) {
         NSApp.terminate(sender)
     }
 
@@ -268,8 +273,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.pickerWindowController = PickerWindowController()
 
             // Position window below status item
-            if let button = self.statusItem.button,
-               let buttonWindow = button.window
+            if
+                let button = self.statusItem.button,
+                let buttonWindow = button.window
             {
                 let buttonRect = button.convert(button.bounds, to: nil)
                 let screenRect = buttonWindow.convertToScreen(buttonRect)
@@ -306,12 +312,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 // MARK: - NSMenuDelegate
 
 extension AppDelegate: NSMenuDelegate {
-    func menuWillOpen(_ menu: NSMenu) {
+    func menuWillOpen(_: NSMenu) {
         self.pickerViewController.shouldUpdateView = true
         self.unregisterGlobalHotkeys()
     }
 
-    func menuDidClose(_ menu: NSMenu) {
+    func menuDidClose(_: NSMenu) {
         self.pickerViewController.shouldUpdateView = false
         self.registerGlobalHotkeys()
     }

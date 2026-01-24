@@ -18,12 +18,14 @@ enum ScreenCapture {
             height: self.captureSize
         )
 
-        guard let cgImage = CGWindowListCreateImage(
-            imageRect,
-            .optionOnScreenOnly,
-            kCGNullWindowID,
-            .shouldBeOpaque
-        ) else {
+        guard
+            let cgImage = CGWindowListCreateImage(
+                imageRect,
+                .optionOnScreenOnly,
+                kCGNullWindowID,
+                .shouldBeOpaque
+            ) else
+        {
             return nil
         }
 
@@ -37,12 +39,14 @@ enum ScreenCapture {
     static func color(at location: NSPoint) -> NSColor? {
         let imageRect = CGRect(x: location.x, y: location.y, width: 1, height: 1)
 
-        guard let cgImage = CGWindowListCreateImage(
-            imageRect,
-            .optionOnScreenOnly,
-            kCGNullWindowID,
-            []
-        ) else {
+        guard
+            let cgImage = CGWindowListCreateImage(
+                imageRect,
+                .optionOnScreenOnly,
+                kCGNullWindowID,
+                []
+            ) else
+        {
             return nil
         }
 
