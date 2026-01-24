@@ -1,5 +1,6 @@
 import Carbon.HIToolbox
 import Foundation
+import DZFoundation
 
 /// Manages global hotkey registration and dispatches events
 @MainActor
@@ -101,7 +102,7 @@ final class HotkeyManager {
         )
 
         if status != noErr {
-            print("Failed to install hotkey event handler: \(status)")
+            DZLog("Failed to install hotkey event handler: \(status)")
         }
     }
 

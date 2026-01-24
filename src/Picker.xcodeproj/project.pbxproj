@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F2D815342F2522E6003BAD6B /* DZFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = F2D815332F2522E6003BAD6B /* DZFoundation */; };
+		F2D815352F2522EB003BAD6B /* DZFoundation in Embed Frameworks */ = {isa = PBXBuildFile; productRef = F2D815332F2522E6003BAD6B /* DZFoundation */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		F2C8ED2B2F178D58005B39D1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -13,6 +18,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F2D815352F2522EB003BAD6B /* DZFoundation in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D815342F2522E6003BAD6B /* DZFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +94,7 @@
 			);
 			name = Picker;
 			packageProductDependencies = (
+				F2D815332F2522E6003BAD6B /* DZFoundation */,
 			);
 			productName = Picker;
 			productReference = F2C8ECB72F178CBC005B39D1 /* Picker.app */;
@@ -115,6 +123,9 @@
 			);
 			mainGroup = F2C8ECAE2F178CBC005B39D1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F2D815322F2522E6003BAD6B /* XCLocalSwiftPackageReference "../../../../Libraries/DZFoundation" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F2C8ECB82F178CBC005B39D1 /* Products */;
 			projectDirPath = "";
@@ -347,6 +358,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		F2D815322F2522E6003BAD6B /* XCLocalSwiftPackageReference "../../../../Libraries/DZFoundation" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../../Libraries/DZFoundation;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F2D815332F2522E6003BAD6B /* DZFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DZFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F2C8ECAF2F178CBC005B39D1 /* Project object */;
 }
