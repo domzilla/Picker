@@ -13,6 +13,11 @@ Picker is a macOS color picker utility that lives in the menu bar. It allows use
 ## Style & Conventions (MANDATORY)
 **Strictly follow** the Swift/SwiftUI style guide: `~/Agents/Style/swift-swiftui-style-guide.md`
 
+## Changelog (MANDATORY)
+**All important code changes** (fixes, additions, deletions, changes) have to written to CHANGELOG.md.
+Changelog format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ## Localization (MANDATORY)
 **Strictly follow** the localization guide: `~/Agents/Guides/localization-guide.md`
 - All user-facing strings must be localized
@@ -64,6 +69,15 @@ The `search` binary is located **inside** the documentation folder:
 - If a file needs to be added to the project, **stop and tell the user** - do not attempt it yourself
 - Use `xcodebuild` for building/testing only - never for project manipulation
 - **Exception**: Only proceed if the user gives explicit permission for a specific edit
+
+## File System Synchronized Groups (Xcode 16+)
+This project uses **File System Synchronized Groups** (internally `PBXFileSystemSynchronizedRootGroup`), introduced in Xcode 16. This means:
+- The `Classes/` and `Resources/` directories are **directly synchronized** with the file system
+- **You CAN freely create, move, rename, and delete files** in these directories
+- Xcode automatically picks up all changes — no project file updates needed
+- This is different from legacy Xcode groups, which required manual project file edits
+
+**Bottom line:** Modify source files in `Classes/` and `Resources/` freely. Just never touch the `.xcodeproj` files themselves.
 
 ## Build & Format Commands
 ```bash
@@ -121,3 +135,13 @@ The project uses XIB files for some views. When porting:
 - Keep XIB compatibility with `@objc(ClassName)` attribute
 - Use `@IBOutlet` and `@IBAction` decorators
 - Update class references in XIB files to match Swift class names
+
+---
+
+## Notes
+- The style guide emphasizes native SwiftUI patterns over MVVM boilerplate
+- Prefer `@Observable` (iOS 17+) over `ObservableObject`
+- Use `async/await` and `.task` modifier for async work
+- Avoid Combine unless specifically needed
+- Use `DZLog`/`DZErrorLog` for all debug logging — never `print()`
+- Always run `swiftformat .` after successful builds before committing
