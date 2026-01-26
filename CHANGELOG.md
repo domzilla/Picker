@@ -1,0 +1,77 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [2.0.0] - 2026-01-14
+
+### Changed
+- Complete migration from Objective-C to Swift 6
+- Updated project settings for modern Swift development
+- Added DZFoundation dependency for logging
+- Updated SwiftFormat configuration
+
+### Added
+- Screen capture permission request on app launch
+- Queuestack integration for task tracking
+
+### Removed
+- Removed obsolete files from legacy codebase
+
+## [1.1.0] - 2025-11-16
+
+### Fixed
+- Fixed thread safety issue in color picker
+- Draw preview color within bounds
+- Draw preview image within bounds
+
+### Changed
+- Updated app icon
+- Updated nib files
+- Code formatting improvements
+- Refactoring for improved maintainability
+
+### Removed
+- Removed timer (no longer needed)
+- Removed BGDataBinding dependency
+
+## [1.0.1] - 2019-10-26
+
+### Changed
+- Changed default color picker shortcut
+- Disabled General preferences tab (not needed)
+
+## [1.0.0] - 2019-07-17
+
+### Added
+- Preferences window with customizable settings
+- Color history (tracks last 6 picked colors)
+- Global hotkey support (works when app is not focused)
+- Copy to pasteboard functionality
+- Floating preview window at menu position
+- Multiple color format support:
+  - HEX (#RRGGBB)
+  - HEX without hash (RRGGBB)
+  - RGB (rgb(r, g, b))
+  - HSB (hsb(h, s, b))
+  - CMYK (cmyk(c, m, y, k))
+  - UIColor Objective-C
+  - UIColor Swift
+  - NSColor Objective-C
+  - NSColor Swift
+- Menu bar integration with NSMenuItem
+- App icon
+- Handle global hotkey when menu is visible
+
+### Changed
+- App activation policy for menu bar behavior
+
+## [0.1.0] - 2019-07-06
+
+### Added
+- Initial commit with basic color picker functionality
+
