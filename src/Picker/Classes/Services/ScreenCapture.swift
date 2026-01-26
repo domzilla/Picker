@@ -1,5 +1,5 @@
 import AppKit
-import CoreGraphics
+import ScreenCaptureKit
 
 /// Utility for capturing screen content around the cursor
 enum ScreenCapture {
@@ -9,7 +9,7 @@ enum ScreenCapture {
     /// Capture a preview image around the given screen location
     /// - Parameter location: The screen location (with origin at top-left)
     /// - Returns: An image of the area around the location
-    static func previewImage(at location: NSPoint) -> NSImage? {
+    static func previewImage(at location: NSPoint) async -> NSImage? {
         let halfSize = self.captureSize / 2
         let imageRect = CGRect(
             x: location.x - halfSize,
@@ -18,39 +18,34 @@ enum ScreenCapture {
             height: self.captureSize
         )
 
-        guard
-            let cgImage = CGWindowListCreateImage(
-                imageRect,
-                .optionOnScreenOnly,
-                kCGNullWindowID,
-                .shouldBeOpaque
-            ) else
-        {
+        let config = SCScreenshotConfiguration()
+        config.showsCursor = false
+
+        do {
+            let cgImage: CGImage? = try await withCheckedThrowingContinuation { continuation in
+                SCScreenshotManager.captureScreenshot(
+                    rect: imageRect,
+                    configuration: config
+                ) { output, error in
+                    if let error {
+                        continuation.resume(throwing: error)
+                    } else {
+                        // Extract CGImage immediately to avoid Sendable issues
+                        continuation.resume(returning: output?.sdrImage)
+                    }
+                }
+            }
+
+            guard let cgImage else {
+                return nil
+            }
+
+            return NSImage(
+                cgImage: cgImage,
+                size: NSSize(width: self.captureSize, height: self.captureSize)
+            )
+        } catch {
             return nil
         }
-
-        let image = NSImage(cgImage: cgImage, size: NSSize(width: self.captureSize, height: self.captureSize))
-        return image
-    }
-
-    /// Get the color at a specific screen location
-    /// - Parameter location: The screen location (with origin at top-left)
-    /// - Returns: The color at that location
-    static func color(at location: NSPoint) -> NSColor? {
-        let imageRect = CGRect(x: location.x, y: location.y, width: 1, height: 1)
-
-        guard
-            let cgImage = CGWindowListCreateImage(
-                imageRect,
-                .optionOnScreenOnly,
-                kCGNullWindowID,
-                []
-            ) else
-        {
-            return nil
-        }
-
-        let bitmap = NSBitmapImageRep(cgImage: cgImage)
-        return bitmap.colorAt(x: 0, y: 0)
     }
 }

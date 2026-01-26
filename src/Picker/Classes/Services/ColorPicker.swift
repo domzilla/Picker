@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import DZFoundation
 
 /// Core color picking engine that tracks the mouse and captures screen colors
 @MainActor
@@ -22,6 +23,12 @@ final class ColorPicker: ObservableObject {
         }
     }
 
+    /// Cached preview image (updated asynchronously during tracking)
+    @Published private(set) var previewImage: NSImage?
+
+    /// Cached color from preview image
+    @Published private(set) var color: NSColor = .black
+
     // MARK: - Publishers
 
     /// Emits when the color changes (mouse moved while tracking)
@@ -37,6 +44,7 @@ final class ColorPicker: ObservableObject {
 
     private var globalMonitor: Any?
     private var localMonitor: Any?
+    private var captureTask: Task<Void, Never>?
 
     // MARK: - Initialization
 
@@ -74,30 +82,53 @@ final class ColorPicker: ObservableObject {
     /// Stop tracking the mouse position
     func stopTracking() {
         self.isTracking = false
-    }
-
-    /// Get the color at the current mouse location
-    var color: NSColor {
-        ScreenCapture.color(at: self.mouseLocation) ?? .black
-    }
-
-    /// Get the preview image at the current mouse location
-    var previewImage: NSImage? {
-        ScreenCapture.previewImage(at: self.mouseLocation)
+        self.captureTask?.cancel()
     }
 
     /// Copy the current color to the pasteboard
     func copyColorToPasteboard() {
-        self.copyColorToPasteboard(saveToHistory: true)
+        Task {
+            await self.copyColorToPasteboardAsync(saveToHistory: true)
+        }
     }
 
     /// Copy the current color to the pasteboard
     /// - Parameter saveToHistory: Whether to save the color to history
     func copyColorToPasteboard(saveToHistory: Bool) {
-        // Get fresh mouse position to avoid stale data
+        Task {
+            await self.copyColorToPasteboardAsync(saveToHistory: saveToHistory)
+        }
+    }
+
+    /// Copy the current color to the pasteboard (async version)
+    /// - Parameter saveToHistory: Whether to save the color to history
+    private func copyColorToPasteboardAsync(saveToHistory: Bool) async {
         let currentLocation = self.currentMouseScreenLocation()
-        let currentColor = ScreenCapture.color(at: currentLocation) ?? .black
+
+        // Capture fresh image for accurate color
+        guard let image = await ScreenCapture.previewImage(at: currentLocation) else {
+            DZLog("Failed to capture image")
+            return
+        }
+
+        let currentColor = self.sampleColor(from: image) ?? .black
         self.copyColor(currentColor, toPasteboard: .general, saveToHistory: saveToHistory)
+    }
+
+    /// Extract the center pixel color from a preview image
+    /// - Parameter image: The preview image to sample from
+    /// - Returns: The color at the center of the image
+    func sampleColor(from image: NSImage) -> NSColor? {
+        guard
+            let tiffData = image.tiffRepresentation,
+            let bitmap = NSBitmapImageRep(data: tiffData) else
+        {
+            return nil
+        }
+
+        let centerX = bitmap.pixelsWide / 2
+        let centerY = bitmap.pixelsHigh / 2
+        return bitmap.colorAt(x: centerX, y: centerY)
     }
 
     /// Copy a specific color to the pasteboard
@@ -135,6 +166,23 @@ final class ColorPicker: ObservableObject {
         guard self.isTracking else { return }
 
         self.mouseLocation = self.currentMouseScreenLocation()
+
+        // Cancel previous capture and start new one
+        self.captureTask?.cancel()
+        self.captureTask = Task {
+            await self.updatePreviewImage()
+        }
+    }
+
+    private func updatePreviewImage() async {
+        let location = self.mouseLocation
+
+        guard let image = await ScreenCapture.previewImage(at: location) else { return }
+        guard !Task.isCancelled else { return }
+
+        // Single capture used for both preview and color
+        self.previewImage = image
+        self.color = self.sampleColor(from: image) ?? .black
         self.colorDidChange.send()
     }
 
@@ -142,7 +190,7 @@ final class ColorPicker: ObservableObject {
     private func currentMouseScreenLocation() -> NSPoint {
         let cocoaLocation = NSEvent.mouseLocation
 
-        // CGWindowListCreateImage uses Quartz coordinates where (0,0) is at the
+        // ScreenCaptureKit uses Quartz coordinates where (0,0) is at the
         // top-left of the main display. NSEvent.mouseLocation uses Cocoa coordinates
         // where (0,0) is at the bottom-left of the main display.
         // The conversion requires the main display height.
