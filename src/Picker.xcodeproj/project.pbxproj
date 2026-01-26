@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F263473A2F27BF0400C56D92 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F26347392F27BF0400C56D92 /* Sparkle */; };
 		F2D815342F2522E6003BAD6B /* DZFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = F2D815332F2522E6003BAD6B /* DZFoundation */; };
 		F2D815352F2522EB003BAD6B /* DZFoundation in Embed Frameworks */ = {isa = PBXBuildFile; productRef = F2D815332F2522E6003BAD6B /* DZFoundation */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2D815342F2522E6003BAD6B /* DZFoundation in Frameworks */,
+				F263473A2F27BF0400C56D92 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +97,7 @@
 			name = Picker;
 			packageProductDependencies = (
 				F2D815332F2522E6003BAD6B /* DZFoundation */,
+				F26347392F27BF0400C56D92 /* Sparkle */,
 			);
 			productName = Picker;
 			productReference = F2C8ECB72F178CBC005B39D1 /* Picker.app */;
@@ -125,6 +128,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F2D815322F2522E6003BAD6B /* XCLocalSwiftPackageReference "../../../../Libraries/DZFoundation" */,
+				F26347382F27BF0400C56D92 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F2C8ECB82F178CBC005B39D1 /* Products */;
@@ -366,7 +370,23 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		F26347382F27BF0400C56D92 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		F26347392F27BF0400C56D92 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F26347382F27BF0400C56D92 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		F2D815332F2522E6003BAD6B /* DZFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DZFoundation;

@@ -26,5 +26,11 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+    <key>SUEnableInstallerLauncherService</key>
+    <true/>
+    <key>SUFeedURL</key>
+    <string>https://dr-picker-mac.s3.amazonaws.com/appcast.xml</string>
+    <key>SUPublicEDKey</key>
+    <string>tfFOu6jc/ABVAmXA0xfDMUXxCgKOFQaZ+i2JH4vyKhI=</string>
 </dict>
 </plist>

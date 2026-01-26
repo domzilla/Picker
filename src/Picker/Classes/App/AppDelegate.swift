@@ -1,12 +1,19 @@
 import AppKit
 import Combine
 import CoreGraphics
+import Sparkle
 
 @main
 @MainActor
 @objc(AppDelegate)
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegate {
     // MARK: - Properties
+
+    private lazy var updaterController = SPUStandardUpdaterController(
+        startingUpdater: true,
+        updaterDelegate: nil,
+        userDriverDelegate: self
+    )
 
     private var statusItem: NSStatusItem!
     private var pickerMenu: NSMenu!
@@ -18,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var selectedFormatMenuItem: NSMenuItem!
     private var pinToScreenItem: NSMenuItem!
     private var pickerPreferencesItem: NSMenuItem!
+    private var checkForUpdatesItem: NSMenuItem!
     private var quitMenuItem: NSMenuItem!
 
     private var pickerWindowController: PickerWindowController?
@@ -141,6 +149,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.pickerPreferencesItem.target = self
         self.pickerMenu.addItem(self.pickerPreferencesItem)
 
+        // Check for Updates
+        self.checkForUpdatesItem = NSMenuItem(
+            title: NSLocalizedString("Check for Updates...", comment: "Check for updates menu item"),
+            action: #selector(self.checkForUpdatesMenuItemAction(_:)),
+            keyEquivalent: ""
+        )
+        self.checkForUpdatesItem.target = self
+        self.pickerMenu.addItem(self.checkForUpdatesItem)
+
         self.pickerMenu.addItem(.separator())
 
         // Quit
@@ -201,6 +218,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     private func preferencesMenuItemAction(_: Any) {
         self.showPreferencesWindow()
+    }
+
+    @objc
+    private func checkForUpdatesMenuItemAction(_: Any) {
+        self.updaterController.checkForUpdates(nil)
     }
 
     @objc
@@ -306,6 +328,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func showPreferencesWindow() {
         PreferencesWindowController.shared.showWindow(nil)
+    }
+
+    // MARK: - SPUStandardUserDriverDelegate
+
+    func supportsGentleScheduledUpdateReminders() -> Bool {
+        true
     }
 }
 
