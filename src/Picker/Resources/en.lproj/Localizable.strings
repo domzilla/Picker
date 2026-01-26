@@ -1,0 +1,39 @@
+/* Localizable.strings (English) */
+
+/* Menu Items */
+"Copy color" = "Copy color";
+"Color format" = "Color format";
+"Pin on screen..." = "Pin on screen...";
+"Preferences..." = "Preferences...";
+"Check for Updates..." = "Check for Updates...";
+"Quit" = "Quit";
+
+/* Window Titles */
+"Picker" = "Picker";
+"Preferences" = "Preferences";
+
+/* Preferences */
+"Shortcuts" = "Shortcuts";
+
+/* Shortcut Recorder */
+"Type Shortcut" = "Type Shortcut";
+"Record Shortcut" = "Record Shortcut";
+"keyboard shortcut" = "keyboard shortcut";
+"Empty keyboard shortcut" = "Empty keyboard shortcut";
+
+/* Picker View */
+"Press %@ to copy color" = "Press %@ to copy color";
+
+/* Key Names */
+"Space" = "Space";
+
+/* Color Format Names */
+"HEX" = "HEX";
+"HEX (No #)" = "HEX (No #)";
+"RGB" = "RGB";
+"HSB" = "HSB";
+"CMYK" = "CMYK";
+"UIColor (Objective-C)" = "UIColor (Objective-C)";
+"UIColor (Swift)" = "UIColor (Swift)";
+"NSColor (Objective-C)" = "NSColor (Objective-C)";
+"NSColor (Swift)" = "NSColor (Swift)";

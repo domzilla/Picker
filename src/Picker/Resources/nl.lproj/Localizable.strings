@@ -1,0 +1,39 @@
+/* Localizable.strings (Dutch) */
+
+/* Menu Items */
+"Copy color" = "Kopieer kleur";
+"Color format" = "Kleurformaat";
+"Pin on screen..." = "Vastmaken op scherm…";
+"Preferences..." = "Voorkeuren…";
+"Check for Updates..." = "Controleer op updates…";
+"Quit" = "Stop";
+
+/* Window Titles */
+"Picker" = "Picker";
+"Preferences" = "Voorkeuren";
+
+/* Preferences */
+"Shortcuts" = "Sneltoetsen";
+
+/* Shortcut Recorder */
+"Type Shortcut" = "Voer sneltoets in";
+"Record Shortcut" = "Sneltoets opnemen";
+"keyboard shortcut" = "sneltoets";
+"Empty keyboard shortcut" = "Geen sneltoets";
+
+/* Picker View */
+"Press %@ to copy color" = "Druk op %@ om de kleur te kopiëren";
+
+/* Key Names */
+"Space" = "Spatie";
+
+/* Color Format Names */
+"HEX" = "HEX";
+"HEX (No #)" = "HEX (zonder #)";
+"RGB" = "RGB";
+"HSB" = "HSB";
+"CMYK" = "CMYK";
+"UIColor (Objective-C)" = "UIColor (Objective-C)";
+"UIColor (Swift)" = "UIColor (Swift)";
+"NSColor (Objective-C)" = "NSColor (Objective-C)";
+"NSColor (Swift)" = "NSColor (Swift)";

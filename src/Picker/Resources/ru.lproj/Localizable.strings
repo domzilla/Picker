@@ -1,0 +1,39 @@
+/* Localizable.strings (Russian) */
+
+/* Menu Items */
+"Copy color" = "Скопировать цвет";
+"Color format" = "Формат цвета";
+"Pin on screen..." = "Закрепить на экране…";
+"Preferences..." = "Настройки…";
+"Check for Updates..." = "Проверить обновления…";
+"Quit" = "Завершить";
+
+/* Window Titles */
+"Picker" = "Picker";
+"Preferences" = "Настройки";
+
+/* Preferences */
+"Shortcuts" = "Сочетания клавиш";
+
+/* Shortcut Recorder */
+"Type Shortcut" = "Введи сочетание";
+"Record Shortcut" = "Записать сочетание";
+"keyboard shortcut" = "сочетание клавиш";
+"Empty keyboard shortcut" = "Сочетание клавиш не задано";
+
+/* Picker View */
+"Press %@ to copy color" = "Нажми %@, чтобы скопировать цвет";
+
+/* Key Names */
+"Space" = "Пробел";
+
+/* Color Format Names */
+"HEX" = "HEX";
+"HEX (No #)" = "HEX (без #)";
+"RGB" = "RGB";
+"HSB" = "HSB";
+"CMYK" = "CMYK";
+"UIColor (Objective-C)" = "UIColor (Objective-C)";
+"UIColor (Swift)" = "UIColor (Swift)";
+"NSColor (Objective-C)" = "NSColor (Objective-C)";
+"NSColor (Swift)" = "NSColor (Swift)";

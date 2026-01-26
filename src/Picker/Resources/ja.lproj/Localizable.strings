@@ -1,0 +1,39 @@
+/* Localizable.strings (Japanese) */
+
+/* Menu Items */
+"Copy color" = "カラーをコピー";
+"Color format" = "カラーフォーマット";
+"Pin on screen..." = "画面に固定…";
+"Preferences..." = "設定…";
+"Check for Updates..." = "アップデートを確認…";
+"Quit" = "終了";
+
+/* Window Titles */
+"Picker" = "Picker";
+"Preferences" = "設定";
+
+/* Preferences */
+"Shortcuts" = "ショートカット";
+
+/* Shortcut Recorder */
+"Type Shortcut" = "ショートカットを入力";
+"Record Shortcut" = "ショートカットを記録";
+"keyboard shortcut" = "キーボードショートカット";
+"Empty keyboard shortcut" = "キーボードショートカットなし";
+
+/* Picker View */
+"Press %@ to copy color" = "%@を押してカラーをコピー";
+
+/* Key Names */
+"Space" = "スペース";
+
+/* Color Format Names */
+"HEX" = "HEX";
+"HEX (No #)" = "HEX（#なし）";
+"RGB" = "RGB";
+"HSB" = "HSB";
+"CMYK" = "CMYK";
+"UIColor (Objective-C)" = "UIColor (Objective-C)";
+"UIColor (Swift)" = "UIColor (Swift)";
+"NSColor (Objective-C)" = "NSColor (Objective-C)";
+"NSColor (Swift)" = "NSColor (Swift)";

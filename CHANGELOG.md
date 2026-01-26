@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Sparkle integration for automatic updates with "Check for Updates..." menu item
+- Localization support for 12 languages: English, German, French, Spanish, Italian, Dutch, Japanese, Korean, Portuguese, Brazilian Portuguese, Russian, and Simplified Chinese
 
 ### Fixed
 - Fix global hotkey color copy returning wrong color (#0d0d0e) due to incorrect coordinate conversion

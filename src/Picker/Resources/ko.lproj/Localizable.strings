@@ -1,0 +1,39 @@
+/* Localizable.strings (Korean) */
+
+/* Menu Items */
+"Copy color" = "색상 복사";
+"Color format" = "색상 포맷";
+"Pin on screen..." = "화면에 고정…";
+"Preferences..." = "설정…";
+"Check for Updates..." = "업데이트 확인…";
+"Quit" = "종료";
+
+/* Window Titles */
+"Picker" = "Picker";
+"Preferences" = "설정";
+
+/* Preferences */
+"Shortcuts" = "단축키";
+
+/* Shortcut Recorder */
+"Type Shortcut" = "단축키 입력";
+"Record Shortcut" = "단축키 기록";
+"keyboard shortcut" = "키보드 단축키";
+"Empty keyboard shortcut" = "키보드 단축키 없음";
+
+/* Picker View */
+"Press %@ to copy color" = "%@ 키를 눌러 색상 복사";
+
+/* Key Names */
+"Space" = "스페이스";
+
+/* Color Format Names */
+"HEX" = "HEX";
+"HEX (No #)" = "HEX (# 제외)";
+"RGB" = "RGB";
+"HSB" = "HSB";
+"CMYK" = "CMYK";
+"UIColor (Objective-C)" = "UIColor (Objective-C)";
+"UIColor (Swift)" = "UIColor (Swift)";
+"NSColor (Objective-C)" = "NSColor (Objective-C)";
+"NSColor (Swift)" = "NSColor (Swift)";

@@ -16,23 +16,23 @@ enum ColorFormat: Int, CaseIterable, Codable {
     var displayName: String {
         switch self {
         case .hex:
-            "HEX"
+            NSLocalizedString("HEX", comment: "Color format name")
         case .hexNoHash:
-            "HEX (No #)"
+            NSLocalizedString("HEX (No #)", comment: "Color format name without hash")
         case .rgb:
-            "RGB"
+            NSLocalizedString("RGB", comment: "Color format name")
         case .hsb:
-            "HSB"
+            NSLocalizedString("HSB", comment: "Color format name")
         case .cmyk:
-            "CMYK"
+            NSLocalizedString("CMYK", comment: "Color format name")
         case .uiColorObjC:
-            "UIColor (Objective-C)"
+            NSLocalizedString("UIColor (Objective-C)", comment: "Color format name")
         case .uiColorSwift:
-            "UIColor (Swift)"
+            NSLocalizedString("UIColor (Swift)", comment: "Color format name")
         case .nsColorObjC:
-            "NSColor (Objective-C)"
+            NSLocalizedString("NSColor (Objective-C)", comment: "Color format name")
         case .nsColorSwift:
-            "NSColor (Swift)"
+            NSLocalizedString("NSColor (Swift)", comment: "Color format name")
         }
     }
 
