@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Sparkle integration for automatic updates with "Check for Updates..." menu item
 
+### Fixed
+- Fix global hotkey color copy returning wrong color (#0d0d0e) due to incorrect coordinate conversion
+
 ## [2.0.0] - 2026-01-14
 
 ### Changed

@@ -94,7 +94,10 @@ final class ColorPicker: ObservableObject {
     /// Copy the current color to the pasteboard
     /// - Parameter saveToHistory: Whether to save the color to history
     func copyColorToPasteboard(saveToHistory: Bool) {
-        self.copyColor(self.color, toPasteboard: .general, saveToHistory: saveToHistory)
+        // Get fresh mouse position to avoid stale data
+        let currentLocation = self.currentMouseScreenLocation()
+        let currentColor = ScreenCapture.color(at: currentLocation) ?? .black
+        self.copyColor(currentColor, toPasteboard: .general, saveToHistory: saveToHistory)
     }
 
     /// Copy a specific color to the pasteboard
@@ -131,17 +134,19 @@ final class ColorPicker: ObservableObject {
     private func updateMouseLocation() {
         guard self.isTracking else { return }
 
-        DispatchQueue.main.async { [weak self] in
-            guard let self else { return }
+        self.mouseLocation = self.currentMouseScreenLocation()
+        self.colorDidChange.send()
+    }
 
-            let rawLocation = NSEvent.mouseLocation
+    /// Get the current mouse position in Quartz screen coordinates (top-left origin)
+    private func currentMouseScreenLocation() -> NSPoint {
+        let cocoaLocation = NSEvent.mouseLocation
 
-            // Convert from Cocoa coordinates (bottom-left origin) to screen coordinates (top-left origin)
-            guard let screen = NSScreen.screens.first else { return }
-            let screenHeight = screen.frame.height
-            self.mouseLocation = NSPoint(x: rawLocation.x, y: screenHeight - rawLocation.y)
-
-            self.colorDidChange.send()
-        }
+        // CGWindowListCreateImage uses Quartz coordinates where (0,0) is at the
+        // top-left of the main display. NSEvent.mouseLocation uses Cocoa coordinates
+        // where (0,0) is at the bottom-left of the main display.
+        // The conversion requires the main display height.
+        let mainDisplayHeight = CGDisplayBounds(CGMainDisplayID()).height
+        return NSPoint(x: cocoaLocation.x, y: mainDisplayHeight - cocoaLocation.y)
     }
 }
