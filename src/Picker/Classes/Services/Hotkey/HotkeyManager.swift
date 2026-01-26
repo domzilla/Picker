@@ -1,6 +1,6 @@
 import Carbon.HIToolbox
-import Foundation
 import DZFoundation
+import Foundation
 
 /// Manages global hotkey registration and dispatches events
 @MainActor
