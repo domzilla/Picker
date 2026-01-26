@@ -88,6 +88,8 @@
     }
   ],
   "supported-platforms" : {
-    "squares" : "shared"
+    "squares" : [
+      "macOS"
+    ]
   }
 }
