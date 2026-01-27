@@ -46,8 +46,8 @@ final class ColorPicker: ObservableObject {
     private var localMonitor: Any?
     private var cancellables = Set<AnyCancellable>()
 
-    /// Capture stream for continuous preview (used when UI is visible)
-    private let captureStream = CaptureStream()
+    /// Screen capture for continuous preview (used when UI is visible)
+    private let screenCapture = ScreenCapture()
 
     /// Number of consumers currently showing the preview (menu, window)
     private var previewConsumerCount = 0
@@ -101,7 +101,7 @@ final class ColorPicker: ObservableObject {
         if self.previewConsumerCount == 1 {
             Task {
                 do {
-                    try await self.captureStream.start()
+                    try await self.screenCapture.start()
                 } catch {
                     DZErrorLog(error)
                 }
@@ -116,7 +116,7 @@ final class ColorPicker: ObservableObject {
         // Stop stream when last consumer disappears
         if self.previewConsumerCount == 0 {
             Task {
-                await self.captureStream.stop()
+                await self.screenCapture.stop()
             }
         }
     }
@@ -142,7 +142,7 @@ final class ColorPicker: ObservableObject {
         let image: NSImage?
 
         // Use stream frame if available, otherwise capture once (hotkey case)
-        if self.captureStream.isRunning, let streamFrame = self.captureStream.latestFrame {
+        if self.screenCapture.isRunning, let streamFrame = self.screenCapture.latestFrame {
             image = streamFrame
         } else {
             let currentLocation = ScreenCapture.cocoaToQuartz(NSEvent.mouseLocation)
@@ -193,16 +193,16 @@ final class ColorPicker: ObservableObject {
         self.mouseLocation = location
 
         // Update stream capture rect if running
-        if self.captureStream.isRunning {
+        if self.screenCapture.isRunning {
             Task {
-                await self.captureStream.updateCaptureRect(for: location)
+                await self.screenCapture.updateCaptureRect(for: location)
             }
         }
     }
 
     private func setupStreamSubscription() {
         // Subscribe to stream frames and update preview/color
-        self.captureStream.$latestFrame
+        self.screenCapture.$latestFrame
             .compactMap(\.self)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] image in
