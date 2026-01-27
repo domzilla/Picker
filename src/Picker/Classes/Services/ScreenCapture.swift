@@ -51,11 +51,19 @@ final class ScreenCapture: NSObject, ObservableObject {
     /// Cached display list to avoid repeated SCShareableContent calls (which trigger TCC checks)
     private var cachedDisplays: [SCDisplay] = []
 
-    /// Last time we refreshed the display cache
-    private var lastDisplayCacheRefresh: CFAbsoluteTime = 0
+    // MARK: - Initialization
 
-    /// How often to refresh the display cache (seconds)
-    private static let displayCacheRefreshInterval: TimeInterval = 5.0
+    override init() {
+        super.init()
+
+        // Listen for display configuration changes (monitor connect/disconnect, arrangement changes)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.screenParametersDidChange),
+            name: NSApplication.didChangeScreenParametersNotification,
+            object: nil
+        )
+    }
 
     // MARK: - Streaming API
 
@@ -154,12 +162,22 @@ final class ScreenCapture: NSObject, ObservableObject {
                 y: location.y - bounds.origin.y
             )
         }
+    }
 
-        // Periodically refresh display cache in case displays changed
-        let now = CFAbsoluteTimeGetCurrent()
-        if now - self.lastDisplayCacheRefresh > Self.displayCacheRefreshInterval {
+    // MARK: - Display Change Handling
+
+    /// Called when display configuration changes (monitor connect/disconnect, arrangement, resolution)
+    @objc
+    private func screenParametersDidChange(_: Notification) {
+        guard self.isRunning else { return }
+
+        DZLog("Display configuration changed, restarting stream")
+
+        Task {
+            // Restart stream to pick up new display configuration
+            await self.stop()
             do {
-                try await self.refreshDisplayCache()
+                try await self.start()
             } catch {
                 DZErrorLog(error)
             }
@@ -255,14 +273,13 @@ final class ScreenCapture: NSObject, ObservableObject {
     // MARK: - Private Helpers (Streaming)
 
     /// Refresh the cached display list from SCShareableContent
-    /// This triggers a TCC check, so call sparingly (at start and periodically)
+    /// This triggers a TCC check, so only called at stream start and on display config changes
     private func refreshDisplayCache() async throws {
         let content = try await SCShareableContent.excludingDesktopWindows(
             false,
             onScreenWindowsOnly: true
         )
         self.cachedDisplays = content.displays
-        self.lastDisplayCacheRefresh = CFAbsoluteTimeGetCurrent()
     }
 
     /// Create stream configuration for capturing the full display
