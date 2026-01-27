@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix preview image distortion when picking colors near screen edges
 - Fix preview lag caused by per-frame session setup/teardown overhead
 - Fix laggy preview rendering in release builds by using cached Metal-backed CIContext
+- Fix laggy preview in notarized builds by throttling capture rect updates to 60 Hz
 
 ## [2.0.1] - 2026-01-26
 
