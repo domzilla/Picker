@@ -6,17 +6,54 @@ extension NSImage {
     /// Extract the center pixel color from the image
     /// - Returns: The color at the center of the image (in sRGB colorspace)
     func sampleColor() -> NSColor? {
-        guard let tiffData = self.tiffRepresentation else { return nil }
-        guard let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
+        // Get CGImage directly - much faster than tiffRepresentation
+        guard let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
+            return nil
+        }
 
-        let centerX = bitmap.pixelsWide / 2
-        let centerY = bitmap.pixelsHigh / 2
+        let width = cgImage.width
+        let height = cgImage.height
+        let centerX = width / 2
+        let centerY = height / 2
 
-        guard let color = bitmap.colorAt(x: centerX, y: centerY) else { return nil }
+        // Create a 1x1 bitmap context to read single pixel
+        var pixel: [UInt8] = [0, 0, 0, 0]
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
 
-        // Convert to sRGB colorspace to ensure getRed:green:blue:alpha: works
-        // The captured image may be in a grayscale or other colorspace
-        return color.usingColorSpace(.sRGB) ?? color
+        guard
+            let context = CGContext(
+                data: &pixel,
+                width: 1,
+                height: 1,
+                bitsPerComponent: 8,
+                bytesPerRow: 4,
+                space: colorSpace,
+                bitmapInfo: bitmapInfo.rawValue
+            ) else
+        {
+            return nil
+        }
+
+        // Draw just the center pixel
+        context.draw(cgImage, in: CGRect(x: -centerX, y: -centerY, width: width, height: height))
+
+        // Convert premultiplied alpha to straight alpha
+        let alpha = CGFloat(pixel[3]) / 255.0
+        guard alpha > 0 else {
+            return NSColor(red: 0, green: 0, blue: 0, alpha: 0)
+        }
+
+        let red = CGFloat(pixel[0]) / 255.0 / alpha
+        let green = CGFloat(pixel[1]) / 255.0 / alpha
+        let blue = CGFloat(pixel[2]) / 255.0 / alpha
+
+        return NSColor(
+            calibratedRed: min(red, 1.0),
+            green: min(green, 1.0),
+            blue: min(blue, 1.0),
+            alpha: alpha
+        )
     }
 
     // MARK: - Factory Methods
