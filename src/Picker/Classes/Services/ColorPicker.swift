@@ -16,10 +16,20 @@ final class ColorPicker: ObservableObject {
     /// Whether the picker is actively tracking
     @Published private(set) var isTracking: Bool = false
 
-    /// Current color format for copying
+    /// Current color format for copying.
+    /// When changed, automatically updates the clipboard if a color was copied within the last 30 seconds.
     @Published var colorFormat: ColorFormat {
         didSet {
             UserDefaults.standard.set(self.colorFormat.rawValue, forKey: Keys.format)
+
+            // Update clipboard with new format if a color was recently copied
+            if
+                let color = self.lastCopiedColor,
+                let timestamp = self.lastCopyTimestamp,
+                Date().timeIntervalSince(timestamp) < Self.clipboardUpdateThreshold
+            {
+                self.copyColor(color, toPasteboard: .general, saveToHistory: false, updateLastCopiedColor: false)
+            }
         }
     }
 
@@ -40,6 +50,11 @@ final class ColorPicker: ObservableObject {
         static let format = "PIColorPickerUserDefaultsFormatKey"
     }
 
+    // MARK: - Constants
+
+    /// Time window for auto-updating clipboard on format change (30 seconds)
+    private static let clipboardUpdateThreshold: TimeInterval = 30
+
     // MARK: - Private Properties
 
     private var globalMonitor: Any?
@@ -51,6 +66,12 @@ final class ColorPicker: ObservableObject {
 
     /// Number of consumers currently showing the preview (menu, window)
     private var previewConsumerCount = 0
+
+    /// Last color that was copied to the clipboard
+    private var lastCopiedColor: NSColor?
+
+    /// Timestamp of the last color copy
+    private var lastCopyTimestamp: Date?
 
     // MARK: - Initialization
 
@@ -160,11 +181,22 @@ final class ColorPicker: ObservableObject {
     ///   - color: The color to copy
     ///   - pasteboard: The pasteboard to copy to
     ///   - saveToHistory: Whether to save the color to history
-    func copyColor(_ color: NSColor, toPasteboard pasteboard: NSPasteboard, saveToHistory: Bool) {
+    ///   - updateLastCopiedColor: Whether to store as the last copied color for format change updates
+    func copyColor(
+        _ color: NSColor,
+        toPasteboard pasteboard: NSPasteboard,
+        saveToHistory: Bool,
+        updateLastCopiedColor: Bool = true
+    ) {
         let colorString = self.colorFormat.string(for: color)
 
         pasteboard.declareTypes([.string], owner: nil)
         pasteboard.setString(colorString, forType: .string)
+
+        if updateLastCopiedColor {
+            self.lastCopiedColor = color
+            self.lastCopyTimestamp = Date()
+        }
 
         if saveToHistory {
             ColorHistory.shared.push(color)

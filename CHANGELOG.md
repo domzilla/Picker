@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Localization support for 12 languages: English, German, French, Spanish, Italian, Dutch, Japanese, Korean, Portuguese, Brazilian Portuguese, Russian, and Simplified Chinese
+- Auto-update clipboard when changing color format (within 30 seconds of last copy)
 - Add 27 new color formats organized by category:
   - Web/CSS: RGBA, HSL, HSLA, HWB, Color Level 4, CSS Variable
   - Apple: SwiftUI Color, SwiftUI Hex, CGColor, CIColor
