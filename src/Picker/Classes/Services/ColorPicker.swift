@@ -73,15 +73,6 @@ final class ColorPicker: ObservableObject {
     /// Timestamp of the last color copy
     private var lastCopyTimestamp: Date?
 
-    /// Throttle interval for capture rect updates (matches 60 FPS)
-    private static let captureRectUpdateInterval: TimeInterval = 1.0 / 60.0
-
-    /// Last time we updated the capture rect
-    private var lastCaptureRectUpdate: CFAbsoluteTime = 0
-
-    /// Pending capture rect update task (for coalescing rapid mouse moves)
-    private var pendingCaptureRectUpdate: Task<Void, Never>?
-
     // MARK: - Initialization
 
     private init() {
@@ -233,38 +224,10 @@ final class ColorPicker: ObservableObject {
         let location = NSEvent.mouseLocation.quartzCoordinate
         self.mouseLocation = location
 
-        // Update stream capture rect if running (throttled to ~60 Hz)
+        // Update cursor location for frame cropping (no throttling needed - just updates a variable)
         if self.screenCapture.isRunning {
-            self.throttledUpdateCaptureRect(for: location)
-        }
-    }
-
-    /// Throttle capture rect updates to avoid overwhelming ScreenCaptureKit
-    /// Mouse events can arrive at hundreds/thousands per second; we only need ~60 updates/sec
-    private func throttledUpdateCaptureRect(for location: NSPoint) {
-        let now = CFAbsoluteTimeGetCurrent()
-        let elapsed = now - self.lastCaptureRectUpdate
-
-        if elapsed >= Self.captureRectUpdateInterval {
-            // Enough time has passed - update immediately
-            self.lastCaptureRectUpdate = now
-            self.pendingCaptureRectUpdate?.cancel()
-            self.pendingCaptureRectUpdate = nil
-
             Task {
-                await self.screenCapture.updateCaptureRect(for: location)
-            }
-        } else {
-            // Too soon - schedule a delayed update (coalesce rapid events)
-            self.pendingCaptureRectUpdate?.cancel()
-
-            let delay = Self.captureRectUpdateInterval - elapsed
-            self.pendingCaptureRectUpdate = Task {
-                try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-                guard !Task.isCancelled else { return }
-
-                self.lastCaptureRectUpdate = CFAbsoluteTimeGetCurrent()
-                await self.screenCapture.updateCaptureRect(for: location)
+                await self.screenCapture.updateCursorLocation(location)
             }
         }
     }

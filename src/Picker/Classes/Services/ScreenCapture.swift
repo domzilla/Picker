@@ -37,8 +37,16 @@ final class ScreenCapture: NSObject, ObservableObject {
 
     private var stream: SCStream?
     private var currentDisplay: SCDisplay?
-    private var currentCursorLocation: NSPoint = .zero
     private let streamQueue = DispatchQueue(label: "net.domzilla.picker.screencapture", qos: .userInteractive)
+
+    /// Current cursor location in display-local Quartz coordinates (accessed from stream queue)
+    private nonisolated(unsafe) var cursorLocationInDisplay: NSPoint = .zero
+
+    /// Current display bounds in Quartz coordinates (accessed from stream queue)
+    private nonisolated(unsafe) var displayBounds: CGRect = .zero
+
+    /// Scale factor of current display (accessed from stream queue)
+    private nonisolated(unsafe) var displayScaleFactor: CGFloat = 2.0
 
     /// Cached display list to avoid repeated SCShareableContent calls (which trigger TCC checks)
     private var cachedDisplays: [SCDisplay] = []
@@ -48,23 +56,6 @@ final class ScreenCapture: NSObject, ObservableObject {
 
     /// How often to refresh the display cache (seconds)
     private static let displayCacheRefreshInterval: TimeInterval = 5.0
-
-    /// Last location where we updated the stream configuration
-    private var lastConfigUpdateLocation: NSPoint = .zero
-
-    /// Minimum movement (in points) before updating stream configuration
-    /// This reduces TCC checks triggered by stream.updateConfiguration()
-    private static let minimumMovementForConfigUpdate: CGFloat = 2.0
-
-    /// Padding info for edge captures (accessed from stream queue)
-    private nonisolated(unsafe) var currentPaddingInfo: PaddingInfo?
-
-    /// Information needed to pad a captured image
-    private struct PaddingInfo: Sendable {
-        let requestedRect: CGRect
-        let clampedRect: CGRect
-        let scaleFactor: CGFloat
-    }
 
     // MARK: - Streaming API
 
@@ -83,12 +74,26 @@ final class ScreenCapture: NSObject, ObservableObject {
         }
 
         self.currentDisplay = display
-        self.currentCursorLocation = cursorLocation
-        self.lastConfigUpdateLocation = cursorLocation
 
-        // Create stream with content filter for the display
+        // Store display info for frame cropping (accessed from stream queue)
+        let bounds = CGRect(
+            x: CGFloat(display.frame.origin.x),
+            y: CGFloat(display.frame.origin.y),
+            width: CGFloat(display.width),
+            height: CGFloat(display.height)
+        )
+        self.displayBounds = bounds
+        self.displayScaleFactor = NSScreen.backingScaleFactor(for: display.displayID)
+
+        // Convert cursor to display-local coordinates
+        self.cursorLocationInDisplay = NSPoint(
+            x: cursorLocation.x - bounds.origin.x,
+            y: cursorLocation.y - bounds.origin.y
+        )
+
+        // Create stream with content filter for the display (captures full screen)
         let filter = SCContentFilter(display: display, excludingWindows: [])
-        let config = self.createStreamConfiguration(for: cursorLocation, display: display)
+        let config = self.createStreamConfiguration(for: display)
 
         let stream = SCStream(filter: filter, configuration: config, delegate: self)
         try stream.addStreamOutput(self, type: .screen, sampleHandlerQueue: self.streamQueue)
@@ -118,20 +123,15 @@ final class ScreenCapture: NSObject, ObservableObject {
         DZLog("Capture stream stopped")
     }
 
-    /// Update the capture rectangle for a new cursor location
+    /// Update cursor location for frame cropping (no TCC check - just geometry!)
     /// - Parameter location: New cursor location in Quartz coordinates (top-left origin)
-    func updateCaptureRect(for location: NSPoint) async {
-        guard self.isRunning, let stream = self.stream else { return }
-
-        self.currentCursorLocation = location
-
+    func updateCursorLocation(_ location: NSPoint) async {
         // Check if cursor moved to a different display using cached display list
-        // This avoids calling SCShareableContent repeatedly (which triggers TCC checks)
         if
             let newDisplay = self.display(containing: location, from: self.cachedDisplays),
             newDisplay.displayID != self.currentDisplay?.displayID
         {
-            // Cursor crossed to a new display - restart stream
+            // Cursor crossed to a new display - restart stream on new display
             await self.stop()
             do {
                 try await self.start()
@@ -139,6 +139,20 @@ final class ScreenCapture: NSObject, ObservableObject {
                 DZErrorLog(error)
             }
             return
+        }
+
+        // Update cursor location for frame cropping (no TCC check!)
+        if let display = self.currentDisplay {
+            let bounds = CGRect(
+                x: CGFloat(display.frame.origin.x),
+                y: CGFloat(display.frame.origin.y),
+                width: CGFloat(display.width),
+                height: CGFloat(display.height)
+            )
+            self.cursorLocationInDisplay = NSPoint(
+                x: location.x - bounds.origin.x,
+                y: location.y - bounds.origin.y
+            )
         }
 
         // Periodically refresh display cache in case displays changed
@@ -149,24 +163,6 @@ final class ScreenCapture: NSObject, ObservableObject {
             } catch {
                 DZErrorLog(error)
             }
-        }
-
-        // Re-check running state before updating configuration
-        guard self.isRunning, let display = self.currentDisplay else { return }
-
-        // Only update configuration if cursor moved enough (reduces TCC checks)
-        let dx = abs(location.x - self.lastConfigUpdateLocation.x)
-        let dy = abs(location.y - self.lastConfigUpdateLocation.y)
-        guard dx >= Self.minimumMovementForConfigUpdate || dy >= Self.minimumMovementForConfigUpdate else {
-            return
-        }
-
-        self.lastConfigUpdateLocation = location
-        let config = self.createStreamConfiguration(for: location, display: display)
-        do {
-            try await stream.updateConfiguration(config)
-        } catch {
-            DZErrorLog(error)
         }
     }
 
@@ -269,65 +265,15 @@ final class ScreenCapture: NSObject, ObservableObject {
         self.lastDisplayCacheRefresh = CFAbsoluteTimeGetCurrent()
     }
 
-    /// Create stream configuration for capturing around the given location
-    private func createStreamConfiguration(for location: NSPoint, display: SCDisplay) -> SCStreamConfiguration {
+    /// Create stream configuration for capturing the full display
+    private func createStreamConfiguration(for display: SCDisplay) -> SCStreamConfiguration {
         let config = SCStreamConfiguration()
-        let halfSize = Self.captureSize / 2
-
-        // Calculate the source rect in display-local coordinates
-        let displayBounds = CGRect(
-            x: CGFloat(display.frame.origin.x),
-            y: CGFloat(display.frame.origin.y),
-            width: CGFloat(display.width),
-            height: CGFloat(display.height)
-        )
-
-        // Convert global cursor location to display-local coordinates
-        let localX = location.x - displayBounds.origin.x
-        let localY = location.y - displayBounds.origin.y
-
-        // Requested rect around cursor
-        let requestedRect = CGRect(
-            x: localX - halfSize,
-            y: localY - halfSize,
-            width: Self.captureSize,
-            height: Self.captureSize
-        )
-
-        // Clamp to display bounds (in local coordinates)
-        let localDisplayBounds = CGRect(
-            x: 0,
-            y: 0,
-            width: displayBounds.width,
-            height: displayBounds.height
-        )
-        let clampedRect = requestedRect.intersection(localDisplayBounds)
-
-        // Use clamped rect if valid, otherwise use the full requested rect
-        let sourceRect = clampedRect.isEmpty ? requestedRect : clampedRect
-
-        // Get display scale factor for proper resolution
         let scaleFactor = NSScreen.backingScaleFactor(for: display.displayID)
 
-        // Output size matches the clamped rect (will be padded later if needed)
-        let outputWidth = Int(sourceRect.width * scaleFactor)
-        let outputHeight = Int(sourceRect.height * scaleFactor)
-
-        // Store padding info if capture is at screen edge
-        if clampedRect != requestedRect, !clampedRect.isEmpty {
-            self.currentPaddingInfo = PaddingInfo(
-                requestedRect: requestedRect,
-                clampedRect: clampedRect,
-                scaleFactor: scaleFactor
-            )
-        } else {
-            self.currentPaddingInfo = nil
-        }
-
-        config.sourceRect = sourceRect
+        // Capture the full display - no sourceRect means full screen
+        config.width = Int(CGFloat(display.width) * scaleFactor)
+        config.height = Int(CGFloat(display.height) * scaleFactor)
         config.captureResolution = .best
-        config.width = outputWidth
-        config.height = outputHeight
         config.showsCursor = false
         config.minimumFrameInterval = CMTime(value: 1, timescale: CMTimeScale(Self.targetFrameRate))
         config.queueDepth = 3
@@ -353,28 +299,74 @@ final class ScreenCapture: NSObject, ObservableObject {
         return displays.first { $0.displayID == CGMainDisplayID() } ?? displays.first
     }
 
-    /// Convert a CMSampleBuffer to NSImage, applying padding if at screen edge
-    private nonisolated func image(from sampleBuffer: CMSampleBuffer) -> NSImage? {
+    /// Extract the 28×28 area around the cursor from a full-screen frame
+    private nonisolated func extractPreviewImage(from sampleBuffer: CMSampleBuffer) -> NSImage? {
         guard let imageBuffer = sampleBuffer.imageBuffer else { return nil }
 
         let ciImage = CIImage(cvImageBuffer: imageBuffer)
+        let imageWidth = ciImage.extent.width
+        let imageHeight = ciImage.extent.height
 
-        guard let cgImage = Self.ciContext.createCGImage(ciImage, from: ciImage.extent) else {
+        let scaleFactor = self.displayScaleFactor
+        let captureSize = Self.captureSize
+        let halfSize = captureSize / 2
+        let scaledCaptureSize = captureSize * scaleFactor
+
+        // Get cursor position in pixel coordinates (Quartz: top-left origin)
+        let cursorPixelX = self.cursorLocationInDisplay.x * scaleFactor
+        let cursorPixelY = self.cursorLocationInDisplay.y * scaleFactor
+
+        // CIImage has origin at bottom-left, so flip Y
+        let cursorCIY = imageHeight - cursorPixelY
+
+        // Calculate the crop rect centered on cursor (in CIImage coordinates)
+        let cropRect = CGRect(
+            x: cursorPixelX - halfSize * scaleFactor,
+            y: cursorCIY - halfSize * scaleFactor,
+            width: scaledCaptureSize,
+            height: scaledCaptureSize
+        )
+
+        // Clamp to image bounds
+        let imageBounds = CGRect(x: 0, y: 0, width: imageWidth, height: imageHeight)
+        let clampedRect = cropRect.intersection(imageBounds)
+
+        // If completely outside, return black
+        guard !clampedRect.isEmpty else {
+            return .blackImage(size: NSSize(width: captureSize, height: captureSize))
+        }
+
+        // Crop the CIImage
+        let croppedCI = ciImage.cropped(to: clampedRect)
+
+        guard let cgImage = Self.ciContext.createCGImage(croppedCI, from: croppedCI.extent) else {
             return nil
         }
 
-        // Check if padding is needed (capture was at screen edge)
-        if let paddingInfo = self.currentPaddingInfo {
-            return .paddedImage(
-                cgImage: cgImage,
-                capturedRect: paddingInfo.clampedRect,
-                requestedRect: paddingInfo.requestedRect
-            )
+        // If crop matches requested size, no padding needed
+        if clampedRect.width == scaledCaptureSize, clampedRect.height == scaledCaptureSize {
+            return NSImage(cgImage: cgImage, size: NSSize(width: captureSize, height: captureSize))
         }
 
-        return NSImage(
+        // Need to pad with black for edge cases
+        // Convert back to logical coordinates for padding calculation
+        let logicalCropRect = CGRect(
+            x: cropRect.origin.x / scaleFactor,
+            y: cropRect.origin.y / scaleFactor,
+            width: captureSize,
+            height: captureSize
+        )
+        let logicalClampedRect = CGRect(
+            x: clampedRect.origin.x / scaleFactor,
+            y: clampedRect.origin.y / scaleFactor,
+            width: clampedRect.width / scaleFactor,
+            height: clampedRect.height / scaleFactor
+        )
+
+        return .paddedImage(
             cgImage: cgImage,
-            size: NSSize(width: Self.captureSize, height: Self.captureSize)
+            capturedRect: logicalClampedRect,
+            requestedRect: logicalCropRect
         )
     }
 }
@@ -400,7 +392,7 @@ extension ScreenCapture: SCStreamOutput {
         of type: SCStreamOutputType
     ) {
         guard type == .screen else { return }
-        guard let image = self.image(from: sampleBuffer) else { return }
+        guard let image = self.extractPreviewImage(from: sampleBuffer) else { return }
 
         Task { @MainActor in
             self.latestFrame = image
