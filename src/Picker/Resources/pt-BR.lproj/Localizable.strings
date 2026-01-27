@@ -27,13 +27,57 @@
 /* Key Names */
 "Space" = "Espaço";
 
-/* Color Format Names */
+/* Color Format Categories */
+"Generic" = "Geral";
+"Web / CSS" = "Web / CSS";
+"Apple Platforms" = "Plataformas Apple";
+"Cross-Platform" = "Multiplataforma";
+"JavaScript" = "JavaScript";
+"Design" = "Design";
+"Other" = "Outros";
+
+/* Color Format Names - Generic */
 "HEX" = "HEX";
 "HEX (No #)" = "HEX (sem #)";
 "RGB" = "RGB";
 "HSB" = "HSB";
 "CMYK" = "CMYK";
-"UIColor (Objective-C)" = "UIColor (Objective-C)";
+
+/* Color Format Names - Web/CSS */
+"CSS RGBA" = "CSS RGBA";
+"CSS HSL" = "CSS HSL";
+"CSS HSLA" = "CSS HSLA";
+"CSS HWB" = "CSS HWB";
+"CSS Color Level 4" = "CSS Color Level 4";
+"CSS Variable" = "CSS Variable";
+
+/* Color Format Names - Apple Platforms */
+"SwiftUI Color" = "SwiftUI Color";
+"SwiftUI Color (Hex)" = "SwiftUI Color (Hex)";
 "UIColor (Swift)" = "UIColor (Swift)";
-"NSColor (Objective-C)" = "NSColor (Objective-C)";
 "NSColor (Swift)" = "NSColor (Swift)";
+"CGColor" = "CGColor";
+"CIColor" = "CIColor";
+
+/* Color Format Names - Cross-Platform */
+"Flutter Color" = "Flutter Color";
+"Flutter RGBO" = "Flutter RGBO";
+"Android Kotlin" = "Android Kotlin";
+"Android XML" = "Android XML";
+"Unity C#" = "Unity C#";
+"Godot GDScript" = "Godot GDScript";
+
+/* Color Format Names - JavaScript */
+"JS Object" = "JS Object";
+"JS Array" = "JS Array";
+"Tailwind CSS" = "Tailwind CSS";
+
+/* Color Format Names - Design */
+"Float (0-1)" = "Float (0-1)";
+"Integer (0-255)" = "Integer (0-255)";
+
+/* Color Format Names - Other */
+"Java AWT" = "Java AWT";
+"Qt / QML" = "Qt / QML";
+"GLSL vec4" = "GLSL vec4";
+"Hex Integer" = "Hex Integer";

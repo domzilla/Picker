@@ -9,12 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Localization support for 12 languages: English, German, French, Spanish, Italian, Dutch, Japanese, Korean, Portuguese, Brazilian Portuguese, Russian, and Simplified Chinese
+- Add 27 new color formats organized by category:
+  - Web/CSS: RGBA, HSL, HSLA, HWB, Color Level 4, CSS Variable
+  - Apple: SwiftUI Color, SwiftUI Hex, CGColor, CIColor
+  - Cross-Platform: Flutter, Flutter RGBO, Android Kotlin, Android XML, Unity C#, Godot GDScript
+  - JavaScript: JS Object, JS Array, Tailwind CSS
+  - Design: Float (0-1), Integer (0-255)
+  - Other: Java AWT, Qt/QML, GLSL vec4, Hex Integer
 
 ### Changed
 - Migrate screen capture from CGWindowListCreateImage to ScreenCaptureKit
 - Implement dual-mode screen capture: SCStream for continuous preview (up to 60 FPS) and one-shot mode for hotkey color copy
 - Bump minimum deployment target to macOS 26.0
 - Refactor ScreenCapture utilities into NSPoint, NSImage, and NSScreen extensions
+- Reorganize color format menu with category headers and separators
+
+### Removed
+- Remove deprecated Objective-C color formats (UIColor/NSColor Objective-C)
 
 ### Fixed
 - Fix cursor sometimes being captured in color samples, causing incorrect color values

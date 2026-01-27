@@ -115,16 +115,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
         self.availableFormatsMenuItem.title = NSLocalizedString("Color format", comment: "Color format menu item")
         self.availableFormatsSubmenu = NSMenu()
 
-        for format in ColorFormat.allCases {
-            let item = self.availableFormatsSubmenu.addItem(
-                withTitle: format.displayName,
-                action: #selector(self.formatSubmenuItemAction(_:)),
-                keyEquivalent: ""
-            )
-            item.target = self
+        for (index, category) in ColorFormat.Category.allCases.enumerated() {
+            // Add separator between categories (not before the first one)
+            if index > 0 {
+                self.availableFormatsSubmenu.addItem(.separator())
+            }
+
+            // Add category header (disabled item with unique negative tag to avoid conflicts)
+            let headerItem = NSMenuItem(title: category.displayName, action: nil, keyEquivalent: "")
+            headerItem.isEnabled = false
+            headerItem.tag = -(category.rawValue + 1)
+            self.availableFormatsSubmenu.addItem(headerItem)
+
+            // Add formats in this category
+            for format in category.formats {
+                let item = self.availableFormatsSubmenu.addItem(
+                    withTitle: format.displayName,
+                    action: #selector(self.formatSubmenuItemAction(_:)),
+                    keyEquivalent: ""
+                )
+                item.tag = format.rawValue
+                item.target = self
+                item.indentationLevel = 1
+            }
         }
 
-        self.selectedFormatMenuItem = self.availableFormatsSubmenu.item(at: ColorPicker.shared.colorFormat.rawValue)
+        self.selectedFormatMenuItem = self.availableFormatsSubmenu
+            .item(withTag: ColorPicker.shared.colorFormat.rawValue)
         self.selectedFormatMenuItem?.state = .on
         self.availableFormatsMenuItem.submenu = self.availableFormatsSubmenu
         self.pickerMenu.addItem(self.availableFormatsMenuItem)
@@ -206,8 +223,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
     private func formatSubmenuItemAction(_ sender: Any) {
         guard
             let menuItem = sender as? NSMenuItem,
-            let index = self.availableFormatsSubmenu.items.firstIndex(of: menuItem),
-            let format = ColorFormat(rawValue: index) else { return }
+            let format = ColorFormat(rawValue: menuItem.tag) else { return }
 
         self.selectedFormatMenuItem?.state = .off
         self.selectedFormatMenuItem = menuItem
