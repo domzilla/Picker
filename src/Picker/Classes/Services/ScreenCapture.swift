@@ -1,15 +1,18 @@
 import AppKit
+import DZFoundation
 import ScreenCaptureKit
 
-/// Utility for capturing screen content around the cursor
+/// Utility for capturing screen content around the cursor (one-shot mode)
 enum ScreenCapture {
     /// Size of the preview capture area
-    private static let captureSize: CGFloat = 28
+    static let captureSize: CGFloat = 28
 
-    /// Capture a preview image around the given screen location
+    /// Capture a single image around the given screen location (one-shot mode)
+    /// Use this for hotkey color copy when no UI is visible.
+    /// For continuous preview, use CaptureStream instead.
     /// - Parameter location: The screen location (with origin at top-left)
     /// - Returns: An image of the area around the location
-    static func previewImage(at location: NSPoint) async -> NSImage? {
+    static func captureOnce(at location: NSPoint) async -> NSImage? {
         let halfSize = self.captureSize / 2
         let requestedRect = CGRect(
             x: location.x - halfSize,
@@ -69,10 +72,10 @@ enum ScreenCapture {
         }
     }
 
-    // MARK: - Private Helpers
+    // MARK: - Shared Utilities
 
     /// Get the combined bounds of all connected screens in Quartz coordinates
-    private static func combinedScreenBounds() -> CGRect {
+    static func combinedScreenBounds() -> CGRect {
         var combinedBounds = CGRect.zero
         let maxDisplays: UInt32 = 16
         var displays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
@@ -87,6 +90,33 @@ enum ScreenCapture {
 
         return combinedBounds
     }
+
+    /// Convert Cocoa coordinates (bottom-left origin) to Quartz coordinates (top-left origin)
+    /// - Parameter cocoaPoint: Point in Cocoa coordinate system
+    /// - Returns: Point in Quartz coordinate system
+    static func cocoaToQuartz(_ cocoaPoint: NSPoint) -> NSPoint {
+        let mainDisplayHeight = CGDisplayBounds(CGMainDisplayID()).height
+        return NSPoint(x: cocoaPoint.x, y: mainDisplayHeight - cocoaPoint.y)
+    }
+
+    /// Extract the center pixel color from a preview image
+    /// - Parameter image: The preview image to sample from
+    /// - Returns: The color at the center of the image (in sRGB colorspace)
+    static func sampleColor(from image: NSImage) -> NSColor? {
+        guard let tiffData = image.tiffRepresentation else { return nil }
+        guard let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
+
+        let centerX = bitmap.pixelsWide / 2
+        let centerY = bitmap.pixelsHigh / 2
+
+        guard let color = bitmap.colorAt(x: centerX, y: centerY) else { return nil }
+
+        // Convert to sRGB colorspace to ensure getRed:green:blue:alpha: works
+        // The captured image may be in a grayscale or other colorspace
+        return color.usingColorSpace(.sRGB) ?? color
+    }
+
+    // MARK: - Private Helpers
 
     /// Solid black image of the standard capture size
     private static func blackImage() -> NSImage {

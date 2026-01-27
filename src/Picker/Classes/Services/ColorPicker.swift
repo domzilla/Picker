@@ -44,7 +44,13 @@ final class ColorPicker: ObservableObject {
 
     private var globalMonitor: Any?
     private var localMonitor: Any?
-    private var captureTask: Task<Void, Never>?
+    private var cancellables = Set<AnyCancellable>()
+
+    /// Capture stream for continuous preview (used when UI is visible)
+    private let captureStream = CaptureStream()
+
+    /// Number of consumers currently showing the preview (menu, window)
+    private var previewConsumerCount = 0
 
     // MARK: - Initialization
 
@@ -55,6 +61,9 @@ final class ColorPicker: ObservableObject {
 
         // Set up mouse monitoring
         self.setupMouseMonitoring()
+
+        // Subscribe to stream frames
+        self.setupStreamSubscription()
     }
 
     // MARK: - Defaults
@@ -82,7 +91,34 @@ final class ColorPicker: ObservableObject {
     /// Stop tracking the mouse position
     func stopTracking() {
         self.isTracking = false
-        self.captureTask?.cancel()
+    }
+
+    /// Called when a preview consumer (menu or window) becomes visible
+    func previewDidBecomeVisible() {
+        self.previewConsumerCount += 1
+
+        // Start stream when first consumer appears
+        if self.previewConsumerCount == 1 {
+            Task {
+                do {
+                    try await self.captureStream.start()
+                } catch {
+                    DZErrorLog(error)
+                }
+            }
+        }
+    }
+
+    /// Called when a preview consumer (menu or window) is hidden
+    func previewDidBecomeHidden() {
+        self.previewConsumerCount = max(0, self.previewConsumerCount - 1)
+
+        // Stop stream when last consumer disappears
+        if self.previewConsumerCount == 0 {
+            Task {
+                await self.captureStream.stop()
+            }
+        }
     }
 
     /// Copy the current color to the pasteboard
@@ -103,32 +139,20 @@ final class ColorPicker: ObservableObject {
     /// Copy the current color to the pasteboard (async version)
     /// - Parameter saveToHistory: Whether to save the color to history
     private func copyColorToPasteboardAsync(saveToHistory: Bool) async {
-        let currentLocation = self.currentMouseScreenLocation()
+        let image: NSImage?
 
-        // Capture fresh image for accurate color
-        guard let image = await ScreenCapture.previewImage(at: currentLocation) else {
-            DZLog("Failed to capture image")
-            return
+        // Use stream frame if available, otherwise capture once (hotkey case)
+        if self.captureStream.isRunning, let streamFrame = self.captureStream.latestFrame {
+            image = streamFrame
+        } else {
+            let currentLocation = ScreenCapture.cocoaToQuartz(NSEvent.mouseLocation)
+            image = await ScreenCapture.captureOnce(at: currentLocation)
         }
 
-        let currentColor = self.sampleColor(from: image) ?? .black
+        guard let image else { return }
+
+        let currentColor = ScreenCapture.sampleColor(from: image) ?? .black
         self.copyColor(currentColor, toPasteboard: .general, saveToHistory: saveToHistory)
-    }
-
-    /// Extract the center pixel color from a preview image
-    /// - Parameter image: The preview image to sample from
-    /// - Returns: The color at the center of the image
-    func sampleColor(from image: NSImage) -> NSColor? {
-        guard
-            let tiffData = image.tiffRepresentation,
-            let bitmap = NSBitmapImageRep(data: tiffData) else
-        {
-            return nil
-        }
-
-        let centerX = bitmap.pixelsWide / 2
-        let centerY = bitmap.pixelsHigh / 2
-        return bitmap.colorAt(x: centerX, y: centerY)
     }
 
     /// Copy a specific color to the pasteboard
@@ -165,36 +189,28 @@ final class ColorPicker: ObservableObject {
     private func updateMouseLocation() {
         guard self.isTracking else { return }
 
-        self.mouseLocation = self.currentMouseScreenLocation()
+        let location = ScreenCapture.cocoaToQuartz(NSEvent.mouseLocation)
+        self.mouseLocation = location
 
-        // Cancel previous capture and start new one
-        self.captureTask?.cancel()
-        self.captureTask = Task {
-            await self.updatePreviewImage()
+        // Update stream capture rect if running
+        if self.captureStream.isRunning {
+            Task {
+                await self.captureStream.updateCaptureRect(for: location)
+            }
         }
     }
 
-    private func updatePreviewImage() async {
-        let location = self.mouseLocation
-
-        guard let image = await ScreenCapture.previewImage(at: location) else { return }
-        guard !Task.isCancelled else { return }
-
-        // Single capture used for both preview and color
-        self.previewImage = image
-        self.color = self.sampleColor(from: image) ?? .black
-        self.colorDidChange.send()
-    }
-
-    /// Get the current mouse position in Quartz screen coordinates (top-left origin)
-    private func currentMouseScreenLocation() -> NSPoint {
-        let cocoaLocation = NSEvent.mouseLocation
-
-        // ScreenCaptureKit uses Quartz coordinates where (0,0) is at the
-        // top-left of the main display. NSEvent.mouseLocation uses Cocoa coordinates
-        // where (0,0) is at the bottom-left of the main display.
-        // The conversion requires the main display height.
-        let mainDisplayHeight = CGDisplayBounds(CGMainDisplayID()).height
-        return NSPoint(x: cocoaLocation.x, y: mainDisplayHeight - cocoaLocation.y)
+    private func setupStreamSubscription() {
+        // Subscribe to stream frames and update preview/color
+        self.captureStream.$latestFrame
+            .compactMap(\.self)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] image in
+                guard let self else { return }
+                self.previewImage = image
+                self.color = ScreenCapture.sampleColor(from: image) ?? .black
+                self.colorDidChange.send()
+            }
+            .store(in: &self.cancellables)
     }
 }

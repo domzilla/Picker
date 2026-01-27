@@ -1,6 +1,7 @@
 import AppKit
 import Combine
 import CoreGraphics
+import DZFoundation
 import Sparkle
 
 @main
@@ -342,11 +343,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
 extension AppDelegate: NSMenuDelegate {
     func menuWillOpen(_: NSMenu) {
         self.pickerViewController.shouldUpdateView = true
+        ColorPicker.shared.previewDidBecomeVisible()
         self.unregisterGlobalHotkeys()
     }
 
     func menuDidClose(_: NSMenu) {
         self.pickerViewController.shouldUpdateView = false
+        ColorPicker.shared.previewDidBecomeHidden()
         self.registerGlobalHotkeys()
     }
 }
