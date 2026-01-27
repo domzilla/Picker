@@ -49,6 +49,13 @@ final class ScreenCapture: NSObject, ObservableObject {
     /// How often to refresh the display cache (seconds)
     private static let displayCacheRefreshInterval: TimeInterval = 5.0
 
+    /// Last location where we updated the stream configuration
+    private var lastConfigUpdateLocation: NSPoint = .zero
+
+    /// Minimum movement (in points) before updating stream configuration
+    /// This reduces TCC checks triggered by stream.updateConfiguration()
+    private static let minimumMovementForConfigUpdate: CGFloat = 2.0
+
     /// Padding info for edge captures (accessed from stream queue)
     private nonisolated(unsafe) var currentPaddingInfo: PaddingInfo?
 
@@ -77,6 +84,7 @@ final class ScreenCapture: NSObject, ObservableObject {
 
         self.currentDisplay = display
         self.currentCursorLocation = cursorLocation
+        self.lastConfigUpdateLocation = cursorLocation
 
         // Create stream with content filter for the display
         let filter = SCContentFilter(display: display, excludingWindows: [])
@@ -146,6 +154,14 @@ final class ScreenCapture: NSObject, ObservableObject {
         // Re-check running state before updating configuration
         guard self.isRunning, let display = self.currentDisplay else { return }
 
+        // Only update configuration if cursor moved enough (reduces TCC checks)
+        let dx = abs(location.x - self.lastConfigUpdateLocation.x)
+        let dy = abs(location.y - self.lastConfigUpdateLocation.y)
+        guard dx >= Self.minimumMovementForConfigUpdate || dy >= Self.minimumMovementForConfigUpdate else {
+            return
+        }
+
+        self.lastConfigUpdateLocation = location
         let config = self.createStreamConfiguration(for: location, display: display)
         do {
             try await stream.updateConfiguration(config)
