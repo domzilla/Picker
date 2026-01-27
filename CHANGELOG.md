@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump minimum deployment target to macOS 26.0
 - Refactor ScreenCapture utilities into NSPoint, NSImage, and NSScreen extensions
 - Reorganize color format menu with category headers and separators
+- Use notification-based display change detection instead of polling (eliminates periodic TCC checks)
 
 ### Removed
 - Remove deprecated Objective-C color formats (UIColor/NSColor Objective-C)
