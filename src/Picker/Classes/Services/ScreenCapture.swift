@@ -1,6 +1,7 @@
 import AppKit
 import Combine
 import DZFoundation
+import Metal
 import ScreenCaptureKit
 
 /// Manages screen capture for color picking with two modes:
@@ -23,6 +24,14 @@ final class ScreenCapture: NSObject, ObservableObject {
 
     /// Target frame rate for streaming
     private nonisolated static let targetFrameRate: Int = 60
+
+    /// Shared CIContext with Metal GPU acceleration for efficient frame processing
+    private nonisolated static let ciContext: CIContext = {
+        if let device = MTLCreateSystemDefaultDevice() {
+            return CIContext(mtlDevice: device)
+        }
+        return CIContext()
+    }()
 
     // MARK: - Private Properties
 
@@ -312,9 +321,8 @@ final class ScreenCapture: NSObject, ObservableObject {
         guard let imageBuffer = sampleBuffer.imageBuffer else { return nil }
 
         let ciImage = CIImage(cvImageBuffer: imageBuffer)
-        let context = CIContext()
 
-        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
+        guard let cgImage = Self.ciContext.createCGImage(ciImage, from: ciImage.extent) else {
             return nil
         }
 
