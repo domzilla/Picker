@@ -29,7 +29,7 @@ final class ScreenCapture: NSObject, ObservableObject {
     private var stream: SCStream?
     private var currentDisplay: SCDisplay?
     private var currentCursorLocation: NSPoint = .zero
-    private let streamQueue = DispatchQueue(label: "com.picker.screencapture", qos: .userInteractive)
+    private let streamQueue = DispatchQueue(label: "net.domzilla.picker.screencapture", qos: .userInteractive)
 
     /// Padding info for edge captures (accessed from stream queue)
     private nonisolated(unsafe) var currentPaddingInfo: PaddingInfo?
