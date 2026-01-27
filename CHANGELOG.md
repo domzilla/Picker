@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fix cursor sometimes being captured in color samples, causing incorrect color values
 - Fix color capture failing in global hotkey context
+- Fix preview image distortion when picking colors near screen edges
 
 ## [2.0.1] - 2026-01-26
 
