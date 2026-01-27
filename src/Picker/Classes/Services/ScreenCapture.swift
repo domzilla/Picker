@@ -40,6 +40,15 @@ final class ScreenCapture: NSObject, ObservableObject {
     private var currentCursorLocation: NSPoint = .zero
     private let streamQueue = DispatchQueue(label: "net.domzilla.picker.screencapture", qos: .userInteractive)
 
+    /// Cached display list to avoid repeated SCShareableContent calls (which trigger TCC checks)
+    private var cachedDisplays: [SCDisplay] = []
+
+    /// Last time we refreshed the display cache
+    private var lastDisplayCacheRefresh: CFAbsoluteTime = 0
+
+    /// How often to refresh the display cache (seconds)
+    private static let displayCacheRefreshInterval: TimeInterval = 5.0
+
     /// Padding info for edge captures (accessed from stream queue)
     private nonisolated(unsafe) var currentPaddingInfo: PaddingInfo?
 
@@ -56,15 +65,13 @@ final class ScreenCapture: NSObject, ObservableObject {
     func start() async throws {
         guard !self.isRunning else { return }
 
-        let content = try await SCShareableContent.excludingDesktopWindows(
-            false,
-            onScreenWindowsOnly: true
-        )
+        // Refresh display cache (this triggers TCC check, but only once at start)
+        try await self.refreshDisplayCache()
 
         // Find the display containing the cursor
         let cursorLocation = NSEvent.mouseLocation.quartzCoordinate
 
-        guard let display = self.display(containing: cursorLocation, from: content.displays) else {
+        guard let display = self.display(containing: cursorLocation, from: self.cachedDisplays) else {
             return
         }
 
@@ -110,27 +117,30 @@ final class ScreenCapture: NSObject, ObservableObject {
 
         self.currentCursorLocation = location
 
-        // Check if cursor moved to a different display
-        do {
-            let content = try await SCShareableContent.excludingDesktopWindows(
-                false,
-                onScreenWindowsOnly: true
-            )
-
-            // Re-check running state after async operation (stop() may have been called)
-            guard self.isRunning else { return }
-
-            if
-                let newDisplay = self.display(containing: location, from: content.displays),
-                newDisplay.displayID != self.currentDisplay?.displayID
-            {
-                // Cursor crossed to a new display - restart stream
-                await self.stop()
+        // Check if cursor moved to a different display using cached display list
+        // This avoids calling SCShareableContent repeatedly (which triggers TCC checks)
+        if
+            let newDisplay = self.display(containing: location, from: self.cachedDisplays),
+            newDisplay.displayID != self.currentDisplay?.displayID
+        {
+            // Cursor crossed to a new display - restart stream
+            await self.stop()
+            do {
                 try await self.start()
-                return
+            } catch {
+                DZErrorLog(error)
             }
-        } catch {
-            DZErrorLog(error)
+            return
+        }
+
+        // Periodically refresh display cache in case displays changed
+        let now = CFAbsoluteTimeGetCurrent()
+        if now - self.lastDisplayCacheRefresh > Self.displayCacheRefreshInterval {
+            do {
+                try await self.refreshDisplayCache()
+            } catch {
+                DZErrorLog(error)
+            }
         }
 
         // Re-check running state before updating configuration
@@ -231,6 +241,17 @@ final class ScreenCapture: NSObject, ObservableObject {
     }
 
     // MARK: - Private Helpers (Streaming)
+
+    /// Refresh the cached display list from SCShareableContent
+    /// This triggers a TCC check, so call sparingly (at start and periodically)
+    private func refreshDisplayCache() async throws {
+        let content = try await SCShareableContent.excludingDesktopWindows(
+            false,
+            onScreenWindowsOnly: true
+        )
+        self.cachedDisplays = content.displays
+        self.lastDisplayCacheRefresh = CFAbsoluteTimeGetCurrent()
+    }
 
     /// Create stream configuration for capturing around the given location
     private func createStreamConfiguration(for location: NSPoint, display: SCDisplay) -> SCStreamConfiguration {
