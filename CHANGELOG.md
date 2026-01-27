@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Migrate screen capture from CGWindowListCreateImage to ScreenCaptureKit
 - Implement dual-mode screen capture: SCStream for continuous preview (up to 60 FPS) and one-shot mode for hotkey color copy
 - Bump minimum deployment target to macOS 26.0
+- Refactor ScreenCapture utilities into NSPoint, NSImage, and NSScreen extensions
 
 ### Fixed
 - Fix cursor sometimes being captured in color samples, causing incorrect color values

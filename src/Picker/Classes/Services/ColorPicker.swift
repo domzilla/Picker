@@ -145,13 +145,13 @@ final class ColorPicker: ObservableObject {
         if self.screenCapture.isRunning, let streamFrame = self.screenCapture.latestFrame {
             image = streamFrame
         } else {
-            let currentLocation = ScreenCapture.cocoaToQuartz(NSEvent.mouseLocation)
+            let currentLocation = NSEvent.mouseLocation.quartzCoordinate
             image = await ScreenCapture.captureOnce(at: currentLocation)
         }
 
         guard let image else { return }
 
-        let currentColor = ScreenCapture.sampleColor(from: image) ?? .black
+        let currentColor = image.sampleColor() ?? .black
         self.copyColor(currentColor, toPasteboard: .general, saveToHistory: saveToHistory)
     }
 
@@ -189,7 +189,7 @@ final class ColorPicker: ObservableObject {
     private func updateMouseLocation() {
         guard self.isTracking else { return }
 
-        let location = ScreenCapture.cocoaToQuartz(NSEvent.mouseLocation)
+        let location = NSEvent.mouseLocation.quartzCoordinate
         self.mouseLocation = location
 
         // Update stream capture rect if running
@@ -208,7 +208,7 @@ final class ColorPicker: ObservableObject {
             .sink { [weak self] image in
                 guard let self else { return }
                 self.previewImage = image
-                self.color = ScreenCapture.sampleColor(from: image) ?? .black
+                self.color = image.sampleColor() ?? .black
                 self.colorDidChange.send()
             }
             .store(in: &self.cancellables)

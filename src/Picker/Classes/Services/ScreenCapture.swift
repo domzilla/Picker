@@ -53,7 +53,7 @@ final class ScreenCapture: NSObject, ObservableObject {
         )
 
         // Find the display containing the cursor
-        let cursorLocation = Self.cocoaToQuartz(NSEvent.mouseLocation)
+        let cursorLocation = NSEvent.mouseLocation.quartzCoordinate
 
         guard let display = self.display(containing: cursorLocation, from: content.displays) else {
             return
@@ -159,7 +159,7 @@ final class ScreenCapture: NSObject, ObservableObject {
 
         // If completely off-screen, return a black image
         guard !clampedRect.isEmpty else {
-            return self.blackImage()
+            return .blackImage(size: NSSize(width: self.captureSize, height: self.captureSize))
         }
 
         let config = SCScreenshotConfiguration()
@@ -192,7 +192,7 @@ final class ScreenCapture: NSObject, ObservableObject {
             }
 
             // Need to pad the image with black where it extends beyond screen
-            return self.paddedImage(
+            return .paddedImage(
                 cgImage: cgImage,
                 capturedRect: clampedRect,
                 requestedRect: requestedRect
@@ -203,31 +203,6 @@ final class ScreenCapture: NSObject, ObservableObject {
     }
 
     // MARK: - Shared Utilities
-
-    /// Convert Cocoa coordinates (bottom-left origin) to Quartz coordinates (top-left origin)
-    /// - Parameter cocoaPoint: Point in Cocoa coordinate system
-    /// - Returns: Point in Quartz coordinate system
-    nonisolated static func cocoaToQuartz(_ cocoaPoint: NSPoint) -> NSPoint {
-        let mainDisplayHeight = CGDisplayBounds(CGMainDisplayID()).height
-        return NSPoint(x: cocoaPoint.x, y: mainDisplayHeight - cocoaPoint.y)
-    }
-
-    /// Extract the center pixel color from a preview image
-    /// - Parameter image: The preview image to sample from
-    /// - Returns: The color at the center of the image (in sRGB colorspace)
-    nonisolated static func sampleColor(from image: NSImage) -> NSColor? {
-        guard let tiffData = image.tiffRepresentation else { return nil }
-        guard let bitmap = NSBitmapImageRep(data: tiffData) else { return nil }
-
-        let centerX = bitmap.pixelsWide / 2
-        let centerY = bitmap.pixelsHigh / 2
-
-        guard let color = bitmap.colorAt(x: centerX, y: centerY) else { return nil }
-
-        // Convert to sRGB colorspace to ensure getRed:green:blue:alpha: works
-        // The captured image may be in a grayscale or other colorspace
-        return color.usingColorSpace(.sRGB) ?? color
-    }
 
     /// Get the combined bounds of all connected screens in Quartz coordinates
     nonisolated static func combinedScreenBounds() -> CGRect {
@@ -286,7 +261,7 @@ final class ScreenCapture: NSObject, ObservableObject {
         let sourceRect = clampedRect.isEmpty ? requestedRect : clampedRect
 
         // Get display scale factor for proper resolution
-        let scaleFactor = self.backingScaleFactor(for: display.displayID)
+        let scaleFactor = NSScreen.backingScaleFactor(for: display.displayID)
 
         // Output size matches the clamped rect (will be padded later if needed)
         let outputWidth = Int(sourceRect.width * scaleFactor)
@@ -332,22 +307,6 @@ final class ScreenCapture: NSObject, ObservableObject {
         return displays.first { $0.displayID == CGMainDisplayID() } ?? displays.first
     }
 
-    /// Get the backing scale factor for a display
-    private func backingScaleFactor(for displayID: CGDirectDisplayID) -> CGFloat {
-        // Find matching NSScreen by display ID
-        for screen in NSScreen.screens {
-            if
-                let screenDisplayID = screen
-                    .deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
-                screenDisplayID == displayID
-            {
-                return screen.backingScaleFactor
-            }
-        }
-        // Default to 2x for Retina if no match found
-        return 2.0
-    }
-
     /// Convert a CMSampleBuffer to NSImage, applying padding if at screen edge
     private nonisolated func image(from sampleBuffer: CMSampleBuffer) -> NSImage? {
         guard let imageBuffer = sampleBuffer.imageBuffer else { return nil }
@@ -361,7 +320,7 @@ final class ScreenCapture: NSObject, ObservableObject {
 
         // Check if padding is needed (capture was at screen edge)
         if let paddingInfo = self.currentPaddingInfo {
-            return Self.paddedImage(
+            return .paddedImage(
                 cgImage: cgImage,
                 capturedRect: paddingInfo.clampedRect,
                 requestedRect: paddingInfo.requestedRect
@@ -372,68 +331,6 @@ final class ScreenCapture: NSObject, ObservableObject {
             cgImage: cgImage,
             size: NSSize(width: Self.captureSize, height: Self.captureSize)
         )
-    }
-
-    // MARK: - Private Helpers (One-Shot)
-
-    /// Solid black image of the standard capture size
-    private nonisolated static func blackImage() -> NSImage {
-        let size = NSSize(width: self.captureSize, height: self.captureSize)
-        let image = NSImage(size: size)
-        image.lockFocus()
-        NSColor.black.setFill()
-        NSRect(origin: .zero, size: size).fill()
-        image.unlockFocus()
-        return image
-    }
-
-    /// Padded image with black fill where capture extends beyond screen
-    /// - Parameters:
-    ///   - cgImage: The captured image (may be smaller than requested)
-    ///   - capturedRect: The actual rect that was captured (clamped to screen)
-    ///   - requestedRect: The original requested rect
-    /// - Returns: A padded image with the captured content properly positioned
-    private nonisolated static func paddedImage(
-        cgImage: CGImage,
-        capturedRect: CGRect,
-        requestedRect: CGRect
-    )
-        -> NSImage
-    {
-        let size = NSSize(width: self.captureSize, height: self.captureSize)
-        let image = NSImage(size: size)
-
-        image.lockFocus()
-
-        // Fill with black background
-        NSColor.black.setFill()
-        NSRect(origin: .zero, size: size).fill()
-
-        // Calculate where the captured image should be drawn within the final image.
-        // The offset is where the clamped rect starts relative to the requested rect.
-        let offsetX = capturedRect.origin.x - requestedRect.origin.x
-        let offsetY = capturedRect.origin.y - requestedRect.origin.y
-
-        // NSImage drawing uses flipped coordinates (origin at top-left for drawing)
-        // so we need to flip the Y offset
-        let drawRect = NSRect(
-            x: offsetX,
-            y: self.captureSize - offsetY - capturedRect.height,
-            width: capturedRect.width,
-            height: capturedRect.height
-        )
-
-        let capturedImage = NSImage(cgImage: cgImage, size: capturedRect.size)
-        capturedImage.draw(
-            in: drawRect,
-            from: .zero,
-            operation: .sourceOver,
-            fraction: 1.0
-        )
-
-        image.unlockFocus()
-
-        return image
     }
 }
 
