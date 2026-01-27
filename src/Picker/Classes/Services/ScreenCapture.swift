@@ -349,18 +349,33 @@ final class ScreenCapture: NSObject, ObservableObject {
         }
 
         // Need to pad with black for edge cases
-        // Convert back to logical coordinates for padding calculation
+        // Convert from CIImage coords (origin bottom-left) to Quartz coords (origin top-left)
+        // Quartz_Y = imageHeight - CIImage_Y - rect.height
+        let quartzCropRect = CGRect(
+            x: cropRect.origin.x,
+            y: imageHeight - cropRect.origin.y - cropRect.height,
+            width: cropRect.width,
+            height: cropRect.height
+        )
+        let quartzClampedRect = CGRect(
+            x: clampedRect.origin.x,
+            y: imageHeight - clampedRect.origin.y - clampedRect.height,
+            width: clampedRect.width,
+            height: clampedRect.height
+        )
+
+        // Convert to logical coordinates (divide by scale factor)
         let logicalCropRect = CGRect(
-            x: cropRect.origin.x / scaleFactor,
-            y: cropRect.origin.y / scaleFactor,
+            x: quartzCropRect.origin.x / scaleFactor,
+            y: quartzCropRect.origin.y / scaleFactor,
             width: captureSize,
             height: captureSize
         )
         let logicalClampedRect = CGRect(
-            x: clampedRect.origin.x / scaleFactor,
-            y: clampedRect.origin.y / scaleFactor,
-            width: clampedRect.width / scaleFactor,
-            height: clampedRect.height / scaleFactor
+            x: quartzClampedRect.origin.x / scaleFactor,
+            y: quartzClampedRect.origin.y / scaleFactor,
+            width: quartzClampedRect.width / scaleFactor,
+            height: quartzClampedRect.height / scaleFactor
         )
 
         return .paddedImage(
