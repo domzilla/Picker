@@ -1,80 +1,85 @@
 {
-  "fill-specializations" : [
+  "fill" : {
+    "automatic-gradient" : "extended-srgb:0.00000,0.53333,1.00000,1.00000"
+  },
+  "groups" : [
     {
-      "value" : {
-        "linear-gradient" : [
-          "display-p3:1.00000,1.00000,1.00000,1.00000",
-          "display-p3:0.09108,0.38933,0.79935,1.00000"
-        ],
-        "orientation" : {
-          "start" : {
-            "x" : 0.5,
-            "y" : 0
-          },
-          "stop" : {
-            "x" : 0.5,
-            "y" : 0.7
-          }
+      "blend-mode-specializations" : [
+        {
+          "value" : "overlay"
+        },
+        {
+          "appearance" : "tinted",
+          "value" : "plus-darker"
         }
+      ],
+      "blur-material" : null,
+      "layers" : [
+        {
+          "glass" : true,
+          "image-name" : "drop.png",
+          "name" : "drop"
+        }
+      ],
+      "lighting" : "individual",
+      "opacity" : 0.15,
+      "shadow" : {
+        "kind" : "none",
+        "opacity" : 0.7
+      },
+      "specular" : true,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
       }
     },
     {
-      "appearance" : "dark",
-      "value" : {
-        "solid" : "display-p3:0.08326,0.19396,0.36343,1.00000"
+      "blend-mode-specializations" : [
+        {
+          "value" : "normal"
+        },
+        {
+          "appearance" : "tinted",
+          "value" : "plus-darker"
+        }
+      ],
+      "blur-material" : 0.5,
+      "layers" : [
+        {
+          "glass" : true,
+          "image-name" : "drop.png",
+          "name" : "drop"
+        }
+      ],
+      "lighting" : "individual",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.7
+      },
+      "specular" : false,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
       }
-    }
-  ],
-  "groups" : [
+    },
     {
       "layers" : [
         {
-          "blend-mode" : "normal",
-          "glass" : true,
-          "image-name" : "Icon_Lens.png",
-          "name" : "Icon_Lens"
-        },
-        {
-          "blend-mode" : "normal",
-          "fill" : "none",
-          "glass" : true,
-          "image-name" : "Icon_Lens_Content.png",
-          "name" : "Icon_Lens_Content"
-        },
-        {
-          "blend-mode-specializations" : [
-            {
-              "value" : "normal"
-            },
-            {
-              "appearance" : "dark",
-              "value" : "normal"
-            }
-          ],
-          "fill-specializations" : [
-            {
-              "appearance" : "dark",
-              "value" : "none"
-            }
-          ],
           "glass-specializations" : [
             {
-              "value" : true
+              "value" : false
             },
             {
               "appearance" : "dark",
               "value" : true
+            },
+            {
+              "appearance" : "tinted",
+              "value" : true
             }
           ],
-          "hidden" : false,
-          "image-name" : "Icon_Background.png",
-          "name" : "Icon_Background",
-          "opacity-specializations" : [
-            {
-              "appearance" : "dark",
-              "value" : 1
-            }
-          ]
+          "image-name" : "background.png",
+          "name" : "background"
         }
       ],
       "shadow" : {
