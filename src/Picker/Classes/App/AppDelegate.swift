@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
     private var selectedFormatMenuItem: NSMenuItem!
     private var pinToScreenItem: NSMenuItem!
     private var pickerPreferencesItem: NSMenuItem!
+    private var aboutMenuItem: NSMenuItem!
     private var checkForUpdatesItem: NSMenuItem!
     private var quitMenuItem: NSMenuItem!
 
@@ -157,6 +158,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
 
         self.pickerMenu.addItem(.separator())
 
+        // About
+        self.aboutMenuItem = NSMenuItem(
+            title: NSLocalizedString("About Picker", comment: "About menu item"),
+            action: #selector(self.aboutMenuItemAction(_:)),
+            keyEquivalent: ""
+        )
+        self.aboutMenuItem.target = self
+        self.pickerMenu.addItem(self.aboutMenuItem)
+
         // Preferences
         self.pickerPreferencesItem = NSMenuItem(
             title: NSLocalizedString("Preferences...", comment: "Preferences menu item"),
@@ -230,6 +240,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
         self.selectedFormatMenuItem?.state = .on
 
         ColorPicker.shared.colorFormat = format
+    }
+
+    @objc
+    private func aboutMenuItemAction(_: Any) {
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.orderFrontStandardAboutPanel(nil)
     }
 
     @objc
