@@ -25,7 +25,7 @@ post_publish_commands:
 - nova --wait ~/Sites/Online/picker-app.net/www/website/config/apps.config.php
 - git -C ~/Sites/Online/picker-app.net add www/website/config/apps.config.php && git -C ~/Sites/Online/picker-app.net commit -m "Release {{version}}"
 - git -C ~/Sites/Online/picker-app.net push origin
-- transmit www.picket-app.net
+- transmit www.picker-app.net
 - gh release create v{{version}} sparkle/release/{{zip_name}} --title "{{app_name}} {{version}}" --notes-file sparkle/release/{{app_name}}_{{version}}.html -R domzilla/Picker
 - echo "Release {{version}} complete"
 sparkle:
