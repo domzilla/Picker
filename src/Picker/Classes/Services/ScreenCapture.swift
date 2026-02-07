@@ -117,16 +117,19 @@ final class ScreenCapture: NSObject, ObservableObject {
     func stop() async {
         guard self.isRunning, let stream = self.stream else { return }
 
+        // Clear state synchronously before the async stopCapture() call.
+        // This prevents a race where a subsequent start() sees isRunning == true
+        // during the stopCapture() suspension and bails out early.
+        self.stream = nil
+        self.currentDisplay = nil
+        self.isRunning = false
+        self.latestFrame = nil
+
         do {
             try await stream.stopCapture()
         } catch {
             DZErrorLog(error)
         }
-
-        self.stream = nil
-        self.currentDisplay = nil
-        self.isRunning = false
-        self.latestFrame = nil
 
         DZLog("Capture stream stopped")
     }

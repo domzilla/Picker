@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix screen capture preview not updating when floating window is shown (race condition between async stream stop/start)
+
 ### Added
 - "About Picker" menu item that opens the standard macOS About panel
 - Localization support for 12 languages: English, German, French, Spanish, Italian, Dutch, Japanese, Korean, Portuguese, Brazilian Portuguese, Russian, and Simplified Chinese
