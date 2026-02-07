@@ -62,4 +62,4 @@ Requires Xcode 16 or later with Swift 6.
 
 ## License
 
-Copyright © 2019–2026 Dominic Rodemer. All rights reserved.
+This project is licensed under the [MIT License](LICENSE).
