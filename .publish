@@ -1,0 +1,38 @@
+---
+version_source: plist
+tag_prefix: v
+release_branch: master
+git_remotes:
+- github.com
+- origin
+publishers:
+- sparkle
+post_publish_template: |
+  array(
+      APP_NAME => "Picker",
+      APP_TITLE => _("Picker"),
+      APP_DESCRIPTION => _("Pick any color. Copy any format."),
+      APP_VERSION => "{{version}}",
+      APP_SIZE => "{{size}}",
+      APP_ICON => "/images/logo-2x.png",
+      APP_URL => "{{url}}",
+      DOWNLOAD_URL => "/download",
+      APP_LINK_TARGET => "_blank",
+      APP_OS => $__OS_macOS,
+      APP_HIDDEN => false
+  )
+post_publish_commands:
+- nova --wait ~/Sites/Online/picker-app.net/www/website/config/apps.config.php
+- git -C ~/Sites/Online/picker-app.net add www/website/config/apps.config.php && git -C ~/Sites/Online/picker-app.net commit -m "Release {{version}}"
+- git -C ~/Sites/Online/picker-app.net push origin
+- transmit www.picket-app.net
+- gh release create v{{version}} sparkle/release/{{zip_name}} --title "{{app_name}} {{version}}" --notes-file sparkle/release/{{app_name}}_{{version}}.html -R domzilla/Picker
+- echo "Release {{version}} complete"
+sparkle:
+  app_name: Picker
+  s3_bucket: dr-picker-mac
+  aws_region: eu-central-1
+  release_dir: sparkle/release
+  generate_appcast: ~/bin/sparkle/generate_appcast
+  signing_account: ed25519
+  editor: nova --wait
