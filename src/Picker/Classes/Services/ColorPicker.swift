@@ -225,6 +225,18 @@ final class ColorPicker: ObservableObject {
         }
     }
 
+    /// Nudge the cursor position by the given delta (in Quartz coordinates)
+    func nudgeCursor(dx: CGFloat, dy: CGFloat) {
+        guard self.isTracking else { return }
+
+        var position = self.mouseLocation
+        position.x += dx
+        position.y += dy
+
+        CGWarpMouseCursorPosition(position)
+        self.updateMouseLocation()
+    }
+
     private func updateMouseLocation() {
         guard self.isTracking else { return }
 

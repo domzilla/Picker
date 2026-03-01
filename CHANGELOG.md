@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Arrow key support for pixel-precise cursor nudging in the floating preview window
+
+## [2.2.2] - 2026-02-07
+
 ### Fixed
 - Fix screen capture preview not updating when floating window is shown (race condition between async stream stop/start)
 - Fix accumulating lag caused by orphaned SCStream objects: serialize stream lifecycle Tasks in ColorPicker, make start() stop any existing stream first, and guard updateCursorLocation against stale mouse-move Tasks
