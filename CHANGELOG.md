@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-03-01
+
 ### Fixed
 - Fix color sampling and crosshair targeting the gap between pixels instead of a true center pixel (changed capture size from 28 to 27)
 
