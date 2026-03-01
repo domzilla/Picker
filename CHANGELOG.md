@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix color sampling and crosshair targeting the gap between pixels instead of a true center pixel (changed capture size from 28 to 27)
+
 ### Added
 - Arrow key support for pixel-precise cursor nudging in the floating preview window
 

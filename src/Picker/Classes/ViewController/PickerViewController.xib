@@ -147,7 +147,7 @@
                     </textFieldCell>
                 </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SgV-CJ-bZt" customClass="PickerPreviewView">
-                    <rect key="frame" x="20" y="37" width="181" height="181"/>
+                    <rect key="frame" x="16" y="37" width="189" height="189"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </customView>
                 <button focusRingType="none" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHm-Z0-oEx" customClass="ColorButton">

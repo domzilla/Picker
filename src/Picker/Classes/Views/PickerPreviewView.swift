@@ -20,44 +20,26 @@ class PickerPreviewView: NSView {
         // Draw the preview image
         image.draw(in: self.bounds, from: .zero, operation: .sourceOver, fraction: 1.0)
 
-        // Draw crosshairs
-        let path = NSBezierPath()
+        // Draw crosshairs at the center pixel
+        let crosshairPath = NSBezierPath()
         NSColor.black.set()
 
-        let centerAdjust: CGFloat = 3.5
-        let pickerRectX = self.bounds.origin.x + centerAdjust
-        let pickerRectY = self.bounds.origin.y - centerAdjust
+        let centerX = self.bounds.midX
+        let centerY = self.bounds.midY
 
         // Horizontal line
-        path.move(to: NSPoint(
-            x: pickerRectX - centerAdjust,
-            y: pickerRectY + self.bounds.width / 2
-        ))
-        path.line(to: NSPoint(
-            x: pickerRectX + self.bounds.width - centerAdjust,
-            y: pickerRectY + self.bounds.height / 2
-        ))
+        crosshairPath.move(to: NSPoint(x: self.bounds.minX, y: centerY))
+        crosshairPath.line(to: NSPoint(x: self.bounds.maxX, y: centerY))
 
         // Vertical line
-        path.move(to: NSPoint(
-            x: pickerRectX + self.bounds.width / 2,
-            y: pickerRectY + self.bounds.height + centerAdjust
-        ))
-        path.line(to: NSPoint(
-            x: pickerRectX + self.bounds.width / 2,
-            y: pickerRectY + centerAdjust
-        ))
+        crosshairPath.move(to: NSPoint(x: centerX, y: self.bounds.minY))
+        crosshairPath.line(to: NSPoint(x: centerX, y: self.bounds.maxY))
 
-        path.stroke()
+        crosshairPath.stroke()
 
         // Draw border
-        path.move(to: self.bounds.origin)
-        path.line(to: NSPoint(x: self.bounds.origin.x, y: self.bounds.maxY))
-        path.line(to: NSPoint(x: self.bounds.maxX, y: self.bounds.maxY))
-        path.line(to: NSPoint(x: self.bounds.maxX, y: self.bounds.origin.y))
-        path.close()
-
+        let borderPath = NSBezierPath(rect: self.bounds)
         NSColor.lightGray.set()
-        path.stroke()
+        borderPath.stroke()
     }
 }

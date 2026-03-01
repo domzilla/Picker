@@ -19,8 +19,8 @@ final class ScreenCapture: NSObject, ObservableObject {
 
     // MARK: - Constants
 
-    /// Size of the preview capture area
-    nonisolated static let captureSize: CGFloat = 28
+    /// Size of the preview capture area (must be odd for a true center pixel)
+    nonisolated static let captureSize: CGFloat = 27
 
     /// Target frame rate for streaming
     private nonisolated static let targetFrameRate: Int = 60
@@ -329,7 +329,7 @@ final class ScreenCapture: NSObject, ObservableObject {
         return displays.first { $0.displayID == CGMainDisplayID() } ?? displays.first
     }
 
-    /// Extract the 28×28 area around the cursor from a full-screen frame
+    /// Extract the area around the cursor from a full-screen frame
     private nonisolated func extractPreviewImage(from sampleBuffer: CMSampleBuffer) -> NSImage? {
         guard let imageBuffer = sampleBuffer.imageBuffer else { return nil }
 
