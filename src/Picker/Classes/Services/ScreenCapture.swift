@@ -69,7 +69,11 @@ final class ScreenCapture: NSObject, ObservableObject {
 
     /// Start the capture stream on the display containing the cursor
     func start() async throws {
-        guard !self.isRunning else { return }
+        // Stop any existing stream first to prevent orphaned SCStream objects.
+        // This handles races where multiple start() calls overlap due to async Task scheduling.
+        if self.isRunning {
+            await self.stop()
+        }
 
         // Refresh display cache (this triggers TCC check, but only once at start)
         try await self.refreshDisplayCache()
@@ -137,6 +141,12 @@ final class ScreenCapture: NSObject, ObservableObject {
     /// Update cursor location for frame cropping (no TCC check - just geometry!)
     /// - Parameter location: New cursor location in Quartz coordinates (top-left origin)
     func updateCursorLocation(_ location: NSPoint) async {
+        // Bail out if stream was stopped while this Task was pending.
+        // Without this guard, pending mouse-move Tasks from before stop() would all
+        // trigger restarts because stop() clears currentDisplay to nil, making the
+        // display comparison below always true.
+        guard self.isRunning else { return }
+
         // Check if cursor moved to a different display using cached display list
         if
             let newDisplay = self.display(containing: location, from: self.cachedDisplays),

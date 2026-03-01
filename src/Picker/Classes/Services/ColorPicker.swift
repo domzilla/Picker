@@ -67,6 +67,9 @@ final class ColorPicker: ObservableObject {
     /// Number of consumers currently showing the preview (menu, window)
     private var previewConsumerCount = 0
 
+    /// Serialized stream lifecycle task to prevent overlapping start/stop operations
+    private var streamTask: Task<Void, Never>?
+
     /// Last color that was copied to the clipboard
     private var lastCopiedColor: NSColor?
 
@@ -120,7 +123,9 @@ final class ColorPicker: ObservableObject {
 
         // Start stream when first consumer appears
         if self.previewConsumerCount == 1 {
-            Task {
+            let previousTask = self.streamTask
+            self.streamTask = Task {
+                await previousTask?.value
                 do {
                     try await self.screenCapture.start()
                 } catch {
@@ -136,7 +141,9 @@ final class ColorPicker: ObservableObject {
 
         // Stop stream when last consumer disappears
         if self.previewConsumerCount == 0 {
-            Task {
+            let previousTask = self.streamTask
+            self.streamTask = Task {
+                await previousTask?.value
                 await self.screenCapture.stop()
             }
         }

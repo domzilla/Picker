@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix screen capture preview not updating when floating window is shown (race condition between async stream stop/start)
+- Fix accumulating lag caused by orphaned SCStream objects: serialize stream lifecycle Tasks in ColorPicker, make start() stop any existing stream first, and guard updateCursorLocation against stale mouse-move Tasks
 
 ### Added
 - "About Picker" menu item that opens the standard macOS About panel
