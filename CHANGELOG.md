@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix "Check for Updates" failing: set `INFOPLIST_FILE` build setting so Sparkle's `SUFeedURL` and public key are included in the built app
+- Fix "Check for Updates" network error: add outgoing network entitlement (`com.apple.security.network.client`) required by App Sandbox
+
 ## [2.3.0] - 2026-03-01
 
 ### Fixed
