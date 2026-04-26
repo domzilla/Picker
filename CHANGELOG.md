@@ -8,130 +8,89 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
-- Fix "Check for Updates" failing: set `INFOPLIST_FILE` build setting so Sparkle's `SUFeedURL` and public key are included in the built app
-- Fix "Check for Updates" network error: add outgoing network entitlement (`com.apple.security.network.client`) required by App Sandbox
+- "Check for Updates" no longer fails: Sparkle's feed URL and public key are now bundled correctly, and the required outgoing network entitlement is in place.
 
 ## [2.3.0] - 2026-03-01
 
-### Fixed
-- Fix color sampling and crosshair targeting the gap between pixels instead of a true center pixel (changed capture size from 28 to 27)
-
 ### Added
-- Arrow key support for pixel-precise cursor nudging in the floating preview window
+- Arrow keys now nudge the cursor pixel by pixel inside the floating preview window.
+
+### Fixed
+- Color sampling and the crosshair now target a true center pixel instead of the gap between pixels.
 
 ## [2.2.2] - 2026-02-07
 
-### Fixed
-- Fix screen capture preview not updating when floating window is shown (race condition between async stream stop/start)
-- Fix accumulating lag caused by orphaned SCStream objects: serialize stream lifecycle Tasks in ColorPicker, make start() stop any existing stream first, and guard updateCursorLocation against stale mouse-move Tasks
-
 ### Added
-- "About Picker" menu item that opens the standard macOS About panel
-- Localization support for 12 languages: English, German, French, Spanish, Italian, Dutch, Japanese, Korean, Portuguese, Brazilian Portuguese, Russian, and Simplified Chinese
-- Auto-update clipboard when changing color format (within 30 seconds of last copy)
-- Add 27 new color formats organized by category:
-  - Web/CSS: RGBA, HSL, HSLA, HWB, Color Level 4, CSS Variable
-  - Apple: SwiftUI Color, SwiftUI Hex, CGColor, CIColor
-  - Cross-Platform: Flutter, Flutter RGBO, Android Kotlin, Android XML, Unity C#, Godot GDScript
-  - JavaScript: JS Object, JS Array, Tailwind CSS
-  - Design: Float (0-1), Integer (0-255)
-  - Other: Java AWT, Qt/QML, GLSL vec4, Hex Integer
+- "About Picker" menu item that opens the standard macOS About panel.
+- Localization for 12 languages: English, German, French, Spanish, Italian, Dutch, Japanese, Korean, Portuguese, Brazilian Portuguese, Russian, and Simplified Chinese.
+- Auto-update of the clipboard when changing color format within 30 seconds of the last copy.
+- 27 new color formats organized by category (Web/CSS, Apple, Cross-Platform, JavaScript, Design, Other), including SwiftUI Color, CGColor, Flutter, Android XML, Unity C#, Tailwind CSS, GLSL vec4, and more.
 
 ### Changed
-- Migrate screen capture from CGWindowListCreateImage to ScreenCaptureKit
-- Implement dual-mode screen capture: SCStream for continuous preview (up to 60 FPS) and one-shot mode for hotkey color copy
-- Bump minimum deployment target to macOS 26.0
-- Refactor ScreenCapture utilities into NSPoint, NSImage, and NSScreen extensions
-- Reorganize color format menu with category headers and separators
-- Use notification-based display change detection instead of polling (eliminates periodic TCC checks)
+- Migrated screen capture from `CGWindowListCreateImage` to ScreenCaptureKit, with a continuous preview at up to 60 FPS and a one-shot mode for hotkey color copy.
+- Reorganized the color format menu with category headers and separators.
+- Bumped the minimum deployment target to macOS 26.0.
 
 ### Removed
-- Remove deprecated Objective-C color formats (UIColor/NSColor Objective-C)
+- Removed the deprecated Objective-C color formats (`UIColor`/`NSColor` Objective-C).
 
 ### Fixed
-- Fix cursor sometimes being captured in color samples, causing incorrect color values
-- Fix color capture failing in global hotkey context
-- Fix preview image distortion when picking colors near screen edges
-- Fix preview lag caused by per-frame session setup/teardown overhead
-- Fix laggy preview rendering in release builds by using cached Metal-backed CIContext
-- Fix laggy preview in notarized builds by capturing full screen and cropping in software (eliminates TCC checks on mouse move)
+- The cursor is no longer captured in color samples, so colors are accurate.
+- Color capture now works reliably from the global hotkey context.
+- Preview no longer distorts when picking colors near screen edges.
+- Preview is no longer laggy in release or notarized builds.
 
 ## [2.0.1] - 2026-01-26
 
 ### Added
-- Sparkle integration for automatic updates with "Check for Updates..." menu item
-
-### Fixed
-- Fix global hotkey color copy returning wrong color (#0d0d0e) due to incorrect coordinate conversion
+- "Check for Updates..." menu item powered by Sparkle.
 
 ### Changed
-- Set app category to utilities
+- App category set to Utilities.
+
+### Fixed
+- Global hotkey color copy no longer returns the wrong color (#0d0d0e) due to a coordinate conversion bug.
 
 ## [2.0.0] - 2026-01-14
 
-### Changed
-- Complete migration from Objective-C to Swift 6
-- Updated project settings for modern Swift development
-- Added DZFoundation dependency for logging
-- Updated SwiftFormat configuration
-
 ### Added
-- Screen capture permission request on app launch
-- Queuestack integration for task tracking
+- Screen capture permission request on app launch.
 
-### Removed
-- Removed obsolete files from legacy codebase
+### Changed
+- Complete migration from Objective-C to Swift 6.
 
 ## [1.1.0] - 2025-11-16
 
-### Fixed
-- Fixed thread safety issue in color picker
-- Draw preview color within bounds
-- Draw preview image within bounds
-
 ### Changed
-- Updated app icon
-- Updated nib files
-- Code formatting improvements
-- Refactoring for improved maintainability
+- Updated app icon.
 
 ### Removed
-- Removed timer (no longer needed)
-- Removed BGDataBinding dependency
+- Removed the BGDataBinding dependency.
+
+### Fixed
+- Fixed a thread-safety issue in the color picker.
+- Preview color and image now draw within their bounds.
 
 ## [1.0.1] - 2019-10-26
 
 ### Changed
-- Changed default color picker shortcut
-- Disabled General preferences tab (not needed)
+- Changed the default color picker shortcut.
+
+### Removed
+- Removed the unused General preferences tab.
 
 ## [1.0.0] - 2019-07-17
 
 ### Added
-- Preferences window with customizable settings
-- Color history (tracks last 6 picked colors)
-- Global hotkey support (works when app is not focused)
-- Copy to pasteboard functionality
-- Floating preview window at menu position
-- Multiple color format support:
-  - HEX (#RRGGBB)
-  - HEX without hash (RRGGBB)
-  - RGB (rgb(r, g, b))
-  - HSB (hsb(h, s, b))
-  - CMYK (cmyk(c, m, y, k))
-  - UIColor Objective-C
-  - UIColor Swift
-  - NSColor Objective-C
-  - NSColor Swift
-- Menu bar integration with NSMenuItem
-- App icon
-- Handle global hotkey when menu is visible
-
-### Changed
-- App activation policy for menu bar behavior
+- Initial release of Picker, a menu bar color picker.
+- Preferences window with customizable settings.
+- Color history of the last 6 picked colors.
+- Global hotkey support that works even when the app isn't focused.
+- Copy to pasteboard.
+- Floating preview window at the menu position.
+- Color formats: HEX, HEX without hash, RGB, HSB, CMYK, UIColor (Obj-C and Swift), and NSColor (Obj-C and Swift).
 
 ## [0.1.0] - 2019-07-06
 
 ### Added
-- Initial commit with basic color picker functionality
-
+- Initial commit with basic color picker functionality.
