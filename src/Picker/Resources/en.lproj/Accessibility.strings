@@ -1,0 +1,41 @@
+/* Accessibility value for a color swatch: RGB components followed by the hex code */
+"%1$@, hex %2$@" = "%1$@, HEX %2$@";
+
+/* Accessibility label for the color format selector */
+"Color format" = "Color format";
+
+/* Accessibility label for the menu bar status item */
+"Color picker" = "Color picker";
+
+/* Accessibility label for the copy color shortcut recorder */
+"Copy color shortcut" = "Copy color shortcut";
+
+/* Accessibility label for the magnified screen preview */
+"Magnified preview" = "Magnified preview";
+
+/* Accessibility value for a shortcut recorder with no shortcut recorded */
+"None" = "None";
+
+/* Accessibility label for the swatch showing the picked color */
+"Picked color" = "Picked color";
+
+/* Accessibility label for the pin to screen shortcut recorder */
+"Pin to screen shortcut" = "Pin to screen shortcut";
+
+/* Accessibility label for the first recently picked color */
+"Recent color 1" = "Recent color 1";
+
+/* Accessibility label for the second recently picked color */
+"Recent color 2" = "Recent color 2";
+
+/* Accessibility label for the third recently picked color */
+"Recent color 3" = "Recent color 3";
+
+/* Accessibility label for the fourth recently picked color */
+"Recent color 4" = "Recent color 4";
+
+/* Accessibility label for the fifth recently picked color */
+"Recent color 5" = "Recent color 5";
+
+/* Accessibility label for the sixth recently picked color */
+"Recent color 6" = "Recent color 6";

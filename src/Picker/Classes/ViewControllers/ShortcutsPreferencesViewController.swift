@@ -42,12 +42,26 @@ class ShortcutsPreferencesViewController: NSViewController {
         super.viewDidLoad()
 
         // Set up color copy shortcut view
+        self.colorCopyShortcutView?.setAccessibilityLabel(NSLocalizedString(
+            "Copy color shortcut",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the copy color shortcut recorder"
+        ))
+        self.colorCopyShortcutView?
+            .setAccessibilityIdentifier("ShortcutsPreferencesViewController.colorCopyShortcutView")
         self.colorCopyShortcutView?.shortcutValue = Preferences.shared.colorCopyShortcut
         self.colorCopyShortcutView?.shortcutValueChange = { view in
             Preferences.shared.colorCopyShortcut = view.shortcutValue
         }
 
         // Set up pin to screen shortcut view
+        self.pinToScreenShortcutView?.setAccessibilityLabel(NSLocalizedString(
+            "Pin to screen shortcut",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the pin to screen shortcut recorder"
+        ))
+        self.pinToScreenShortcutView?
+            .setAccessibilityIdentifier("ShortcutsPreferencesViewController.pinToScreenShortcutView")
         self.pinToScreenShortcutView?.shortcutValue = Preferences.shared.pinToScreenShortcut
         self.pinToScreenShortcutView?.shortcutValueChange = { view in
             Preferences.shared.pinToScreenShortcut = view.shortcutValue

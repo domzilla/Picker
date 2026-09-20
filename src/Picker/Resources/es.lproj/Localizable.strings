@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "Escribe un atajo";
 "Record Shortcut" = "Grabar atajo";
-"keyboard shortcut" = "atajo de teclado";
-"Empty keyboard shortcut" = "Sin atajo de teclado";
 
 /* Picker View */
 "Press %@ to copy color" = "Pulsa %@ para copiar el color";

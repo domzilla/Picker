@@ -7,7 +7,30 @@ class ColorView: NSView {
     @objc var color: NSColor = .white {
         didSet {
             self.needsDisplay = true
+            self.updateAccessibilityValue()
         }
+    }
+
+    // MARK: - Lifecycle
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        self.updateAccessibilityValue()
+    }
+
+    // MARK: - Private Helpers
+
+    private func updateAccessibilityValue() {
+        self.setAccessibilityValue(String(
+            format: NSLocalizedString(
+                "%1$@, hex %2$@",
+                tableName: "Accessibility",
+                comment: "Accessibility value for a color swatch: RGB components followed by the hex code"
+            ),
+            self.color.rgbRepresentation,
+            self.color.hexRepresentation
+        ))
     }
 
     // MARK: - Drawing

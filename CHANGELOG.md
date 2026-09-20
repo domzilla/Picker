@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- VoiceOver support: the menu bar item, the magnified preview, the color format selector and the shortcut recorders in Preferences now announce themselves, and color swatches read out their RGB and HEX values instead of relying on sight.
+
 ### Fixed
 - "Check for Updates" no longer fails: Sparkle's feed URL and public key are now bundled correctly, and the required outgoing network entitlement is in place.
 

@@ -332,11 +332,15 @@ class ShortcutRecorderView: NSControl {
         true
     }
 
-    override func accessibilityLabel() -> String? {
+    override func accessibilityValue() -> Any? {
         if let shortcut = self.shortcutValue {
-            return shortcut.displayString + " " + NSLocalizedString("keyboard shortcut", comment: "")
+            return shortcut.displayString
         }
-        return NSLocalizedString("Empty keyboard shortcut", comment: "")
+        return NSLocalizedString(
+            "None",
+            tableName: "Accessibility",
+            comment: "Accessibility value for a shortcut recorder with no shortcut recorded"
+        )
     }
 
     override func accessibilityRole() -> NSAccessibility.Role? {

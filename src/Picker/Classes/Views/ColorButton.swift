@@ -7,10 +7,30 @@ class ColorButton: NSButton {
     @objc var color: NSColor? {
         didSet {
             self.updateImage()
+            self.updateAccessibilityValue()
         }
     }
 
     // MARK: - Private Helpers
+
+    private func updateAccessibilityValue() {
+        guard let color = self.color else {
+            self.setAccessibilityElement(false)
+            self.setAccessibilityValue(nil)
+            return
+        }
+
+        self.setAccessibilityElement(true)
+        self.setAccessibilityValue(String(
+            format: NSLocalizedString(
+                "%1$@, hex %2$@",
+                tableName: "Accessibility",
+                comment: "Accessibility value for a color swatch: RGB components followed by the hex code"
+            ),
+            color.rgbRepresentation,
+            color.hexRepresentation
+        ))
+    }
 
     private func updateImage() {
         guard let color = self.color else {

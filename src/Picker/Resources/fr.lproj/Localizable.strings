@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "Saisir un raccourci";
 "Record Shortcut" = "Enregistrer un raccourci";
-"keyboard shortcut" = "raccourci clavier";
-"Empty keyboard shortcut" = "Aucun raccourci clavier";
 
 /* Picker View */
 "Press %@ to copy color" = "Appuie sur %@ pour copier la couleur";

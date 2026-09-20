@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "Введи сочетание";
 "Record Shortcut" = "Записать сочетание";
-"keyboard shortcut" = "сочетание клавиш";
-"Empty keyboard shortcut" = "Сочетание клавиш не задано";
 
 /* Picker View */
 "Press %@ to copy color" = "Нажми %@, чтобы скопировать цвет";

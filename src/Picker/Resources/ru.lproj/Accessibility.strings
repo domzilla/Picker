@@ -1,0 +1,41 @@
+/* Accessibility value for a color swatch: RGB components followed by the hex code */
+"%1$@, hex %2$@" = "%1$@, HEX %2$@";
+
+/* Accessibility label for the color format selector */
+"Color format" = "Формат цвета";
+
+/* Accessibility label for the menu bar status item */
+"Color picker" = "Выбор цвета";
+
+/* Accessibility label for the copy color shortcut recorder */
+"Copy color shortcut" = "Сочетание клавиш для копирования цвета";
+
+/* Accessibility label for the magnified screen preview */
+"Magnified preview" = "Увеличенный предпросмотр";
+
+/* Accessibility value for a shortcut recorder with no shortcut recorded */
+"None" = "Не задано";
+
+/* Accessibility label for the swatch showing the picked color */
+"Picked color" = "Выбранный цвет";
+
+/* Accessibility label for the pin to screen shortcut recorder */
+"Pin to screen shortcut" = "Сочетание клавиш для закрепления на экране";
+
+/* Accessibility label for the first recently picked color */
+"Recent color 1" = "Недавний цвет 1";
+
+/* Accessibility label for the second recently picked color */
+"Recent color 2" = "Недавний цвет 2";
+
+/* Accessibility label for the third recently picked color */
+"Recent color 3" = "Недавний цвет 3";
+
+/* Accessibility label for the fourth recently picked color */
+"Recent color 4" = "Недавний цвет 4";
+
+/* Accessibility label for the fifth recently picked color */
+"Recent color 5" = "Недавний цвет 5";
+
+/* Accessibility label for the sixth recently picked color */
+"Recent color 6" = "Недавний цвет 6";

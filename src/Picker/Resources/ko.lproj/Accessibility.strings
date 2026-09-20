@@ -1,0 +1,41 @@
+/* Accessibility value for a color swatch: RGB components followed by the hex code */
+"%1$@, hex %2$@" = "%1$@, HEX %2$@";
+
+/* Accessibility label for the color format selector */
+"Color format" = "색상 포맷";
+
+/* Accessibility label for the menu bar status item */
+"Color picker" = "색상 선택기";
+
+/* Accessibility label for the copy color shortcut recorder */
+"Copy color shortcut" = "색상 복사 단축키";
+
+/* Accessibility label for the magnified screen preview */
+"Magnified preview" = "확대 미리보기";
+
+/* Accessibility value for a shortcut recorder with no shortcut recorded */
+"None" = "없음";
+
+/* Accessibility label for the swatch showing the picked color */
+"Picked color" = "선택한 색상";
+
+/* Accessibility label for the pin to screen shortcut recorder */
+"Pin to screen shortcut" = "화면에 고정 단축키";
+
+/* Accessibility label for the first recently picked color */
+"Recent color 1" = "최근 색상 1";
+
+/* Accessibility label for the second recently picked color */
+"Recent color 2" = "최근 색상 2";
+
+/* Accessibility label for the third recently picked color */
+"Recent color 3" = "최근 색상 3";
+
+/* Accessibility label for the fourth recently picked color */
+"Recent color 4" = "최근 색상 4";
+
+/* Accessibility label for the fifth recently picked color */
+"Recent color 5" = "최근 색상 5";
+
+/* Accessibility label for the sixth recently picked color */
+"Recent color 6" = "최근 색상 6";

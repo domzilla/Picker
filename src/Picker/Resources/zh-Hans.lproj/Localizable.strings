@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "输入快捷键";
 "Record Shortcut" = "录制快捷键";
-"keyboard shortcut" = "键盘快捷键";
-"Empty keyboard shortcut" = "无键盘快捷键";
 
 /* Picker View */
 "Press %@ to copy color" = "按下 %@ 拷贝颜色";

@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "Digita abbreviazione";
 "Record Shortcut" = "Registra abbreviazione";
-"keyboard shortcut" = "abbreviazione da tastiera";
-"Empty keyboard shortcut" = "Nessuna abbreviazione da tastiera";
 
 /* Picker View */
 "Press %@ to copy color" = "Premi %@ per copiare il colore";

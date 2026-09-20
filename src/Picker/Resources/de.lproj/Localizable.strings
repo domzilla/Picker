@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "Kurzbefehl eingeben";
 "Record Shortcut" = "Kurzbefehl aufnehmen";
-"keyboard shortcut" = "Tastaturkurzbefehl";
-"Empty keyboard shortcut" = "Kein Tastaturkurzbefehl";
 
 /* Picker View */
 "Press %@ to copy color" = "Drücke %@, um die Farbe zu kopieren";

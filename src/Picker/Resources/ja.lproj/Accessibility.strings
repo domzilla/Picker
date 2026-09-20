@@ -1,0 +1,41 @@
+/* Accessibility value for a color swatch: RGB components followed by the hex code */
+"%1$@, hex %2$@" = "%1$@、HEX %2$@";
+
+/* Accessibility label for the color format selector */
+"Color format" = "カラーフォーマット";
+
+/* Accessibility label for the menu bar status item */
+"Color picker" = "カラーピッカー";
+
+/* Accessibility label for the copy color shortcut recorder */
+"Copy color shortcut" = "カラーをコピーするショートカット";
+
+/* Accessibility label for the magnified screen preview */
+"Magnified preview" = "拡大プレビュー";
+
+/* Accessibility value for a shortcut recorder with no shortcut recorded */
+"None" = "なし";
+
+/* Accessibility label for the swatch showing the picked color */
+"Picked color" = "選択したカラー";
+
+/* Accessibility label for the pin to screen shortcut recorder */
+"Pin to screen shortcut" = "画面に固定するショートカット";
+
+/* Accessibility label for the first recently picked color */
+"Recent color 1" = "最近のカラー 1";
+
+/* Accessibility label for the second recently picked color */
+"Recent color 2" = "最近のカラー 2";
+
+/* Accessibility label for the third recently picked color */
+"Recent color 3" = "最近のカラー 3";
+
+/* Accessibility label for the fourth recently picked color */
+"Recent color 4" = "最近のカラー 4";
+
+/* Accessibility label for the fifth recently picked color */
+"Recent color 5" = "最近のカラー 5";
+
+/* Accessibility label for the sixth recently picked color */
+"Recent color 6" = "最近のカラー 6";

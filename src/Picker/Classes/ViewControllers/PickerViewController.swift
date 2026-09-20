@@ -81,6 +81,8 @@ class PickerViewController: NSViewController {
             self.formatButton?.selectItem(at: ColorPicker.shared.colorFormat.rawValue)
         }
 
+        self.setupAccessibility()
+
         // Set up Combine subscriptions
         self.setupSubscriptions()
 
@@ -110,6 +112,84 @@ class PickerViewController: NSViewController {
     }
 
     // MARK: - Private Methods
+
+    private func setupAccessibility() {
+        self.pickerPreviewView?.setAccessibilityElement(true)
+        self.pickerPreviewView?.setAccessibilityRole(.image)
+        self.pickerPreviewView?.setAccessibilityLabel(NSLocalizedString(
+            "Magnified preview",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the magnified screen preview"
+        ))
+        self.pickerPreviewView?.setAccessibilityIdentifier("PickerViewController.pickerPreviewView")
+
+        self.colorPreview?.setAccessibilityElement(true)
+        self.colorPreview?.setAccessibilityRole(.image)
+        self.colorPreview?.setAccessibilityLabel(NSLocalizedString(
+            "Picked color",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the swatch showing the picked color"
+        ))
+        self.colorPreview?.setAccessibilityIdentifier("PickerViewController.colorPreview")
+
+        self.colorHistoryButton1?.setAccessibilityLabel(NSLocalizedString(
+            "Recent color 1",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the first recently picked color"
+        ))
+        self.colorHistoryButton1?.setAccessibilityIdentifier("PickerViewController.colorHistoryButton1")
+
+        self.colorHistoryButton2?.setAccessibilityLabel(NSLocalizedString(
+            "Recent color 2",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the second recently picked color"
+        ))
+        self.colorHistoryButton2?.setAccessibilityIdentifier("PickerViewController.colorHistoryButton2")
+
+        self.colorHistoryButton3?.setAccessibilityLabel(NSLocalizedString(
+            "Recent color 3",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the third recently picked color"
+        ))
+        self.colorHistoryButton3?.setAccessibilityIdentifier("PickerViewController.colorHistoryButton3")
+
+        self.colorHistoryButton4?.setAccessibilityLabel(NSLocalizedString(
+            "Recent color 4",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the fourth recently picked color"
+        ))
+        self.colorHistoryButton4?.setAccessibilityIdentifier("PickerViewController.colorHistoryButton4")
+
+        self.colorHistoryButton5?.setAccessibilityLabel(NSLocalizedString(
+            "Recent color 5",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the fifth recently picked color"
+        ))
+        self.colorHistoryButton5?.setAccessibilityIdentifier("PickerViewController.colorHistoryButton5")
+
+        self.colorHistoryButton6?.setAccessibilityLabel(NSLocalizedString(
+            "Recent color 6",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the sixth recently picked color"
+        ))
+        self.colorHistoryButton6?.setAccessibilityIdentifier("PickerViewController.colorHistoryButton6")
+
+        self.formatButton?.setAccessibilityLabel(NSLocalizedString(
+            "Color format",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the color format selector"
+        ))
+        self.formatButton?.setAccessibilityIdentifier("PickerViewController.formatButton")
+
+        self.hexText?.setAccessibilityIdentifier("PickerViewController.hexText")
+        self.rgbText?.setAccessibilityIdentifier("PickerViewController.rgbText")
+        self.hueText?.setAccessibilityIdentifier("PickerViewController.hueText")
+        self.saturationText?.setAccessibilityIdentifier("PickerViewController.saturationText")
+        self.brightnessText?.setAccessibilityIdentifier("PickerViewController.brightnessText")
+        self.xText?.setAccessibilityIdentifier("PickerViewController.xText")
+        self.yText?.setAccessibilityIdentifier("PickerViewController.yText")
+        self.shortcutLabel?.setAccessibilityIdentifier("PickerViewController.shortcutLabel")
+    }
 
     private func setupSubscriptions() {
         // Subscribe to color changes

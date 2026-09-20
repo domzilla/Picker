@@ -1,0 +1,41 @@
+/* Accessibility value for a color swatch: RGB components followed by the hex code */
+"%1$@, hex %2$@" = "%1$@, HEX %2$@";
+
+/* Accessibility label for the color format selector */
+"Color format" = "Kleurformaat";
+
+/* Accessibility label for the menu bar status item */
+"Color picker" = "Kleurenkiezer";
+
+/* Accessibility label for the copy color shortcut recorder */
+"Copy color shortcut" = "Sneltoets voor kleur kopiëren";
+
+/* Accessibility label for the magnified screen preview */
+"Magnified preview" = "Vergrote voorvertoning";
+
+/* Accessibility value for a shortcut recorder with no shortcut recorded */
+"None" = "Geen";
+
+/* Accessibility label for the swatch showing the picked color */
+"Picked color" = "Gekozen kleur";
+
+/* Accessibility label for the pin to screen shortcut recorder */
+"Pin to screen shortcut" = "Sneltoets voor vastmaken op scherm";
+
+/* Accessibility label for the first recently picked color */
+"Recent color 1" = "Recente kleur 1";
+
+/* Accessibility label for the second recently picked color */
+"Recent color 2" = "Recente kleur 2";
+
+/* Accessibility label for the third recently picked color */
+"Recent color 3" = "Recente kleur 3";
+
+/* Accessibility label for the fourth recently picked color */
+"Recent color 4" = "Recente kleur 4";
+
+/* Accessibility label for the fifth recently picked color */
+"Recent color 5" = "Recente kleur 5";
+
+/* Accessibility label for the sixth recently picked color */
+"Recent color 6" = "Recente kleur 6";

@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "단축키 입력";
 "Record Shortcut" = "단축키 기록";
-"keyboard shortcut" = "키보드 단축키";
-"Empty keyboard shortcut" = "키보드 단축키 없음";
 
 /* Picker View */
 "Press %@ to copy color" = "%@ 키를 눌러 색상 복사";

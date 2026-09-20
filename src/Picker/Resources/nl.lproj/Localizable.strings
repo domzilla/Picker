@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "Voer sneltoets in";
 "Record Shortcut" = "Sneltoets opnemen";
-"keyboard shortcut" = "sneltoets";
-"Empty keyboard shortcut" = "Geen sneltoets";
 
 /* Picker View */
 "Press %@ to copy color" = "Druk op %@ om de kleur te kopiëren";

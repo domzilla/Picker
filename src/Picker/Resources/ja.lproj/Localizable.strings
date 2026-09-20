@@ -20,8 +20,6 @@
 /* Shortcut Recorder */
 "Type Shortcut" = "ショートカットを入力";
 "Record Shortcut" = "ショートカットを記録";
-"keyboard shortcut" = "キーボードショートカット";
-"Empty keyboard shortcut" = "キーボードショートカットなし";
 
 /* Picker View */
 "Press %@ to copy color" = "%@を押してカラーをコピー";

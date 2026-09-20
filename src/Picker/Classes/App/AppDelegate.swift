@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
     private var pickerMenu: NSMenu!
     private var pickerViewController: PickerViewController!
 
+    private var pickerMenuItem: NSMenuItem!
     private var colorCopyMenuItem: NSMenuItem!
     private var availableFormatsMenuItem: NSMenuItem!
     private var availableFormatsSubmenu: NSMenu!
@@ -86,6 +87,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
     private func setupStatusItem() {
         self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         self.statusItem.button?.image = NSImage(named: "menu_icon_dropper")
+        self.statusItem.button?.setAccessibilityLabel(NSLocalizedString(
+            "Color picker",
+            tableName: "Accessibility",
+            comment: "Accessibility label for the menu bar status item"
+        ))
+        self.statusItem.button?.setAccessibilityIdentifier("AppDelegate.statusItem.button")
     }
 
     private func setupMenu() {
@@ -95,9 +102,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
 
         // Embedded picker view
         self.pickerViewController = PickerViewController(mode: .menuMode)
-        let pickerMenuItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
-        pickerMenuItem.view = self.pickerViewController.view
-        self.pickerMenu.addItem(pickerMenuItem)
+        self.pickerMenuItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
+        self.pickerMenuItem.view = self.pickerViewController.view
+        self.pickerMenuItem.setAccessibilityIdentifier("AppDelegate.pickerMenuItem")
+        self.pickerMenu.addItem(self.pickerMenuItem)
 
         // Hidden copy color menu item (for local keyboard shortcut)
         self.colorCopyMenuItem = NSMenuItem(
@@ -107,6 +115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
         )
         self.colorCopyMenuItem.allowsKeyEquivalentWhenHidden = true
         self.colorCopyMenuItem.isHidden = true
+        self.colorCopyMenuItem.setAccessibilityIdentifier("AppDelegate.colorCopyMenuItem")
         self.pickerMenu.addItem(self.colorCopyMenuItem)
 
         self.pickerMenu.addItem(.separator())
@@ -114,6 +123,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
         // Color format submenu
         self.availableFormatsMenuItem = NSMenuItem()
         self.availableFormatsMenuItem.title = NSLocalizedString("Color format", comment: "Color format menu item")
+        self.availableFormatsMenuItem.setAccessibilityIdentifier("AppDelegate.availableFormatsMenuItem")
         self.availableFormatsSubmenu = NSMenu()
 
         for (index, category) in ColorFormat.Category.allCases.enumerated() {
@@ -126,6 +136,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
             let headerItem = NSMenuItem(title: category.displayName, action: nil, keyEquivalent: "")
             headerItem.isEnabled = false
             headerItem.tag = -(category.rawValue + 1)
+            headerItem.setAccessibilityIdentifier("AppDelegate.availableFormatsSubmenu.\(category)Header")
             self.availableFormatsSubmenu.addItem(headerItem)
 
             // Add formats in this category
@@ -138,6 +149,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
                 item.tag = format.rawValue
                 item.target = self
                 item.indentationLevel = 1
+                item.setAccessibilityIdentifier("AppDelegate.availableFormatsSubmenu.\(format)")
             }
         }
 
@@ -154,6 +166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
             keyEquivalent: ""
         )
         self.pinToScreenItem.target = self
+        self.pinToScreenItem.setAccessibilityIdentifier("AppDelegate.pinToScreenItem")
         self.pickerMenu.addItem(self.pinToScreenItem)
 
         self.pickerMenu.addItem(.separator())
@@ -165,6 +178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
             keyEquivalent: ""
         )
         self.aboutMenuItem.target = self
+        self.aboutMenuItem.setAccessibilityIdentifier("AppDelegate.aboutMenuItem")
         self.pickerMenu.addItem(self.aboutMenuItem)
 
         // Preferences
@@ -175,6 +189,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
         )
         self.pickerPreferencesItem.keyEquivalentModifierMask = .command
         self.pickerPreferencesItem.target = self
+        self.pickerPreferencesItem.setAccessibilityIdentifier("AppDelegate.pickerPreferencesItem")
         self.pickerMenu.addItem(self.pickerPreferencesItem)
 
         // Check for Updates
@@ -184,6 +199,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
             keyEquivalent: ""
         )
         self.checkForUpdatesItem.target = self
+        self.checkForUpdatesItem.setAccessibilityIdentifier("AppDelegate.checkForUpdatesItem")
         self.pickerMenu.addItem(self.checkForUpdatesItem)
 
         self.pickerMenu.addItem(.separator())
@@ -195,6 +211,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUStandardUserDriverDelegat
             keyEquivalent: "q"
         )
         self.quitMenuItem.target = self
+        self.quitMenuItem.setAccessibilityIdentifier("AppDelegate.quitMenuItem")
         self.pickerMenu.addItem(self.quitMenuItem)
     }
 
